@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-__author__ = 'ArchieT'
 class soft:
 	def __init__(self,sr,sph):
 		self.bezier = bezier
@@ -12,9 +11,11 @@ class soft:
 		self.sph = sph
 class polar:
 	"""Kartezjańskie na biegunowe"""
-	def __init__(self): pass
+	def __init__(self): self.degOLrad = lambda w: lambda x,a: x if a==w else (math.degrees(x) if w=="deg" else math.radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
 	@staticmethod
-	def fkartz(x,y): import math ; return {'phi':math.atan2(x,y),'r':math.sqrt((x^2)+(y^2))}
+	def fkartz(x,y): import math;return {'phi':math.atan2(y,x),'phia':'rad','r':math.sqrt((x^2)+(y^2))}
+	@staticmethod
+	def tkartz(phi,r,phia="rad"): import math;return {'x':r*math.sin(self.degOLrad("rad")(phi,phia)),'y':r*math.cos(self.degOLrad("rad")(phi,phia))}
 class bezier:
 	"""Krzywa Beziera"""
 	def __init__(self,sph,sr,c1ph,c1r,c2ph,c2r,eph,er):
@@ -46,6 +47,7 @@ class arc:
 		self.r=r = float(l)/float(rad) if not czyproste else float('inf')
 	def draw(self):
 		pass
+class arccentr(arc):
 class proste(arc):
 	"""Prosta jako odmiana łuku"""
 	def __init__(self,l,azim,sr,sph,spha="deg",azima="deg"):
