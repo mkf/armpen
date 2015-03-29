@@ -12,3 +12,6 @@ class kat:
 		if self.w==0: return 0
 		if self.radval is None: self.radval=self.degOLrad("rad")(self.w,self.a)
 		return self.radval
+	def iloczyn(self,czynnik):
+		if self.w==0: return self
+		return kat(w*czynnik+a)
