@@ -29,7 +29,7 @@ class rysowania:
 """
 
 class specramiona:
-	def __init__(self,startAlpha,startBeta):
+	def __init__(self,startAlpha,startBeta,):
 
 class rysunek:
 	def __init__(self,startPhi,startR):
@@ -74,11 +74,11 @@ class plotxy(plot):
 		self.oneXzeroYPhi=oneXzeroYPhi;self.oneXzeroYR=oneXzeroYR;self.oneYzeroXPhi=oneYzeroXPhi;self.oneYzeroXR=oneYzeroXR
 		self.fFromX=fFromX
 class plotrphi(plot):
-	def __init__(self,fFromPhi,zeroPhi,zeroR,minR,maxR,phiZero):
+	def __init__(self,fFromPhi,zeroPhi,zeroR,minR,maxR,minPhi,maxPhi,phiZero):
 		plot.__init__(self,zeroPhi,zeroR)
 		self.fFromPhi=fFromPhi
 		self.minR=minR
 		self.maxR=maxR
 		self.phiZero=phiZero
 class plotrphiFromZero(plotrphi):
-	def __init__(self,fFromPhi,minR,maxR,phiZero): plotrphi.__init__(self,fFromPhi,kat(0,"deg"),0,minR,maxR,phiZero)
+	def __init__(self,fFromPhi,minR,maxR,minPhi,maxPhi,phiZero): plotrphi.__init__(self,fFromPhi,kat(0,"deg"),0,minR,maxR,minPhi,maxPhi,phiZero)
