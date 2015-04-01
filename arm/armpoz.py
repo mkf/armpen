@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from wartosci.kat import kat
+from wartosci.kat import kat,arctrig
 from wartosci.pos import pos
 from math import acos
 from __future__ import division
@@ -12,5 +12,5 @@ class armpoz(pos):
 		selfpo = self.po
 		cosalpha = (arm.l1/(2*self.rval))+(self.rval/(2*arm.l1))-(arm.l2**2/(2*self.rval*arm.l1))
 		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.rval**2/(2*arm.l1*arm.l2))
-
-#	def
+		alpha = arctrig(cosalpha,'cos')
+		beta = arctrig(cosbeta,'cos')
