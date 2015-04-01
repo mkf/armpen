@@ -26,6 +26,8 @@ class kat:
 	def __neg__(self): return kat(-self.w,self.a)
 	def __sub__(self, other): assert isinstance(other,kat); return self.__add__(other.__neg__)
 	@property
+	def __abs__(self): return self.__neg__ if self.w<0 else self
+	@property
 	def naplaszczyznie(self):
 		zdiva=divmod(self.w,eval("kat(360,'deg')."+self.a))
 		return {'katnaplaszczyznie': kat(zdiva[1],self.a),'pelnych':int(zdiva[0])}
