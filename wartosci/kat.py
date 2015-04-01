@@ -2,8 +2,9 @@
 from __future__ import division
 class kat:
 	def __init__(self,w,a):
+		from math import degrees,radians
 		self.defaultaforinterior="deg"  # config: default for internal operations if needed
-		self.degOLrad = lambda w: lambda x,a: x if a==w else (math.degrees(x) if w=="deg" else math.radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
+		self.degOLrad = lambda w: lambda x,a: x if a==w else (degrees(x) if w=="deg" else radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
 		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
 		assert a in ("rad","deg")
 	@property
@@ -22,7 +23,8 @@ class kat:
 		return kat(self.w*other,self.a)
 	def __add__(self, other):
 		assert isinstance(other,kat)
-		return kat(other.w+self.w,self.a) if other.a==self.a else kat(eval("other."+self.defaultaforinterior)+eval('self.'+self.defaultaforinterior),self.defaultaforinterior)
+		cowkoncu = lambda w,a: w.deg if a=="deg" else w.rad if a=="rad" else None
+		return kat(other.w+self.w,self.a) if other.a==self.a else kat(cowkoncu(other,self.defaultaforinterior)+cowkoncu(self,self.defaultaforinterior),self.defaultaforinterior)
 	@property
 	def __neg__(self): return kat(-self.w,self.a)
 	def __sub__(self, other): assert isinstance(other,kat); return self.__add__(other.__neg__)
@@ -30,11 +32,11 @@ class kat:
 	def __abs__(self): return self.__neg__ if self.w<0 else self
 	@property
 	def naplaszczyznie(self):
-		zdiva=divmod(self.w,eval("kat(360,'deg')."+self.a))
+		zdiva=divmod(self.w,float(360) if self.a=="deg" else kat(360,"deg").rad if self.a=="rad" else None)
 		return {'katnaplaszczyznie': kat(zdiva[1],self.a),'pelnych':int(zdiva[0])}
 	@property
 	def cwiartka(self):
-		zdiva=divmod(self.w,eval("kat(90,'deg'')."+self.a))
+		zdiva=divmod(self.w,float(90) if self.a=="deg" else kat(90,"deg").rad if self.a=="rad" else None)
 		return {'cwiartka':int(zdiva[0]),'ostry':kat(zdiva[1],self.a)}
 	def __eq__(self, other): return self.deg==other.deg or self.rad==other.rad
 	def __lt__(self, other): return self.deg < other.deg and self.rad<other.rad
