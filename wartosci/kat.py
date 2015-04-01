@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 class kat:
 	degOLrad = lambda w: lambda x,a: x if a==w else (math.degrees(x) if w=="deg" else math.radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
 	def __init__(self,w,a):
@@ -53,7 +54,6 @@ class arctrig(kat):
 	def __init__(self,val,trigt):
 		assert trigt in ['cos','sin','tan']
 		from math import sqrt
-		from __future__ import division
 		if trigt=='cos': from math import acos as atrig
 		elif trigt=='sin': from math import asin as atrig
 		elif trigt=='tan': from math import atan as atrig
