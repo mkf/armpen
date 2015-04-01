@@ -27,6 +27,8 @@ class kat:
 		return kat(other.w+self.w,self.a) if other.a==self.a else kat(cowkoncu(other,self.defaultaforinterior)+cowkoncu(self,self.defaultaforinterior),self.defaultaforinterior)
 	@property
 	def __neg__(self): return kat(-self.w,self.a)
+	@property
+	def __pos__(self): return self  # redundant, I know.
 	def __sub__(self, other): assert isinstance(other,kat); return self.__add__(other.__neg__)
 	@property
 	def __abs__(self): return self.__neg__ if self.w<0 else self
