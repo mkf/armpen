@@ -54,17 +54,19 @@ class bezier(krzywa):
 		self.c2Phi=c2Phi
 		self.c2R=c2R
 	def draw(self,maszyna):
-		maszyna.przemiesc(self.startPhi,self.startR)
+		from armpoz import armpoz
+		armpoz({'phi':self.startPhi,'r':self.startR},maszyna)
 		maszyna.opusc_pioro()
-		# dalej
+		# lambda x: #funkcja
 
 class prosta(bezier):
 	def __init__(self,startPhi,startR,endPhi,endR):
 		bezier.__init__(self,startPhi,startR,startPhi,startR,endPhi,endR,endPhi,endR)
 	def draw(self,maszyna):
-		maszyna.przemiesc(self.startPhi,self.startR)
+		from armpoz import armpoz
+		armpoz({'phi':self.startPhi,'r':self.startR},maszyna)
 		maszyna.opusc_pioro()
-		# dalej
+		funk = lambda p: ''
 
 class plot(krzywa):
 	def __init__(self,zeroPhi,zeroR): krzywa.__init__(self,zeroPhi,zeroR)
@@ -82,3 +84,8 @@ class plotrphi(plot):
 		self.phiZero=phiZero
 class plotrphiFromZero(plotrphi):
 	def __init__(self,fFromPhi,minR,maxR,minPhi,maxPhi,phiZero): plotrphi.__init__(self,fFromPhi,kat(0,"deg"),0,minR,maxR,minPhi,maxPhi,phiZero)
+class arcfromzero(plotrphiFromZero):
+	def __init__(self,r,minPhi,maxPhi):
+		plotrphiFromZero.__init__(self,lambda x:r,r,r,minPhi,maxPhi,kat(0,"deg"))
+		self.r=r;self.minPhi=minPhi;self.maxPhi=maxPhi
+	def draw(self,arm):
