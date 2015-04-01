@@ -2,7 +2,7 @@
 class kat:
 	degOLrad = lambda w: lambda x,a: x if a==w else (math.degrees(x) if w=="deg" else math.radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
 	def __init__(self,w,a):
-		self.w=w;self.a=a;self.degval=None;self.radval=None
+		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
 		assert a in ("rad","deg")
 	@property
 	def deg(self):
@@ -18,7 +18,7 @@ class kat:
 		if self.w==0: return self
 		return kat(w*czynnik,a)
 	def dodajinny(self,inny,wczymifnotsame):
-		return kat(inny.w+self.w,self.a) if inny.a==self.a else kat(inny.eval(wczymifnotsame)+self.eval(wczymifnotsame),wczymifnotsame)
+		return kat(inny.w+self.w,self.a) if inny.a==self.a else kat(inny.eval(wczymifnotsame)+eval('self.'+wczymifnotsame),wczymifnotsame)
 	@property
 	def ujemny(self): return kat(-self.w,self.a)
 	@property
@@ -33,13 +33,30 @@ class kat:
 		return (self.deg==inny.deg or self.rad==inny.rad)
 	@property
 	def sin(self):
+		if sinval is not None: return self.sinval
 		from math import sin
-		return sin(self.rad)
+		self.sinval = sin(self.rad)
+		return self.sinval
 	@property
 	def cos(self):
+		if cosval is not None: return self.cosval
 		from math import cos
-		return cos(self.rad)
+		self.cosval = cos(self.rad)
+		return self.cosval
 	@property
 	def tan(self):
+		if tanval is not None: return self.tanval
 		from math import tan
-		return tan(self.rad)
+		self.tanval = tan(self.rad)
+		return self.tanval
+class arctrig(kat):
+	def __init__(self,val,trigt):
+		assert trigt in ['cos','sin','tan']
+		from math import sqrt
+		if trigt=='cos': from math import acos as atrig
+		elif trigt=='sin': from math import asin as atrig
+		elif trigt=='tan': from math import atan as atrig
+		kat.__init__(self,atrig(val),'rad')
+		if trigt=='cos': self.cosval = val
+		elif trigt=='sin': self.sinval = val
+		elif trigt=='tan': self.tanval = val
