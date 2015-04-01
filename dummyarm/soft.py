@@ -11,11 +11,14 @@ class soft:
 		self.sph = sph
 class polar:
 	"""Kartezjańskie na biegunowe"""
-	def __init__(self): self.degOLrad = lambda w: lambda x,a: x if a==w else (math.degrees(x) if w=="deg" else math.radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
+	def __init__(self): pass
 	@staticmethod
 	def topolar(x,y): import math;return {'phi':math.atan2(y,x),'phia':'rad','r':math.sqrt((x^2)+(y^2))}
 	@staticmethod
-	def tokartz(phi,r,phia="rad"): import math;return {'x':r*math.sin(self.degOLrad("rad")(phi,phia)),'y':r*math.cos(self.degOLrad("rad")(phi,phia))}
+	def tokartz(phi,r,phia="rad"):
+		from math import degrees,radians
+		degOLrad = lambda w: lambda x,a: x if a==w else (degrees(x) if w=="deg" else radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
+		return {'x':r*math.sin(degOLrad("rad")(phi,phia)),'y':r*math.cos(degOLrad("rad")(phi,phia))}
 class bezier:
 	"""Krzywa Beziera"""
 	def __init__(self,sph,sr,c1ph,c1r,c2ph,c2r,eph,er):
@@ -24,13 +27,13 @@ class arc:
 	"""Łuk"""
 	def __init__(self,l,tz,azim,sr,sph,ta="deg",spha="deg",azima="deg"):
 		import math
-		import numpy
+		from numpy import sign
 		self.l = l
 		self.sr = sr
 		self.sph = sph
 		self.t = t = abs(tz)
 		self.tz = tz
-		self.clkw=clkw=float(numpy.sign(tz))
+		self.clkw=clkw=float(sign(tz))
 		self.ta = ta
 		self.spha = spha
 		self.azim = azim

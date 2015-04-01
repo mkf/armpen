@@ -17,36 +17,36 @@ class kat:
 		return self.radval
 	def skalar(self,czynnik):
 		if self.w==0: return self
-		return kat(w*czynnik,a)
+		return kat(self.w*czynnik,self.a)
 	def dodajinny(self,inny,wczymifnotsame):
 		return kat(inny.w+self.w,self.a) if inny.a==self.a else kat(inny.eval(wczymifnotsame)+eval('self.'+wczymifnotsame),wczymifnotsame)
 	@property
 	def ujemny(self): return kat(-self.w,self.a)
 	@property
 	def naplaszczyznie(self):
-		zdiva=divmod(self.w,kat(360,"deg").eval(self.a))
+		zdiva=divmod(self.w,eval("kat(360,'deg')."+self.a))
 		return {'katnaplaszczyznie': kat(zdiva[1],self.a),'pelnych':int(zdiva[0])}
 	@property
 	def cwiartka(self):
-		zdiva=divmod(self.w,kat(90,"deg").eval(self.a))
+		zdiva=divmod(self.w,eval("kat(90,'deg'')."+self.a))
 		return {'cwiartka':int(zdiva[0]),'ostry':kat(zdiva[1],self.a)}
 	def porownaj(self,inny):
-		return (self.deg==inny.deg or self.rad==inny.rad)
+		return self.deg==inny.deg or self.rad==inny.rad
 	@property
 	def sin(self):
-		if sinval is not None: return self.sinval
+		if self.sinval is not None: return self.sinval
 		from math import sin
 		self.sinval = sin(self.rad)
 		return self.sinval
 	@property
 	def cos(self):
-		if cosval is not None: return self.cosval
+		if self.cosval is not None: return self.cosval
 		from math import cos
 		self.cosval = cos(self.rad)
 		return self.cosval
 	@property
 	def tan(self):
-		if tanval is not None: return self.tanval
+		if self.tanval is not None: return self.tanval
 		from math import tan
 		self.tanval = tan(self.rad)
 		return self.tanval
