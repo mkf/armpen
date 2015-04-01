@@ -14,8 +14,31 @@ class armpoz(pos):
 		self.alphaodr = arctrig(cosalphaodr,'cos')
 		self.beta = arctrig(cosbeta,'cos')
 		assert self.beta<=arm.maxbetafromzero and self.beta>=arm.minbetafromzero
-		self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
-		assert self.alphaodzera != 'str'
-class zarmpoz(armpoz):
-	def __init__(self,alphaodzera,beta):
-		pass
+		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
+		self.alphaodzera=(self.phival+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
+		assert self.alphaodzera != 'err'
+	def przemiesc(self,last):
+		from maszyna import maszyna, nasilnik
+		naszaf = lambda x: {'w':self,'e':x==1}
+		dajemy = nasilnik(naszaf,last,"Przemieszczenie na %s" % str(dict(self)))
+		maszyna().dajnasilnik(dajemy,1)
+
+class gdzieramiona:
+	def __init__(self,alphaodzera,beta,arm):
+		self.alphaodzera=alphaodzera
+		self.beta=beta
+		self.arm=arm
+	@property
+	def dajpoz(self):
+		try: return self.armpozy
+		except NameError: pass
+		arm=self.arm
+		beta=self.beta
+		alph=self.alphaodzera
+		from math import acos,sqrt
+		radi = sqrt(arm.l1**2+(arm.l2**2)-(2*arm.l1*arm.l2*beta.cos))
+		alodr=arctrig((arm.l1-(arm.l2*beta.cos))/radi,'cos')
+		# elbow direction temporarily given up
+		pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}
+		self.armpozy = armpoz(pozd,self.arm)
+		return self.armpozy

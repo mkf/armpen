@@ -32,6 +32,10 @@ class kat:
 	def __sub__(self, other): assert isinstance(other,kat); return self.__add__(other.__neg__)
 	@property
 	def __abs__(self): return self.__neg__ if self.w<0 else self
+	def __truediv__(self, other):
+		assert isinstance(other,kat)
+		cowkoncu = lambda w,a: w.deg if a=="deg" else w.rad if a=="rad" else None
+		return self.w/other.w if other.a==self.a else cowkoncu(self,self.defaultaforinterior)/cowkoncu(other,self.defaultaforinterior)
 	@property
 	def naplaszczyznie(self):
 		zdiva=divmod(self.w,float(360) if self.a=="deg" else kat(360,"deg").rad if self.a=="rad" else None)

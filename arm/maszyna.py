@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 class maszyna:
 	def __init__(self):
 		from wartosci.kat import kat
 		self.l1 = 20
 		self.l2 = 10
-		self.maxalphafromzero = kat(180,"deg")
-		self.minalphafromzero = -self.maxalphafromzero
+		# temporarily givin' up the elbow direction
+		#self.maxalphafromzero = kat(180,"deg")
+		#self.minalphafromzero = -self.maxalphafromzero
 		self.maxbetafromzero = kat(90,"deg")
 		self.minbetafromzero = -self.maxbetafromzero
 		self.alphaprecision = kat(0.01,"deg")
@@ -16,25 +18,40 @@ class maszyna:
 		print "Opuszczono pióro"
 	def podnies_pioro(self):
 		print "Podniesiono pióro"
-	def dajnasilnik(self,co,prec,startpoz):
+	def dajnasilnik(self,co,prec):
 		print co
 		end = False
 		gdzie = 0.0
 		done = 0.0
-		lastalpha = startpoz.alphaodzera
-		lastbeta = startpoz.beta
+		lastalpha = co.startpoz.alphaodzera
+		lastbeta = co.startpoz.beta
 		while not end:
+			ruchalpha = None
+			ruchbeta = None
+			syncmultforbetafromalpha = None
 			assert gdzie>=done
 			if done==gdzie: gdzie+=prec
 			elif done<gdzie:
-				to = co(gdzie)
+				toc = co.funkcja(gdzie)
+				to = toc['w']
 				if abs(lastalpha-to.alphaodzera)<self.alphaprecision and abs(lastbeta-to.beta)<self.betaprecision:
 					gdzie+=prec
-				else: pass
+				else:
+					if abs(lastalpha-to.alphaodzera)>=self.alphaprecision:
+						ruchalpha=to.alphaodzera-lastalpha
+					if abs(lastbeta-to.beta)>=self.betaprecision:
+						ruchbeta=to.beta-lastbeta
+					if ruchalpha is not None and ruchbeta is not None:
+						syncmultforbetafromalpha=ruchbeta/ruchalpha
+						pass # ruszyć sync
+					elif ruchalpha is None and ruchbeta is not None:
+						pass # ruszyć alphą
+					elif ruchbeta is None and ruchalpha is not None:
+						pass # ruszyć betą
+				end = toc['e']
 
 class nasilnik:
-	def __init__(self,falpha,fbeta,ilealpha,ilebeta,opis):
-		self.falpha=falpha;self.fbeta=fbeta;self.ilealpha=ilealpha;self.ilebeta=ilebeta
-	@property
-	def __str__(self):
-		return "Dajemy %s ilealpha %s ilebeta %s" % (opis,str(ilealpha),str(ilebeta))
+	def __init__(self,funkcja,startpoz,opis):
+		self.funkcja=funkcja;self.startpoz=startpoz
+		assert isinstance(opis, str)
+		self.__str__ = "Idzie: %s" % opis
