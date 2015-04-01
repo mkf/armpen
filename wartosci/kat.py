@@ -2,6 +2,7 @@
 from __future__ import division
 class kat:
 	def __init__(self,w,a):
+		self.defaultaforinterior="deg"  # config: default for internal operations if needed
 		self.degOLrad = lambda w: lambda x,a: x if a==w else (math.degrees(x) if w=="deg" else math.radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
 		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
 		assert a in ("rad","deg")
@@ -18,10 +19,12 @@ class kat:
 	def skalar(self,czynnik):
 		if self.w==0: return self
 		return kat(self.w*czynnik,self.a)
-	def dodajinny(self,inny,wczymifnotsame):
-		return kat(inny.w+self.w,self.a) if inny.a==self.a else kat(inny.eval(wczymifnotsame)+eval('self.'+wczymifnotsame),wczymifnotsame)
+	def __add__(self, other):
+		assert isinstance(other,kat)
+		return kat(other.w+self.w,self.a) if other.a==self.a else kat(eval("other."+self.defaultaforinterior)+eval('self.'+self.defaultaforinterior),self.defaultaforinterior)
 	@property
-	def ujemny(self): return kat(-self.w,self.a)
+	def __neg__(self): return kat(-self.w,self.a)
+	def __sub__(self, other): assert isinstance(other,kat); return self.__add__(other.__neg__)
 	@property
 	def naplaszczyznie(self):
 		zdiva=divmod(self.w,eval("kat(360,'deg')."+self.a))

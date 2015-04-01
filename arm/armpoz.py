@@ -8,7 +8,7 @@ class armpoz(pos):
 		self.arm = arm
 		wyprost = poz.r==arm.l1+arm.l2
 		assert arm.l1+arm.l2>poz.r or wyprost, "Nie starcza ramion"
-		selfpo = self.po
+		_ = self.po
 		cosalpha = (arm.l1/(2*self.rval))+(self.rval/(2*arm.l1))-(arm.l2**2/(2*self.rval*arm.l1))
 		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.rval**2/(2*arm.l1*arm.l2))
 		self.alpha = arctrig(cosalpha,'cos')
