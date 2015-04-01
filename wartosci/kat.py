@@ -16,9 +16,10 @@ class kat:
 		if self.w==0: return 0
 		if self.radval is None: self.radval=self.degOLrad("rad")(self.w,self.a)
 		return self.radval
-	def skalar(self,czynnik):
+	def __mul__(self, other):
+		assert isinstance(other,int) or isinstance(other,float) or isinstance(other,long) or (isinstance(other,complex) and other.imag==0)
 		if self.w==0: return self
-		return kat(self.w*czynnik,self.a)
+		return kat(self.w*other,self.a)
 	def __add__(self, other):
 		assert isinstance(other,kat)
 		return kat(other.w+self.w,self.a) if other.a==self.a else kat(eval("other."+self.defaultaforinterior)+eval('self.'+self.defaultaforinterior),self.defaultaforinterior)
@@ -35,8 +36,12 @@ class kat:
 	def cwiartka(self):
 		zdiva=divmod(self.w,eval("kat(90,'deg'')."+self.a))
 		return {'cwiartka':int(zdiva[0]),'ostry':kat(zdiva[1],self.a)}
-	def porownaj(self,inny):
-		return self.deg==inny.deg or self.rad==inny.rad
+	def __eq__(self, other): return self.deg==other.deg or self.rad==other.rad
+	def __lt__(self, other): return self.deg < other.deg and self.rad<other.rad
+	def __le__(self, other): return self.__eq__(other) or self.__lt__(other)
+	def __ne__(self, other): return not self.__eq__(other)
+	def __gt__(self, other): return self.deg > other.deg and self.rad > other.rad
+	def __ge__(self, other): return self.__eq__(other) or self.__gt__(other)
 	@property
 	def sin(self):
 		if self.sinval is not None: return self.sinval
