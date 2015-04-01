@@ -9,7 +9,13 @@ class armpoz(pos):
 		wyprost = poz.r==arm.l1+arm.l2
 		assert arm.l1+arm.l2>poz.r or wyprost, "Nie starcza ramion"
 		_ = self.po
-		cosalpha = (arm.l1/(2*self.rval))+(self.rval/(2*arm.l1))-(arm.l2**2/(2*self.rval*arm.l1))
+		cosalphaodr = (arm.l1/(2*self.rval))+(self.rval/(2*arm.l1))-(arm.l2**2/(2*self.rval*arm.l1))
 		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.rval**2/(2*arm.l1*arm.l2))
-		self.alpha = arctrig(cosalpha,'cos')
+		self.alphaodr = arctrig(cosalphaodr,'cos')
 		self.beta = arctrig(cosbeta,'cos')
+		assert self.beta<=arm.maxbetafromzero and self.beta>=arm.minbetafromzero
+		self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
+		assert self.alphaodzera != 'str'
+class zarmpoz(armpoz):
+	def __init__(self,alphaodzera,beta):
+		pass
