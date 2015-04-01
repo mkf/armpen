@@ -53,10 +53,11 @@ class arctrig(kat):
 	def __init__(self,val,trigt):
 		assert trigt in ['cos','sin','tan']
 		from math import sqrt
+		from __future__ import division
 		if trigt=='cos': from math import acos as atrig
 		elif trigt=='sin': from math import asin as atrig
 		elif trigt=='tan': from math import atan as atrig
 		kat.__init__(self,atrig(val),'rad')
-		if trigt=='cos': self.cosval = val
-		elif trigt=='sin': self.sinval = val
-		elif trigt=='tan': self.tanval = val
+		if trigt=='cos': self.cosval = val ; self.sinval=sqrt(1-(val**2)) ; self.tanval=sqrt(1-(val**2))/val
+		elif trigt=='sin': self.sinval = val ; self.cosval=sqrt(1-(val**2)) ; self.tanval=val/sqrt(1-(val**2))
+		elif trigt=='tan': self.tanval = val ; self.sinval=val/sqrt(1+(val**2)) ; self.cosval=1/sqrt(1+(val**2))
