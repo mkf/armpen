@@ -4,7 +4,7 @@ class kat:
 	def __init__(self,w,a):
 		from math import degrees,radians
 		self.defaultaforinterior="deg"  # config: default for internal operations if needed
-		self.degOLrad = lambda w: lambda x,a: x if a==w else (degrees(x) if w=="deg" else radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
+		self.degOLrad = lambda wart: lambda x,ax: x if a==w else (degrees(x) if w=="deg" else radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
 		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
 		assert a in ("rad","deg")
 	@property
