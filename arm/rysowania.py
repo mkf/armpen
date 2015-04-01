@@ -29,7 +29,7 @@ class rysowania:
 """
 
 class specramiona:
-	def __init__(self,startAlpha,startBeta,):
+	def __init__(self,startAlpha,startBeta,): pass
 
 class rysunek:
 	def __init__(self,startPhi,startR):

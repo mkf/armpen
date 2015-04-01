@@ -47,7 +47,7 @@ class arc:
 		self.r=r = float(l)/float(rad) if not czyproste else float('inf')
 	def draw(self):
 		pass
-class arccentr(arc):
+#class arccentr(arc): # syntax error: indent expected -> commented
 class proste(arc):
 	"""Prosta jako odmiana łuku"""
 	def __init__(self,l,azim,sr,sph,spha="deg",azima="deg"):
