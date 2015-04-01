@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from wartosci.kat import kat,arctrig
 from wartosci.pos import pos
 from math import acos
-from __future__ import division
 class armpoz(pos):
 	def __init__(self,poz,arm):
 		pos.__init__(self,poz)
