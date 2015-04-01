@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
 class kat:
-	degOLrad = lambda w: lambda x,a: x if a==w else (math.degrees(x) if w=="deg" else math.radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
 	def __init__(self,w,a):
+		self.degOLrad = lambda w: lambda x,a: x if a==w else (math.degrees(x) if w=="deg" else math.radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
 		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
 		assert a in ("rad","deg")
 	@property
 	def deg(self):
 		if self.w==0: return 0
-		if self.degval is None: self.degval=self.degOLrad("deg")(self.w,self.a)
+		if self.degval is None: self.degval=self.degOLrad('deg')(self.w,self.a)
 		return self.degval
 	@property
 	def rad(self):
