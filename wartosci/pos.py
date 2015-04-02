@@ -13,7 +13,7 @@ class pos:
 		if self.y is not None: di.update({'y':self.y})
 		return di
 	def __getitem__(self, item):
-		if item in self.__dict__: return self.__dict__[item]
+		if item in self.__dict__: return (self.__dict__)[item]
 		else: raise IndexError
 	@property
 	def po(self):
@@ -28,3 +28,18 @@ class pos:
 		if self.typ=='p':
 			self.x=self.rval*self.phival.sin ; self.y=self.rval*self.phival.cos
 			return {'x': self.x,'y':self.y}
+	def __add__(self, other):
+		adddict=other
+		if 'r' in adddict.keys() or 'phi' in adddict.keys():
+			_ = self.po
+			newr = self.rval+adddict['r'] if 'r' in adddict else self.rval
+			newphi = self.phival+adddict['phi'] if 'phi' in adddict else self.phival
+			return pos({'r':newr,'phi':newphi})
+		elif 'x' in adddict.keys() or 'y' in adddict.keys():
+			_ = self.ka
+			newx = self.x+adddict['x'] if 'x' in adddict else self.x
+			newy = self.y+adddict['y'] if 'y' in adddict else self.y
+			return pos({'x':newx,'y':newy})
+	def __sub__(self, other):
+		"""Będzie nam to dawało przesunięcie, jakie trzeba zrobić, żeby z other przenieść się na self"""
+		return {'x':self.ka['x']-other.ka['x'],'y':self.ka['y']-other.ka['y']}

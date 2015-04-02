@@ -28,6 +28,21 @@ class armpoz(MovingMixIn,pos):
 		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
 		self.alphaodzera=(self.phival+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
 		assert self.alphaodzera != 'err'
+	def __add__(self, other):
+		adddict = other
+		if 'r' in adddict.keys() or 'phi' in adddict.keys():
+			newr = self.rval+adddict['r'] if 'r' in adddict else self.rval
+			newphi = self.phival+adddict['phi'] if 'phi' in adddict else self.phival
+			return armpoz({'r':newr,'phi':newphi},self.arm)
+		elif 'x' in adddict.keys() or 'y' in adddict.keys():
+			_ = self.ka
+			newx = self.x+adddict['x'] if 'x' in adddict else self.x
+			newy = self.y+adddict['y'] if 'y' in adddict else self.y
+			return armpoz({'x':newx,'y':newy},self.arm)
+		elif 'alpha' in adddict.keys() or 'beta' in adddict.keys():
+			newaoz = self.alphaodzera+adddict['alpha'] if 'alpha' in adddict else self.alphaodzera
+			newbet = self.beta+adddict['beta'] if 'alpha' in adddict else self.beta
+			return gdzieramiona(newaoz,newbet,self.arm).dajpoz
 
 class gdzieramiona(MovingMixIn):
 	def __init__(self,alphaodzera,beta,arm):

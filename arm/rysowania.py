@@ -70,18 +70,53 @@ class plotxy(krzywa):
 					'x':x,
 					'y':kolej[0],
 				},arm),'e':x>=1}
+			return tocos
+		krzywa.__init__(self,zero,fdef)
 
-class plotrphi(plot):
-	def __init__(self,fFromPhi,zeroPhi,zeroR,minR,maxR,minPhi,maxPhi,phiZero):
-		plot.__init__(self,zeroPhi,zeroR)
-		self.fFromPhi=fFromPhi
-		self.minR=minR
-		self.maxR=maxR
-		self.phiZero=phiZero
-class plotrphiFromZero(plotrphi):
-	def __init__(self,fFromPhi,minR,maxR,minPhi,maxPhi,phiZero): plotrphi.__init__(self,fFromPhi,kat(0,"deg"),0,minR,maxR,minPhi,maxPhi,phiZero)
-class arcfromzero(plotrphiFromZero):
-	def __init__(self,r,minPhi,maxPhi):
-		plotrphiFromZero.__init__(self,lambda x:r,r,r,minPhi,maxPhi,kat(0,"deg"))
-		self.r=r;self.minPhi=minPhi;self.maxPhi=maxPhi
-	def draw(self,arm):
+class plotrphi(krzywa):
+	def __init__(self,fFromPhi,zero,minR,oneR_onZeroPhi,minPhi,maxPhi):  # one is the maximum for radius
+		self.fFromPhi=fFromPhi;self.minR=minR;self.oneR_onZeroPhi=oneR_onZeroPhi
+		self.minPhi=minPhi;self.maxPhi=maxPhi;self.zero=zero
+		from armpoz import armpoz
+		from wartosci.pos import pos
+		vect = zero - pos({'x':0,'y':0})
+		onerzerophi_vect = oneR_onZeroPhi - zero
+		onerzerophi_vect_PosPol = pos(onerzerophi_vect).po
+		rone = onerzerophi_vect_PosPol['r']
+		phione = onerzerophi_vect_PosPol['phi']
+		def fdef(arm):
+			def tocos(phi):
+				kolej = [0,fFromPhi(phi),1];kolej.remove(min(kolej));kolej.remove(max(kolej))
+				#tymczasowo będzie jechało po ramce jak wartość poza zakresem, później się to zmieni
+				pwzs = pos({'phi':(phi+phione).naplaszczyznie['katnaplaszczyznie'],'r':kolej[0]*rone})
+				# pwzs — pozycja względem zera już przeskalowana
+				pjp = pwzs + vect  #pozycja już przesunięta
+				return {'w': armpoz(pjp,arm),'e':phi>=maxPhi}
+			return tocos
+		krzywa.__init__(self,zero,fdef)
+
+class plotrphiFromZero(krzywa):
+	def __init__(self,fFromPhi,minR,oneR_onZeroPhi,minPhi,maxPhi):
+		self.fFromPhi=fFromPhi;self.minR=minR;self.oneR_onZeroPhi=oneR_onZeroPhi
+		self.minPhi=minPhi;self.maxPhi=maxPhi
+		from armpoz import armpoz
+		from wartosci.pos import pos
+		zero = pos({'x':0,'y':0})
+		onerzerophi_vect = oneR_onZeroPhi - zero
+		onerzerophi_vect_PosPol = pos(onerzerophi_vect).po
+		rone = onerzerophi_vect_PosPol['r']
+		phione = onerzerophi_vect_PosPol['phi']
+		def fdef(arm):
+			def tocos(phi):
+				kolej = [0,fFromPhi(phi),1];kolej.remove(min(kolej));kolej.remove(max(kolej))
+				#tymczasowo będzie jechało po ramce jak wartość poza zakresem, później się to zmieni
+				pjp = pos({'phi':(phi+phione).naplaszczyznie['katnaplaszczyznie'],'r':kolej[0]*rone})
+				return {'w': armpoz(pjp,arm),'e':phi>=maxPhi}
+			return tocos
+		krzywa.__init__(self,zero,fdef)
+
+#class arcfromzero(krzywa):
+#	def __init__(self,r,minPhi,maxPhi):
+#		#plotrphiFromZero.__init__(self,lambda x:r,r,r,minPhi,maxPhi,kat(0,"deg"))
+#		self.r=r;self.minPhi=minPhi;self.maxPhi=maxPhi
+#TODO: arcfromzero
