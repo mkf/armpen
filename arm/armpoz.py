@@ -17,9 +17,10 @@ class armpoz(pos):
 		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
 		self.alphaodzera=(self.phival+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
 		assert self.alphaodzera != 'err'
-	def przemiesc(self,last):
+	def przemiesc(self):
 		from maszyna import maszyna, nasilnik
 		naszaf = lambda x: {'w':self,'e':x==1}
+		last = maszyna.gdziejestesmaszyno()
 		dajemy = nasilnik(naszaf,last,"Przemieszczenie na %s" % str(dict(self)))
 		maszyna().dajnasilnik(dajemy,1)
 

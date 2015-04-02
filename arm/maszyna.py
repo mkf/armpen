@@ -3,9 +3,11 @@ from __future__ import division
 class maszyna:
 	def __init__(self):
 		from wartosci.kat import kat
+		import armpoz
 		self.l1 = 20
 		self.l2 = 10
 		# temporarily givin' up the elbow direction
+		# maybe even forever
 		#self.maxalphafromzero = kat(180,"deg")
 		#self.minalphafromzero = -self.maxalphafromzero
 		self.maxbetafromzero = kat(90,"deg")
@@ -18,6 +20,9 @@ class maszyna:
 		print "Opuszczono pióro"
 	def podnies_pioro(self):
 		print "Podniesiono pióro"
+	def gdziejestesmaszyno(self):
+		from armpoz import gdzieramiona;from wartosci.kat import kat
+		return gdzieramiona(kat(20,"deg"),kat(40,"deg"),self)  # dummy, to be replaced by real location
 	def dajnasilnik(self,co,prec):
 		print co
 		end = False

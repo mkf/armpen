@@ -28,45 +28,37 @@ class rysowania:
 		self.okragcentrArmOneRArmTwoExactly = okragcentrArmOneRArmTwoExactly
 """
 
-class specramiona:
-	def __init__(self,startAlpha,startBeta,): pass
-
 class rysunek:
-	def __init__(self,startPhi,startR):
-		assert (startR<1 or startR==1)
-		self.startPhi=startPhi
-		self.startR=startR
+	def __init__(self,start):self.start=start
 
 class krzywa(rysunek):
-	def __init__(self,startPhi,startR): rysunek.__init__(self,startPhi,startR)
+	def __init__(self,start): rysunek.__init__(self,start)
 
 class punkt(rysunek):
-	def __init__(self,startPhi,startR): rysunek.__init__(self,startPhi,startR)
+	def __init__(self,gdzie): rysunek.__init__(self,gdzie);self.gdzie=gdzie
 	def draw(self,maszyna):
-		maszyna.przemiesc(self.startPhi,self.startR)
+		self.gdzie.przemiesc()
 		maszyna.opusc_pioro()
 
-class bezier(krzywa):
-	def __init__(self,startPhi,startR,c1Phi,c1R,c2Phi,c2R,endPhi,endR):
-		krzywa.__init__(self,startPhi,startR)
-		self.c1Phi=c1Phi
-		self.c1R=c1R
-		self.c2Phi=c2Phi
-		self.c2R=c2R
-	def draw(self,maszyna):
-		from armpoz import armpoz
-		armpoz({'phi':self.startPhi,'r':self.startR},maszyna)
-		maszyna.opusc_pioro()
-		# lambda x: #funkcja
+class prosta(cubicbezier):
+	def __init__(self,start,end): cubicbezier.__init__(self,start,start,end,end)
 
-class prosta(bezier):
-	def __init__(self,startPhi,startR,endPhi,endR):
-		bezier.__init__(self,startPhi,startR,startPhi,startR,endPhi,endR,endPhi,endR)
+class quadrbezier(krzywa):    # fragment paraboli
+	def __init__(self,start,c,end):
+		krzywa.__init__(self,start)
+		self.c=c
+	def draw(self):
+
+class cubicbezier(krzywa):
+	def __init__(self,start,c1,c2,end):
+		krzywa.__init__(self,start)
+		self.c1=c1
+		self.c2=c2
 	def draw(self,maszyna):
 		from armpoz import armpoz
-		armpoz({'phi':self.startPhi,'r':self.startR},maszyna)
+		armpoz(self.start,maszyna).przemiesc
 		maszyna.opusc_pioro()
-		funk = lambda p: ''
+		funk = lambda t: {'w':,'e':t>=1}
 
 class plot(krzywa):
 	def __init__(self,zeroPhi,zeroR): krzywa.__init__(self,zeroPhi,zeroR)
