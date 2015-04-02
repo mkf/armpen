@@ -23,7 +23,7 @@ class maszyna:
 	def gdziejestesmaszyno(self):
 		from armpoz import gdzieramiona;from wartosci.kat import kat
 		return gdzieramiona(kat(20,"deg"),kat(40,"deg"),self)  # dummy, to be replaced by real location
-	def dajnasilnik(self,co,prec):
+	def dajnasilnik(self,co):
 		print co
 		end = False
 		gdzie = 0.0
@@ -35,12 +35,12 @@ class maszyna:
 			ruchbeta = None
 			syncmultforbetafromalpha = None
 			assert gdzie>=done
-			if done==gdzie: gdzie+=prec
+			if done==gdzie: gdzie+=co.step
 			elif done<gdzie:
 				toc = co.funkcja(gdzie)
 				to = toc['w']
 				if abs(lastalpha-to.alphaodzera)<self.alphaprecision and abs(lastbeta-to.beta)<self.betaprecision:
-					gdzie+=prec
+					gdzie+=co.step
 				else:
 					if abs(lastalpha-to.alphaodzera)>=self.alphaprecision:
 						ruchalpha=to.alphaodzera-lastalpha
@@ -56,7 +56,7 @@ class maszyna:
 				end = toc['e']
 
 class nasilnik:
-	def __init__(self,funkcja,startpoz,opis):
-		self.funkcja=funkcja;self.startpoz=startpoz
+	def __init__(self,funkcja,startpoz,step,opis):
+		self.funkcja=funkcja;self.startpoz=startpoz;self.step=step
 		assert isinstance(opis, str)
-		self.__str__ = "Idzie: %s" % opis
+		self.__str__ = "Komenda@step%s: %s" % (str(step),opis)

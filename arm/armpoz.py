@@ -2,7 +2,18 @@
 from __future__ import division
 from wartosci.kat import kat,arctrig
 from wartosci.pos import pos
-class armpoz(pos):
+
+class MovingMixIn:
+	def przemiesc(self):
+		from maszyna import maszyna, nasilnik
+		naszaf = lambda x: {'w':self,'e':x==1}
+		last = maszyna.gdziejestesmaszyno()
+		dajemy = nasilnik(naszaf,last,1,"Przemieszczenie na %s" % str(dict(self)))
+		arm = maszyna()
+		arm.podnies_pioro()
+		arm.dajnasilnik(dajemy)
+
+class armpoz(MovingMixIn,pos):
 	def __init__(self,poz,arm):
 		pos.__init__(self,poz)
 		self.arm = arm
@@ -17,18 +28,13 @@ class armpoz(pos):
 		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
 		self.alphaodzera=(self.phival+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
 		assert self.alphaodzera != 'err'
-	def przemiesc(self):
-		from maszyna import maszyna, nasilnik
-		naszaf = lambda x: {'w':self,'e':x==1}
-		last = maszyna.gdziejestesmaszyno()
-		dajemy = nasilnik(naszaf,last,"Przemieszczenie na %s" % str(dict(self)))
-		maszyna().dajnasilnik(dajemy,1)
 
-class gdzieramiona:
+class gdzieramiona(MovingMixIn):
 	def __init__(self,alphaodzera,beta,arm):
 		self.alphaodzera=alphaodzera
 		self.beta=beta
 		self.arm=arm
+		self.__dict__={'alphaodzera':alphaodzera,'beta':beta,'arm':arm}
 	@property
 	def dajpoz(self):
 		try: return self.armpozy

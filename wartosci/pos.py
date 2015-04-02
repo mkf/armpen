@@ -22,7 +22,9 @@ class pos:
 			from math import atan2,sqrt;from wartosci.kat import kat
 			self.phival=kat(atan2(self.y,self.x),"rad") ; self.rval=sqrt((self.x^2)+(self.y^2))
 			return {'phi':self.phival,'r':self.rval}
+	@property
 	def ka(self):
 		if self.typ=='k' or (self.x is not None and self.y is not None): return {'x': self.x, 'y':self.y}
 		if self.typ=='p':
 			self.x=self.rval*self.phival.sin ; self.y=self.rval*self.phival.cos
+			return {'x': self.x,'y':self.y}
