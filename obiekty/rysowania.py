@@ -85,7 +85,8 @@ class plotrphi(krzywa):
 		rone = onerzerophi_vect_PosPol['r']
 		phione = onerzerophi_vect_PosPol['phi']
 		def fdef(arm):
-			def tocos(phi):
+			def tocos(phival):
+				phi = kat(phival,'deg')
 				kolej = [0,fFromPhi(phi),1];kolej.remove(min(kolej));kolej.remove(max(kolej))
 				#tymczasowo będzie jechało po ramce jak wartość poza zakresem, później się to zmieni
 				pwzs = pos({'phi':(phi+phione).naplaszczyznie['katnaplaszczyznie'],'r':kolej[0]*rone})
@@ -107,7 +108,8 @@ class plotrphiFromZero(krzywa):
 		rone = onerzerophi_vect_PosPol['r']
 		phione = onerzerophi_vect_PosPol['phi']
 		def fdef(arm):
-			def tocos(phi):
+			def tocos(phival):
+				phi = kat(phival,'deg')
 				kolej = [0,fFromPhi(phi),1];kolej.remove(min(kolej));kolej.remove(max(kolej))
 				#tymczasowo będzie jechało po ramce jak wartość poza zakresem, później się to zmieni
 				pjp = pos({'phi':(phi+phione).naplaszczyznie['katnaplaszczyznie'],'r':kolej[0]*rone})
