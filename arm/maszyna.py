@@ -51,12 +51,13 @@ class maszyna:
 						ruchbeta=to.beta-lastbeta
 					if ruchalpha is not None and ruchbeta is not None:
 						syncmultforbetafromalpha=ruchbeta/ruchalpha
-						pass # ruszyć sync
+						print syncmultforbetafromalpha, ruchalpha, ruchbeta  #debug
 					elif ruchalpha is None and ruchbeta is not None:
-						pass # ruszyć alphą
+						print ruchbeta  #debug
 					elif ruchbeta is None and ruchalpha is not None:
-						pass # ruszyć betą
+						print ruchalpha  #debug
 				end = toc['e']
+				print "end: %s" % str(end)
 
 class nasilnik:
 	def __init__(self,funkcja,startpoz,step,opis):
