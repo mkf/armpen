@@ -29,6 +29,6 @@ class rastrimg:
 					c1x,c1y=segment.c1
 					c1 = pos({'x':c1x,'y':c1y})
 					c2x,c2y=segment.c2
-					c1 = pos({'x':c2x,'y':c2y})
+					c2 = pos({'x':c2x,'y':c2y})
 					yield rysowania.cubicbezier(start,c1,c2,end)
 				startx=endx;starty=endy
