@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from moduly.wartosci import pos
+from moduly.wartosci.pos import pos
 from moduly.wartosci.kat import arctrig
 
 # noinspection PyClassHasNoInit

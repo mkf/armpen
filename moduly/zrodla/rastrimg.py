@@ -10,8 +10,9 @@ class rastrimg:
 		im = Image.open(plik)
 		data = np.array(im)
 		bmp = potrace.Bitmap(data)
-		path = bmp.trace()
-		for curve in path:
+		self.path = bmp.trace()
+	def daj(self):
+		for curve in self.path:
 			curvestartx,curvestarty = curve.start_point
 			startx=None
 			starty=None
