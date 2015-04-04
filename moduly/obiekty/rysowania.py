@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+from moduly.arm.armpoz import armpoz
 
-from wartosci.kat import kat
+from moduly.wartosci.kat import kat
+from moduly.wartosci.pos import pos
 
 class rysunek:
 	def __init__(self,start):self.start=start
@@ -16,8 +18,7 @@ class krzywa(rysunek):
 		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca;self.step=step
 	def draw(self,ramie,step):
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie)
-		from arm.armpoz import armpoz
-		from arm.maszyna import nasilnik
+		from moduly.arm.maszyna import nasilnik
 		armpoz(self.start.maszyna,ramie).przemiesc()
 		ramie.opusc_pioro()
 		ruch = nasilnik(self.funkcja,self.start,step,str(self))
@@ -25,7 +26,6 @@ class krzywa(rysunek):
 class prosta(krzywa):     #      prosta(cubicbezier):
 	def __init__(self,start,end):   #cubicbezier.__init__(self,start,start,end,end)
 		ks = start.ka;ke = end.ka; dx=ke['x']-ks['x'] ; dy=ke['y']-ks['y']
-		from armpoz import armpoz
 		funkdef = lambda arm: lambda t: {'w':armpoz({'x':(t*dx)+ks['x'],'y':(t*dy)+ks['y']},arm),'e':t>=1}
 		krzywa.__init__(self,start,funkdef)
 		self.end=end
@@ -45,7 +45,6 @@ class quadrbezier(krzywa):    # fragment paraboli
 
 class cubicbezier(krzywa):
 	def __init__(self,start,c1,c2,end):
-		from armpoz import armpoz
 		adfunk = lambda u,t: ((1-t)*(1-t)*(1-t)*start.ka[u])+(3*(1-t)*(1-t)*t*c1.ka[u])+(3*(1-t)*t*t*c2.ka[u])+(t*t*t*end.ka[u])
 		funkcjadefiniujaca = lambda arm: lambda t: {'w':armpoz({
 			'x':adfunk('x',t),
@@ -57,7 +56,6 @@ class cubicbezier(krzywa):
 class plotxy(krzywa):
 	def __init__(self,fFromX,zero,oneXzeroY,oneYzeroX): # one will be the maximum — you have to divide the values appropiately
 		self.oneXzeroY=oneXzeroY;self.oneYzeroX=oneYzeroX;self.fFromX=fFromX
-		from armpoz import armpoz
 		#fdef=lambda arm:lambda x:{'w':armpoz({
 		#	'x':x,
 		#	'y':min(sorted([]))
@@ -77,8 +75,6 @@ class plotrphi(krzywa):
 	def __init__(self,fFromPhi,zero,minR,oneR_onZeroPhi,minPhi,maxPhi):  # one is the maximum for radius
 		self.fFromPhi=fFromPhi;self.minR=minR;self.oneR_onZeroPhi=oneR_onZeroPhi
 		self.minPhi=minPhi;self.maxPhi=maxPhi;self.zero=zero
-		from armpoz import armpoz
-		from wartosci.pos import pos
 		vect = zero - pos({'x':0,'y':0})
 		onerzerophi_vect = oneR_onZeroPhi - zero
 		onerzerophi_vect_PosPol = pos(onerzerophi_vect).po
@@ -100,8 +96,6 @@ class plotrphiFromZero(krzywa):
 	def __init__(self,fFromPhi,minR,oneR_onZeroPhi,minPhi,maxPhi):
 		self.fFromPhi=fFromPhi;self.minR=minR;self.oneR_onZeroPhi=oneR_onZeroPhi
 		self.minPhi=minPhi;self.maxPhi=maxPhi
-		from armpoz import armpoz
-		from wartosci.pos import pos
 		zero = pos({'x':0,'y':0})
 		onerzerophi_vect = oneR_onZeroPhi - zero
 		onerzerophi_vect_PosPol = pos(onerzerophi_vect).po

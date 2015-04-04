@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+from moduly.obiekty import rysowania
+from moduly.wartosci.pos import pos
+
 class rastrimg:
 	def __init__(self,plik):
-		from obiekty import rysowania
-		from wartosci.pos import pos
 		import potrace
 		import numpy as np
 		from PIL import Image

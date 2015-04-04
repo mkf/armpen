@@ -13,9 +13,6 @@ class maszyna:
 		self.l1=l1;self.l2=l2;self.maxbetafromzero=maxbetafromzero;self.minbetafromzero=minbetafromzero
 		self.alphaprecision=alphaprecision;self.betaprecision=betaprecision
 
-		from wartosci.kat import kat
-		import armpoz
-
 		naszefunkcje = dir(self)
 
 		assert 'podnies_pioro' in naszefunkcje

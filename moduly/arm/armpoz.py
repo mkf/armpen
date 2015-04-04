@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-from wartosci.kat import kat,arctrig
-from wartosci.pos import pos
+from moduly.wartosci import pos
+from moduly.wartosci.kat import arctrig
 
 # noinspection PyClassHasNoInit
 class MovingMixIn:
 	def przemiesc(self):
-		from maszyna import nasilnik
+		from moduly.arm.maszyna import nasilnik
 		naszaf = lambda x: {'w':self,'e':x==1}
 		last = self.arm.gdziejestesmaszyno()
 		dajemy = nasilnik(naszaf,last,1,"Przemieszczenie na %s" % str(dict(self)))
