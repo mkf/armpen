@@ -1,31 +1,32 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
 class maszyna:
-	def __init__(self):
+	def __init__(
+			self,
+			l1,l2,
+			#maxalphafromzero,minalphafromzero,
+			maxbetafromzero,minbetafromzero,
+			alphaprecision,
+			betaprecision,
+	):
+
+		self.l1=l1;self.l2=l2;self.maxbetafromzero=maxbetafromzero;self.minbetafromzero=minbetafromzero
+		self.alphaprecision=alphaprecision;self.betaprecision=betaprecision
+
 		from wartosci.kat import kat
 		import armpoz
-		self.l1 = 20
-		self.l2 = 10
-		# temporarily givin' up the elbow direction
-		# maybe even forever
-		#self.maxalphafromzero = kat(180,"deg")
-		#self.minalphafromzero = -self.maxalphafromzero
-		self.maxbetafromzero = kat(90,"deg")
-		self.minbetafromzero = -self.maxbetafromzero
-		self.alphaprecision = kat(0.01,"deg")
-		self.betaprecision = kat(0.01,"deg")
-		self.alphaenginemultiplier = 10
-		self.betaenginemultiplier = 20
+
+		naszefunkcje = dir(self)
+
+		assert 'podnies_pioro' in naszefunkcje
+		assert 'opusc_pioro' in naszefunkcje
+		assert 'gdziejestesmaszyno' in naszefunkcje
+
+		assert 'movealpha' in naszefunkcje
+		assert 'movebeta' in naszefunkcje
+		assert 'syncedmove' in naszefunkcje
 
 	# noinspection PyMethodMayBeStatic
-	def opusc_pioro(self):
-		print "Opuszczono pióro"
-	def podnies_pioro(self):
-		print "Podniesiono pióro"
-
-	def gdziejestesmaszyno(self):
-		from armpoz import gdzieramiona;from wartosci.kat import kat
-		return gdzieramiona(kat(20,"deg"),kat(40,"deg"),self)  # dummy, to be replaced by real location
 	def dajnasilnik(self,co):
 		print co
 		end = False
@@ -36,7 +37,6 @@ class maszyna:
 		while not end:
 			ruchalpha = None
 			ruchbeta = None
-			syncmultforbetafromalpha = None
 			assert gdzie>=done
 			if done==gdzie: gdzie+=co.step
 			elif done<gdzie:
@@ -49,13 +49,17 @@ class maszyna:
 						ruchalpha=to.alphaodzera-lastalpha
 					if abs(lastbeta-to.beta)>=self.betaprecision:
 						ruchbeta=to.beta-lastbeta
+
 					if ruchalpha is not None and ruchbeta is not None:
-						syncmultforbetafromalpha=ruchbeta/ruchalpha
+						self.syncedmove(ruchalpha,ruchbeta)
 						print syncmultforbetafromalpha, ruchalpha, ruchbeta  #debug
 					elif ruchalpha is None and ruchbeta is not None:
+						self.movebeta(ruchbeta)
 						print ruchbeta  #debug
 					elif ruchbeta is None and ruchalpha is not None:
+						self.movealpha(ruchalpha)
 						print ruchalpha  #debug
+
 				end = toc['e']
 				print "end: %s" % str(end)
 

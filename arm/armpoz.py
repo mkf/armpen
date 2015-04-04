@@ -6,11 +6,11 @@ from wartosci.pos import pos
 # noinspection PyClassHasNoInit
 class MovingMixIn:
 	def przemiesc(self):
-		from maszyna import maszyna, nasilnik
+		from maszyna import nasilnik
 		naszaf = lambda x: {'w':self,'e':x==1}
 		last = self.arm.gdziejestesmaszyno()
 		dajemy = nasilnik(naszaf,last,1,"Przemieszczenie na %s" % str(dict(self)))
-		arm = maszyna()
+		arm = self.arm
 		arm.podnies_pioro()
 		arm.dajnasilnik(dajemy)
 

@@ -7,19 +7,19 @@ class rysunek:
 
 class punkt(rysunek):
 	def __init__(self,gdzie): rysunek.__init__(self,gdzie);self.gdzie=gdzie
-	def draw(self,maszyna):
+	def draw(self,ramie):
 		self.gdzie.przemiesc()
-		maszyna.opusc_pioro()
+		ramie.opusc_pioro()
 
 class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):
 		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca;self.step=step
-	def draw(self,maszyna,step):
-		self.funkcja=funkcja=self.funkcjadefiniujaca(maszyna)
-		from armpoz import armpoz
-		from maszyna import nasilnik
-		armpoz(self.start.maszyna).przemiesc()
-		maszyna.opusc_pioro()
+	def draw(self,ramie,step):
+		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie)
+		from arm.armpoz import armpoz
+		from arm.maszyna import nasilnik
+		armpoz(self.start.maszyna,ramie).przemiesc()
+		ramie.opusc_pioro()
 		ruch = nasilnik(self.funkcja,self.start,step,str(self))
 
 class prosta(krzywa):     #      prosta(cubicbezier):
