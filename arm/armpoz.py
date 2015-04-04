@@ -3,11 +3,12 @@ from __future__ import division
 from wartosci.kat import kat,arctrig
 from wartosci.pos import pos
 
+# noinspection PyClassHasNoInit
 class MovingMixIn:
 	def przemiesc(self):
 		from maszyna import maszyna, nasilnik
 		naszaf = lambda x: {'w':self,'e':x==1}
-		last = maszyna.gdziejestesmaszyno()
+		last = self.arm.gdziejestesmaszyno()
 		dajemy = nasilnik(naszaf,last,1,"Przemieszczenie na %s" % str(dict(self)))
 		arm = maszyna()
 		arm.podnies_pioro()
@@ -24,7 +25,7 @@ class armpoz(MovingMixIn,pos):
 		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.rval**2/(2*arm.l1*arm.l2))
 		self.alphaodr = arctrig(cosalphaodr,'cos')
 		self.beta = arctrig(cosbeta,'cos')
-		assert self.beta<=arm.maxbetafromzero and self.beta>=arm.minbetafromzero
+		assert arm.maxbetafromzero >= self.beta >= arm.minbetafromzero
 		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
 		self.alphaodzera=(self.phival+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
 		assert self.alphaodzera != 'err'
@@ -57,7 +58,7 @@ class gdzieramiona(MovingMixIn):
 		arm=self.arm
 		beta=self.beta
 		alph=self.alphaodzera
-		from math import acos,sqrt
+		from math import sqrt  #,acos
 		radi = sqrt(arm.l1**2+(arm.l2**2)-(2*arm.l1*arm.l2*beta.cos))
 		alodr=arctrig((arm.l1-(arm.l2*beta.cos))/radi,'cos')
 		# elbow direction temporarily given up

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 class rastrimg:
-	def __init__(self,file):
+	def __init__(self,plik):
 		from obiekty import rysowania
 		from wartosci.pos import pos
 		import potrace
 		import numpy as np
 		from PIL import Image
-		im = Image.open(file)
+		im = Image.open(plik)
 		data = np.array(im)
 		bmp = potrace.Bitmap(data)
 		path = bmp.trace()

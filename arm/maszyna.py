@@ -16,10 +16,13 @@ class maszyna:
 		self.betaprecision = kat(0.01,"deg")
 		self.alphaenginemultiplier = 10
 		self.betaenginemultiplier = 20
+
+	# noinspection PyMethodMayBeStatic
 	def opusc_pioro(self):
 		print "Opuszczono pióro"
 	def podnies_pioro(self):
 		print "Podniesiono pióro"
+
 	def gdziejestesmaszyno(self):
 		from armpoz import gdzieramiona;from wartosci.kat import kat
 		return gdzieramiona(kat(20,"deg"),kat(40,"deg"),self)  # dummy, to be replaced by real location

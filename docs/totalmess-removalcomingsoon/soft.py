@@ -16,9 +16,9 @@ class polar:
 	def topolar(x,y): import math;return {'phi':math.atan2(y,x),'phia':'rad','r':math.sqrt((x^2)+(y^2))}
 	@staticmethod
 	def tokartz(phi,r,phia="rad"):
-		from math import degrees,radians
+		from math import degrees,radians,sin,cos
 		degOLrad = lambda w: lambda x,a: x if a==w else (degrees(x) if w=="deg" else radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
-		return {'x':r*math.sin(degOLrad("rad")(phi,phia)),'y':r*math.cos(degOLrad("rad")(phi,phia))}
+		return {'x':r*sin(degOLrad("rad")(phi,phia)),'y':r*cos(degOLrad("rad")(phi,phia))}
 class bezier:
 	"""Krzywa Beziera"""
 	def __init__(self,sph,sr,c1ph,c1r,c2ph,c2r,eph,er):

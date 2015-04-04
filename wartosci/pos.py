@@ -13,7 +13,7 @@ class pos:
 		if self.y is not None: di.update({'y':self.y})
 		return di
 	def __getitem__(self, item):
-		if item in self.__dict__: return (self.__dict__)[item]
+		if item in self.__dict__: return self.__dict__[item]
 		else: raise IndexError
 	@property
 	def po(self):
