@@ -22,9 +22,9 @@ class real(maszyna):
 
 	def podnies_pioro(self): print "Podniesiono"
 	def opusc_pioro(self): print "Opuszczono"
-	def gdziejestesmaszyno(self):
-		from armpoz import gdzieramiona;
-
-		return gdzieramiona(kat(20,"deg"),kat(40,"deg"),self)  # dummy, to be replaced by real location
+#	def gdziejestesmaszyno(self):
+#		from armpoz import gdzieramiona;
+#
+#		return gdzieramiona(kat(20,"deg"),kat(40,"deg"),self)  # dummy, to be replaced by real location
 	def movealpha(self,ruch): pass
 	def movebeta(self,ruch): pass

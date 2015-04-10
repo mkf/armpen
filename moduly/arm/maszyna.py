@@ -9,7 +9,10 @@ class maszyna:
 			alphaprecision,
 			betaprecision,
 	):
-
+		from moduly.wartosci.armpoz import gdzieramiona
+		from moduly.wartosci.kat import kat
+		self.homepos = gdzieramiona(kat(0,"deg"),kat(0,"deg"),self)
+		self.whereami = self.homepos
 		self.l1=l1;self.l2=l2;self.maxbetafromzero=maxbetafromzero;self.minbetafromzero=minbetafromzero
 		self.alphaprecision=alphaprecision;self.betaprecision=betaprecision
 
@@ -18,6 +21,7 @@ class maszyna:
 		assert 'podnies_pioro' in naszefunkcje
 		assert 'opusc_pioro' in naszefunkcje
 		assert 'gdziejestesmaszyno' in naszefunkcje
+		
 
 		assert 'movealpha' in naszefunkcje
 		assert 'movebeta' in naszefunkcje
@@ -49,16 +53,22 @@ class maszyna:
 
 					if ruchalpha is not None and ruchbeta is not None:
 						self.syncedmove(ruchalpha,ruchbeta)
+						self.whereami+={'alphaodzera':ruchalpha,'beta':ruchbeta}
 						print syncmultforbetafromalpha, ruchalpha, ruchbeta  #debug
 					elif ruchalpha is None and ruchbeta is not None:
 						self.movebeta(ruchbeta)
+						self.whereami+={'alphaodzera':kat(0,"deg"),'beta':ruchbeta}
 						print ruchbeta  #debug
 					elif ruchbeta is None and ruchalpha is not None:
 						self.movealpha(ruchalpha)
+						self.whereami+={'alphaodzera':ruchalpha,'beta':kat(0,"deg")}
 						print ruchalpha  #debug
+					
 
 				end = toc['e']
 				print "end: %s" % str(end)
+		def gdziejestesmaszyno(self):
+			return self.whereami
 
 class nasilnik:
 	def __init__(self,funkcja,startpoz,step,opis):

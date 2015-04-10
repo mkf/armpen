@@ -65,3 +65,7 @@ class gdzieramiona(MovingMixIn):
 		pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}
 		self.armpozy = armpoz(pozd,self.arm)
 		return self.armpozy
+	def __add__(self,other):
+		saoz=self['alphaodzera']+other['alphaodzera']
+		sbet=self['beta']+other['beta']
+		return gdzieramiona(saoz,sbet,self.arm)
