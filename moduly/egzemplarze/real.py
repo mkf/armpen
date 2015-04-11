@@ -14,7 +14,7 @@ class real(maszyna):
 		# temporarily givin' up the elbow direction
 		# maybe even forever
 		maxalphafromzero = kat(180,"deg")
-		minalphafromzero = -self.maxalphafromzero
+		minalphafromzero = -maxalphafromzero
 		maxbeta = kat(90,"deg")
 		minbeta = -maxbeta
 		alphaprecision = kat(0.01,"deg")
