@@ -25,7 +25,7 @@ class fake(maszyna):
 	def __enter__(self):
 		pygame.init()
 		self.screen = pygame.display.set_mode((640,480))
-		self.image = pygame.image.load("testimage.png")
+		self.image = pygame.image.load("testimage.gif")
 
 		return self
 	def __exit__(self, exc_type, exc_val, exc_tb):sleep(1000)
