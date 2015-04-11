@@ -19,9 +19,9 @@ class fake(maszyna):
 		betaprecision = kat(0.01,"deg")
 		self.drawarea = lambda pozy: True
 		self.pioro = False
-		self.ostat = self.whereami
 
 		maszyna.__init__(self,l1,l2,maxalphafromzero,minalphafromzero,maxbeta,minbeta,alphaprecision,betaprecision)
+		self.ostat = self.whereami
 	def __enter__(self):
 		pygame.init()
 		self.screen = pygame.display.set_mode((640,480))
