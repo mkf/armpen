@@ -4,13 +4,17 @@ from moduly.wartosci.pos import pos
 
 class rastrimg:
 	def __init__(self,plik):
+		self.plik = plik
+	def __enter__(self):
 		import potrace
 		import numpy as np
 		from PIL import Image
-		im = Image.open(plik)
+		im = Image.open(self.plik)
 		data = np.array(im)
 		bmp = potrace.Bitmap(data)
 		self.path = bmp.trace()
+		return self
+	def __exit__(self, exc_type, exc_val, exc_tb): print "Przetworzono obraz"
 	def daj(self):
 		for curve in self.path:
 			curvestartx,curvestarty = curve.start_point
