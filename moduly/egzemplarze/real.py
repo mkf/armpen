@@ -52,3 +52,4 @@ class real(maszyna):
 	def movealpha(self,ruch): pass #self.linprog('#costam motor A rusz o tyle',1)
 	def movebeta(self,ruch): pass #self.linprog('#costam motor B rusz o tyle',1)
 	def syncedmove(self,a,b): pass #self.linprog('#costam synced move motor A z synced motor B',1)
+	def gdziejestesmaszyno(self): return self.whereami  #tutaj można to zrobić lepiej, ale to później

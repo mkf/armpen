@@ -70,3 +70,4 @@ class fake(maszyna):
 			self.screen.blit(self.image,(int(o.ka['x']),int(o.ka['y'])))
 			pygame.display.flip()
 		self.ostat = self.whereami
+	def gdziejestesmaszyno(self): return self.whereami
