@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from moduly.arm import maszyna
 from moduly.wartosci import kat
-
+import nxt.locator
+from nxt.motor import *
 
 class real(maszyna):
 	def __init__(self):
@@ -22,9 +23,9 @@ class real(maszyna):
 		#w sumie moze jednak nie
 		
 		maszyna.__init__(self,l1,l2,maxbetafromzero,minbetafromzero,alphaprecision,betaprecision)
-		self.progfile = open('rysprog.py','w')
-		self.linprog('def main():',0)
-	def linprog(self,tresc,sintend): self.progfile.write(('    '*sintend)+tresc+"\n")
+		#self.progfile = open('rysprog.py','w')
+		#self.linprog('def main():',0)
+	#def linprog(self,tresc,sintend): self.progfile.write(('    '*sintend)+tresc+"\n")
 	def podnies_pioro(self): 
 		self.linprog('#costam motor C podnies',1)
 		print "Podniesiono"
