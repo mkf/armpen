@@ -116,3 +116,5 @@ class plotrphiFromZero(krzywa):
 #		#plotrphiFromZero.__init__(self,lambda x:r,r,r,minPhi,maxPhi,kat(0,"deg"))
 #		self.r=r;self.minPhi=minPhi;self.maxPhi=maxPhi
 #TODO: arcfromzero
+#TODO: arcfromelbow
+#TODO: allipsefrag
