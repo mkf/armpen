@@ -17,8 +17,8 @@ class real(maszyna):
 		minbeta = -maxbeta
 		alphaprecision = kat(0.01,"deg")
 		betaprecision = kat(0.01,"deg")
-		self.alphaenginemultiplier = 10
-		self.betaenginemultiplier = 20
+		self.alphaenginemultiplier = 168
+		self.betaenginemultiplier = 168   # jeszcze nie wiadomo
 		self.drawarea = lambda pozy: True
 		
 		#TODO: w domu zrobic to z with, bo to w sumie bedzie zapis do pliku ostatecznie - zrobic to z __enter__ i __exit__
