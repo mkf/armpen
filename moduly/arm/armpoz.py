@@ -7,7 +7,7 @@ from moduly.wartosci.kat import arctrig
 class MovingMixIn:
 	def przemiesc(self):
 		from moduly.arm.maszyna import nasilnik
-		naszaf = lambda x: {'w':self,'e':x==1}
+		naszaf = lambda x: {'w':self,'e':x>0}
 		last = self.arm.gdziejestesmaszyno()
 		dajemy = nasilnik(naszaf,last,1,"Przemieszczenie na %s" % str(dict(self)))
 		arm = self.arm
@@ -59,7 +59,7 @@ class gdzieramiona(MovingMixIn):
 		beta=self.beta
 		alph=self.alphaodzera
 		from math import sqrt  #,acos
-		radi = sqrt(arm.l1**2+(arm.l2**2)-(2*arm.l1*arm.l2*beta.cos))
+		radi = sqrt(arm.l1*arm.l1+(arm.l2*arm.l2)-(2*arm.l1*arm.l2*beta.cos))
 		alodr=arctrig((arm.l1-(arm.l2*beta.cos))/radi,'cos')
 		# elbow direction temporarily given up
 		pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}

@@ -111,10 +111,13 @@ class plotrphiFromZero(krzywa):
 			return tocos
 		krzywa.__init__(self,zero,fdef)
 
-#class arcfromzero(krzywa):
-#	def __init__(self,r,minPhi,maxPhi):
-#		#plotrphiFromZero.__init__(self,lambda x:r,r,r,minPhi,maxPhi,kat(0,"deg"))
-#		self.r=r;self.minPhi=minPhi;self.maxPhi=maxPhi
-#TODO: arcfromzero
+class arcFromZero(krzywa):
+	def __init__(self,r,minPhi,maxPhi):
+		#plotrphiFromZero.__init__(self,lambda x:r,r,r,minPhi,maxPhi,kat(0,"deg"))
+		self.r=r;self.minPhi=minPhi;self.maxPhi=maxPhi
+		start = pos({'r':r,'phi':minPhi})
+		def fdef(arm):
+			def tocos(x):
+				return {'w': armpoz({'r':r,'phi':maxPhi},arm),'e':x>0}
 #TODO: arcfromelbow
 #TODO: allipsefrag
