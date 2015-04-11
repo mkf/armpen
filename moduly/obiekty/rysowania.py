@@ -15,7 +15,7 @@ class punkt(rysunek):
 
 class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):
-		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca;self.step=step
+		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca
 	def draw(self,ramie,step):
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie)
 		from moduly.arm.maszyna import nasilnik
