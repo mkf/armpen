@@ -28,6 +28,8 @@ class kat:
 	def __neg__(self): return kat(-self.w,self.a)
 	def __pos__(self): return self  # redundant, I know.
 	def __sub__(self, other): assert isinstance(other,kat); return self.__add__(other.__neg__)
+	def signum(self): return 0 if self.w==0 else 1 if self.w>0 else -1 if self.w<0 else None
+	def onesign(self): return 1 if self.w>=0 else -1 if self.w<0 else None
 	def __abs__(self): return self.__neg__ if self.w<0 else self
 	def __truediv__(self, other):
 		assert isinstance(other,kat)
