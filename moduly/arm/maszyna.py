@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
+from moduly.arm.armpoz import gdzieramiona
+from moduly.wartosci.kat import kat
 class maszyna:
 	def __init__(
 			self,
 			l1,l2,
-			#maxalphafromzero,minalphafromzero,
-			maxbetafromzero,minbetafromzero,
+			maxalphafromzero,minalphafromzero,
+			maxbeta,minbeta,
 			alphaprecision,
 			betaprecision,
 	):
-		from moduly.wartosci.armpoz import gdzieramiona
-		from moduly.wartosci.kat import kat
 		self.homepos = gdzieramiona(kat(0,"deg"),kat(0,"deg"),self)
 		self.whereami = self.homepos
-		self.l1=l1;self.l2=l2;self.maxbetafromzero=maxbetafromzero;self.minbetafromzero=minbetafromzero
+		self.l1=l1;self.l2=l2
+		self.maxalphafromzero=maxalphafromzero;self.minalphafromzero=minalphafromzero
+		self.maxbeta=maxbeta;self.minbeta=minbeta
 		self.alphaprecision=alphaprecision;self.betaprecision=betaprecision
 
 		naszefunkcje = dir(self)
@@ -26,6 +28,11 @@ class maszyna:
 		assert 'movealpha' in naszefunkcje
 		assert 'movebeta' in naszefunkcje
 		assert 'syncedmove' in naszefunkcje
+
+		assert 'drawarea' in naszefunkcje
+
+	def armzakrescheck(self,pozy):
+		return self.minalphafromzero<=pozy['alphafromzero']<=self.maxalphafromzero and self.minbeta<=pozy['beta']<=self.maxbeta
 
 	# noinspection PyMethodMayBeStatic
 	def dajnasilnik(self,co):
@@ -45,7 +52,7 @@ class maszyna:
 				to = toc['w']
 				if abs(lastalpha-to.alphaodzera)<self.alphaprecision and abs(lastbeta-to.beta)<self.betaprecision:
 					gdzie+=co.step
-				else:
+				elif self.armzakrescheck(to) and self.drawarea(to):
 					if abs(lastalpha-to.alphaodzera)>=self.alphaprecision:
 						ruchalpha=to.alphaodzera-lastalpha
 					if abs(lastbeta-to.beta)>=self.betaprecision:
@@ -54,7 +61,7 @@ class maszyna:
 					if ruchalpha is not None and ruchbeta is not None:
 						self.syncedmove(ruchalpha,ruchbeta)
 						self.whereami+={'alphaodzera':ruchalpha,'beta':ruchbeta}
-						print syncmultforbetafromalpha, ruchalpha, ruchbeta  #debug
+						print ruchalpha, ruchbeta  #debug
 					elif ruchalpha is None and ruchbeta is not None:
 						self.movebeta(ruchbeta)
 						self.whereami+={'alphaodzera':kat(0,"deg"),'beta':ruchbeta}
@@ -63,6 +70,7 @@ class maszyna:
 						self.movealpha(ruchalpha)
 						self.whereami+={'alphaodzera':ruchalpha,'beta':kat(0,"deg")}
 						print ruchalpha  #debug
+				else: print "Nie narysowano — poza zakresem: ", str(dict(to))
 					
 
 				end = toc['e']

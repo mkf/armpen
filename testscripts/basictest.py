@@ -1,3 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'ArchieT'
-pass
+#from moduly.egzemplarze.fake import fake
+from moduly.zrodla.testsource import testsource
+src = testsource()
+for i in src: print i
