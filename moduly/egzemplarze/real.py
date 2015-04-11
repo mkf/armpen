@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import division
 from moduly.arm.maszyna import maszyna
 from moduly.wartosci.kat import kat
 import nxt.locator
@@ -6,8 +7,8 @@ from nxt.motor import *
 
 class real(maszyna):
 	def __init__(self):
-		l1 = 20
-		l2 = 10
+		l1 = 26.58
+		l2 = l1 * (0.426/0.574)
 		# temporarily givin' up the elbow direction
 		# maybe even forever
 		maxalphafromzero = kat(180,"deg")
