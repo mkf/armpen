@@ -21,7 +21,8 @@ class fake(maszyna):
 
 
 		maszyna.__init__(self,l1,l2,maxalphafromzero,minalphafromzero,maxbeta,minbeta,alphaprecision,betaprecision)
-
+	def __enter__(self): return self
+	def __exit__(self, exc_type, exc_val, exc_tb): pass
 	def podnies_pioro(self): print "Podniesiono"
 	def opusc_pioro(self): print "Opuszczono"
 	def movealpha(self,ruch): print ruch

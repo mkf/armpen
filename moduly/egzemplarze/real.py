@@ -20,14 +20,15 @@ class real(maszyna):
 		self.alphaenginemultiplier = 168
 		self.betaenginemultiplier = 168   # jeszcze nie wiadomo
 		self.drawarea = lambda pozy: True
-		
-		#TODO: w domu zrobic to z with, bo to w sumie bedzie zapis do pliku ostatecznie - zrobic to z __enter__ i __exit__
-		#w sumie moze jednak nie
-		
+
 		maszyna.__init__(self,l1,l2,maxalphafromzero,minalphafromzero,maxbeta,minbeta,alphaprecision,betaprecision)
 		#self.progfile = open('rysprog.py','w')
 		#self.linprog('def main():',0)
 	#def linprog(self,tresc,sintend): self.progfile.write(('    '*sintend)+tresc+"\n")
+	def __enter__(self):
+		pass
+		return self
+	def __exit__(self, exc_type, exc_val, exc_tb): pass
 	def podnies_pioro(self): 
 		#self.linprog('#costam motor C podnies',1)
 		print "Podniesiono"
