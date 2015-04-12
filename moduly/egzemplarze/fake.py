@@ -42,7 +42,9 @@ class fake(maszyna):
 				if self.pioro: yield self.ostat+{'alpha':i*stepdivid}
 				i+=1
 		for o in czesci():
-			self.screen.blit(self.image,(int(o.ka['x']),int(o.ka['y'])))
+			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
+			print naszazmienna
+			self.screen.blit(self.image,naszazmienna)
 			pygame.display.flip()
 		self.ostat = self.whereami
 	def movebeta(self,ruch):
@@ -54,7 +56,9 @@ class fake(maszyna):
 				if self.pioro: yield self.ostat+{'beta':i*stepdivid}
 				i+=1
 		for o in czesci():
-			self.screen.blit(self.image,(int(o.ka['x']),int(o.ka['y'])))
+			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
+			print naszazmienna
+			self.screen.blit(self.image,naszazmienna)
 			pygame.display.flip()
 		self.ostat = self.whereami
 	def syncedmove(self,a,b):
@@ -67,7 +71,9 @@ class fake(maszyna):
 				if self.pioro: yield self.ostat+{'alpha':i*sda,'beta':i*sdb}
 				i+=1
 		for o in czesci():
-			self.screen.blit(self.image,(int(o.ka['x']),int(o.ka['y'])))
+			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
+			print naszazmienna
+			self.screen.blit(self.image,naszazmienna)
 			pygame.display.flip()
 		self.ostat = self.whereami
 	def gdziejestesmaszyno(self): return self.whereami
