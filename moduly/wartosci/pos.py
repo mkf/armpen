@@ -2,14 +2,20 @@
 from moduly.wartosci.kat import kat
 class pos:
 	def __init__(self,coordicti):
+		debugg = True
+		self.debugg = debugg
+		if debugg: print coordicti # debug
 		coordict = dict(coordicti)
+		if debugg: print coordict
 		assert (('phi' in coordict or 'theta' in coordict) and 'r' in coordict) or ('x' in coordict and 'y' in coordict),coordict
 		self.xval=None;self.yval=None;self.phival=None;self.rval=None
 		if 'x' in coordict and 'y' in coordict:
 			self.xval = coordict['x'] ; self.yval=coordict['y'] ; self.typ='k'
+			if debugg: print self.xval , self.yval, self.typ
 		if ('phi' in coordict or 'theta' in coordict) and 'r' in coordict:
 			self.phival = coordict['phi'] if 'phi' in coordict else coordict['theta'] if 'theta' in coordict else None
 			self.rval=coordict['r'] ; self.typ='p'
+			if debugg: print self.phival, self.rval,self.typ
 		assert (self.xval is not None and self.yval is not None) or (self.phival is not None and self.rval is not None)
 	def __dict__(self):
 		di = {}
@@ -17,7 +23,7 @@ class pos:
 		if self.rval is not None: di.update({'r':self.rval})
 		if self.xval is not None: di.update({'x':self.xval})
 		if self.yval is not None: di.update({'y':self.yval})
-		assert ('phi' in di and 'r' in di) or ('x' in di and 'y' in di)
+		assert ('phi' in di and 'r' in di) or ('x' in di and 'y' in di),di
 		return di
 	def __str__(self): return str(dict(self))
 	def __getitem__(self, item):
