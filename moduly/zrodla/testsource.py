@@ -24,3 +24,4 @@ class testsource:
 			i+=1
 			print toprosta
 			print self.co
+			print i
