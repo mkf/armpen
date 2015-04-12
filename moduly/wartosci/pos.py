@@ -3,6 +3,7 @@ from moduly.wartosci.kat import kat
 class pos:
 	def __init__(self,coordicti):
 		coordict = dict(coordicti)
+		assert (('phi' in di or 'theta' in di) and 'r' in di) or ('x' in di and 'y' in di)
 		self.xval=None;self.yval=None;self.phival=None;self.rval=None
 		if 'x' in coordict and 'y' in coordict:
 			self.xval = coordict['x'] ; self.yval=coordict['y'] ; self.typ='k'
