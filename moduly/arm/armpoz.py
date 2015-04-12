@@ -28,7 +28,7 @@ class armpoz(MovingMixIn,pos):
 		self.beta = arctrig(cosbeta,'cos')
 		assert arm.maxbeta >= self.beta >= arm.minbeta
 		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
-		self.alphaodzera=(self.phival+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
+		self.alphaodzera=(self.phi+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
 		assert self.alphaodzera != 'err'
 	def __add__(self, other):
 		adddict = other
