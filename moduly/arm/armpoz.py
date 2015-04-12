@@ -64,6 +64,6 @@ class gdzieramiona(MovingMixIn):
 		self.armpozy = armpoz(pozd,self.arm)
 		return self.armpozy
 	def __add__(self,other):
-		saoz=self['alphaodzera']+other['alphaodzera']
-		sbet=self['beta']+other['beta']
+		saoz=dict(self)['alphaodzera']+dict(other)['alphaodzera']
+		sbet=dict(self)['beta']+dict(other)['beta']
 		return gdzieramiona(saoz,sbet,self.arm)

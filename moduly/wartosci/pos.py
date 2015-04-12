@@ -8,6 +8,7 @@ class pos:
 		if ('phi' in coordict or 'theta' in coordict) and 'r' in coordict:
 			self.phival = coordict['phi'] if 'phi' in coordict else coordict['theta'] if 'theta' in coordict else None
 			self.rval=coordict['r'] ; self.typ='p'
+		assert (self.xval is not None and self.yval is not None) or (self.phival is not None and self.rval is not None)
 	def __dict__(self):
 		di = {}
 		if self.phival is not None: di.update({'phi':self.phival})

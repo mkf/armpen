@@ -9,8 +9,10 @@ class testsource:
 	def daj(self):
 		i = 1
 		while i<10:
-			yield rysowania.prosta(pos({'x':float(i)/float(10),'y':0.1}), pos({'x':float(i)/float(10),'y':0.7}))
+			toprosta = rysowania.prosta(pos({'x':float(i)/float(10),'y':0.1}), pos({'x':float(i)/float(10),'y':0.7}))
+			yield toprosta
 			#yield rysowania.
 
 			i+=1
+			print toprosta
 			print self.co
