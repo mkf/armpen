@@ -40,10 +40,8 @@ class pos:
 		return di
 	def __dict__(self): return self.dict
 	def __str__(self): return str(self.dict)
-	def __getitem__(self, item):
-		try:
-			return self.dict[item]
-		except KeyError: return None
+	def __getitem__(self, item): return self.dict[item]
+	def __contains__(self, item): return item in self.dict
 	@property
 	def r(self):
 		if self.rval is not None: return self.rval
