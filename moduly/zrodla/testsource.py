@@ -13,9 +13,9 @@ class testsource:
 	def daj(self):
 		i = 1
 		while i<10:
-			toprostastart = pos({'x':i,'y':11.1})
+			toprostastart = pos({'x':i,'y':33.1})
 			print toprostastart
-			toprostaend = pos({'x':i,'y':7.7})
+			toprostaend = pos({'x':i,'y':27.7})
 			print toprostaend
 			toprosta = rysowania.prosta(toprostastart, toprostaend)
 			yield toprosta
