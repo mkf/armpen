@@ -16,6 +16,7 @@ class pos:
 		if self.xval is not None: di.update({'x':self.xval})
 		if self.yval is not None: di.update({'y':self.yval})
 		return di
+	def __str__(self): return str(dict(self))
 	def __getitem__(self, item):
 		if item in self.__dict__: return self.__dict__[item]
 		else: raise IndexError
