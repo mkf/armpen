@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from moduly.wartosci.kat import kat
 class pos:
-	def __init__(self,coordict):
+	def __init__(self,coordicti):
+		coordict = dict(coordicti)
 		self.xval=None;self.yval=None;self.phival=None;self.rval=None
 		if 'x' in coordict and 'y' in coordict:
 			self.xval = coordict['x'] ; self.yval=coordict['y'] ; self.typ='k'
