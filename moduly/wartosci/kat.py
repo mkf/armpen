@@ -7,6 +7,7 @@ class kat:
 		self.degOLrad = lambda wart: lambda x,ax: x if a==w else (degrees(x) if w=="deg" else radians(x) if w=="rad" else None) if a==("deg" if w=="rad" else "rad" if w=="deg" else None) else None
 		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
 		assert a in ("rad","deg")
+		assert isinstance(w,int) or isinstance(w,float) or isinstance(w,long) or isinstance(w,complex)
 	@property
 	def deg(self):
 		if self.w==0: return 0
@@ -37,6 +38,7 @@ class kat:
 		return self.w/other.w if other.a==self.a else cowkoncu(self,self.defaultaforinterior)/cowkoncu(other,self.defaultaforinterior)
 	@property
 	def naplaszczyznie(self):
+		print self.a    #debug
 		zdiva=divmod(self.w,float(360) if self.a=="deg" else kat(360,"deg").rad if self.a=="rad" else None)
 		return {'katnaplaszczyznie': kat(zdiva[1],self.a),'pelnych':int(zdiva[0])}
 	@property
