@@ -8,7 +8,7 @@ class kat:
 		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
 		assert a in ("rad","deg")
 		assert isinstance(w,int) or isinstance(w,float) or isinstance(w,long) or isinstance(w,complex)
-	def __str__(self): return (self.w,self.a,self.deg)
+	def __str__(self): return str([self.w,self.a,self.deg])
 	@property
 	def deg(self):
 		if self.w==0: return 0.0
