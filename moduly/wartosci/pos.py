@@ -19,10 +19,19 @@ class pos:
 		assert (self.xval is not None and self.yval is not None) or (self.phival is not None and self.rval is not None)
 	def __dict__(self):
 		di = {}
-		if self.phival is not None: di.update({'phi':self.phival})
-		if self.rval is not None: di.update({'r':self.rval})
-		if self.xval is not None: di.update({'x':self.xval})
-		if self.yval is not None: di.update({'y':self.yval})
+		if self.debugg: print self.phival,self.rval,self.xval,self.yval
+		if self.phival is not None:
+			di.update({'phi':self.phival})
+			if self.debugg: print "di.update({'phi':self.phival})"
+		if self.rval is not None:
+			di.update({'r':self.rval})
+			if self.debugg: print "di.update({'r':self.rval})"
+		if self.xval is not None:
+			di.update({'x':self.xval})
+			if self.debugg: print "di.update({'x':self.xval})"
+		if self.yval is not None:
+			di.update({'y':self.yval})
+			if self.debugg: print "di.update({'y':self.yval})"
 		assert ('phi' in di and 'r' in di) or ('x' in di and 'y' in di),di
 		return di
 	def __str__(self): return str(dict(self))
