@@ -21,17 +21,19 @@ class pos:
 	@property
 	def r(self):
 		if self.rval is not None: return self.rval
-		else:
+		elif self.xval is not None and self.rval is not None:
 			from math import sqrt
-			self.rval = sqrt((self.x*self.x)+(self.y*self.y))
+			self.rval = sqrt((self.xval*self.xval)+(self.yval*self.yval))
 			return self.rval
+		else: print "self.xval",self.xval,'self.yval',self.yval,dict(self)
 	@property
 	def phi(self):
 		if self.phival is not None: return self.phival
-		else:
+		elif self.xval is not None and self.yval is not None:
 			from math import atan2
 			self.phival = kat(atan2(self.y,self.x),"rad")
 			return self.phival
+		else: print "self.xval",self.xval,'self.yval',self.yval,dict(self)
 	@property
 	def po(self): return {'phi':self.phi,'r':self.r}
 	@property

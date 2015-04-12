@@ -31,13 +31,12 @@ class armpoz(MovingMixIn,pos):
 	def __add__(self, other):
 		adddict = other
 		if 'r' in adddict.keys() or 'phi' in adddict.keys():
-			newr = self.rval+adddict['r'] if 'r' in adddict else self.rval
-			newphi = self.phival+adddict['phi'] if 'phi' in adddict else self.phival
+			newr = self.r+adddict['r'] if 'r' in adddict else self.r
+			newphi = self.phi+adddict['phi'] if 'phi' in adddict else self.phi
 			return armpoz({'r':newr,'phi':newphi},self.arm)
 		elif 'x' in adddict.keys() or 'y' in adddict.keys():
-			_ = self.ka
-			newx = self.xval+adddict['x'] if 'x' in adddict else self.xval
-			newy = self.yval+adddict['y'] if 'y' in adddict else self.yval
+			newx = self.x+adddict['x'] if 'x' in adddict else self.xval
+			newy = self.y+adddict['y'] if 'y' in adddict else self.yval
 			return armpoz({'x':newx,'y':newy},self.arm)
 		elif 'alpha' in adddict.keys() or 'beta' in adddict.keys():
 			newaoz = self.alphaodzera+adddict['alpha'] if 'alpha' in adddict else self.alphaodzera
