@@ -15,7 +15,7 @@ class testsource:
 		while i<10:
 			toprostastart = pos({'x':i,'y':33.1})
 			print toprostastart
-			toprostaend = pos({'x':i,'y':27.7})
+			toprostaend = pos({'x':i,'y':29.7})
 			print toprostaend
 			toprosta = rysowania.prosta(toprostastart, toprostaend)
 			yield toprosta
