@@ -19,6 +19,7 @@ class krzywa(rysunek):
 	def draw(self,ramie,step):
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie)
 		from moduly.arm.maszyna import nasilnik
+		print 'self.start',self.start,'ramie',ramie
 		armpoz(self.start,ramie).przemiesc()
 		ramie.opusc_pioro()
 		ruch = nasilnik(self.funkcja,self.start,step,str(self))
