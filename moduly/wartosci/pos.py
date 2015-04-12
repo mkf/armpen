@@ -23,7 +23,7 @@ class pos:
 		if self.rval is not None: return self.rval
 		else:
 			from math import sqrt
-			self.rval = sqrt((self.xval^2)+(self.yval^2))
+			self.rval = sqrt((self.xval*self.xval)+(self.yval*self.yval))
 			return self.rval
 	@property
 	def phi(self):
