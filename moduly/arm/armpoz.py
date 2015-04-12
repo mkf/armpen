@@ -37,8 +37,8 @@ class armpoz(MovingMixIn,pos):
 			return armpoz({'r':newr,'phi':newphi},self.arm)
 		elif 'x' in adddict.keys() or 'y' in adddict.keys():
 			_ = self.ka
-			newx = self.x+adddict['x'] if 'x' in adddict else self.x
-			newy = self.y+adddict['y'] if 'y' in adddict else self.y
+			newx = self.xval+adddict['x'] if 'x' in adddict else self.xval
+			newy = self.yval+adddict['y'] if 'y' in adddict else self.yval
 			return armpoz({'x':newx,'y':newy},self.arm)
 		elif 'alpha' in adddict.keys() or 'beta' in adddict.keys():
 			newaoz = self.alphaodzera+adddict['alpha'] if 'alpha' in adddict else self.alphaodzera
