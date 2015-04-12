@@ -35,6 +35,7 @@ class krzywa(rysunek):
 					assert not endjuz
 					doprzem = tojest['w']
 					zrobione = True
+					jest+=1
 				except AssertionError: pass
 
 		doprzem.przemiesc()
