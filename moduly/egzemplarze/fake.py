@@ -39,7 +39,7 @@ class fake(maszyna):
 		def czesci():
 			i = 0
 			while i<100:
-				yield self.ostat+{'alpha':i*stepdivid}
+				if self.pioro: yield self.ostat+{'alpha':i*stepdivid}
 				i+=1
 		for o in czesci():
 			self.screen.blit(self.image,(int(o.ka['x']),int(o.ka['y'])))
@@ -51,7 +51,7 @@ class fake(maszyna):
 		def czesci():
 			i = 0
 			while i<100:
-				yield self.ostat+{'beta':i*stepdivid}
+				if self.pioro: yield self.ostat+{'beta':i*stepdivid}
 				i+=1
 		for o in czesci():
 			self.screen.blit(self.image,(int(o.ka['x']),int(o.ka['y'])))
@@ -64,7 +64,7 @@ class fake(maszyna):
 		def czesci():
 			i = 0
 			while i<100:
-				yield self.ostat+{'alpha':i*sda,'beta':i*sdb}
+				if self.pioro: yield self.ostat+{'alpha':i*sda,'beta':i*sdb}
 				i+=1
 		for o in czesci():
 			self.screen.blit(self.image,(int(o.ka['x']),int(o.ka['y'])))
