@@ -23,25 +23,25 @@ class pos:
 		if self.rval is not None: return self.rval
 		else:
 			from math import sqrt
-			self.rval = sqrt((self.xval*self.xval)+(self.yval*self.yval))
+			self.rval = sqrt((self.x*self.x)+(self.y*self.y))
 			return self.rval
 	@property
 	def phi(self):
 		if self.phival is not None: return self.phival
 		else:
 			from math import atan2
-			self.phival = kat(atan2(self.yval,self.xval),"rad")
+			self.phival = kat(atan2(self.y,self.x),"rad")
 			return self.phival
 	@property
 	def po(self): return {'phi':self.phi,'r':self.r}
 	@property
 	def x(self):
 		if self.xval is not None: return self.xval
-		else: self.xval=self.rval*self.phival.sin ; return self.xval
+		else: self.xval=self.r*self.phi.sin ; return self.xval
 	@property
 	def y(self):
 		if self.yval is not None: return self.yval
-		else: self.yval=self.rval*self.phival.cos ; return self.yval
+		else: self.yval=self.r*self.phi.cos ; return self.yval
 	@property
 	def ka(self): return {'x': self.x,'y':self.y}
 	def __add__(self, other):

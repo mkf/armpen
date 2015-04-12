@@ -20,9 +20,8 @@ class armpoz(MovingMixIn,pos):
 		self.arm = arm
 		wyprost = poz.r==arm.l1+arm.l2
 		assert arm.l1+arm.l2>poz.r or wyprost, "Nie starcza ramion"
-		_ = self.po
-		cosalphaodr = (arm.l1/(2*self.rval))+(self.rval/(2*arm.l1))-(arm.l2**2/(2*self.rval*arm.l1))
-		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.rval**2/(2*arm.l1*arm.l2))
+		cosalphaodr = (arm.l1/(2*self.r))+(self.r/(2*arm.l1))-(arm.l2*arm.l2/(2*self.r*arm.l1))
+		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.r*self.r/(2*arm.l1*arm.l2))
 		self.alphaodr = arctrig(cosalphaodr,'cos')
 		self.beta = arctrig(cosbeta,'cos')
 		assert arm.maxbetafromzero >= self.beta >= arm.minbetafromzero
