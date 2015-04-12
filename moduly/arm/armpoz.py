@@ -16,7 +16,7 @@ class MovingMixIn:
 
 class armpoz(MovingMixIn,pos):
 	def __init__(self,poz,arm):
-		pos.__init__(self,poz)
+		pos.__init__(self,dict(poz))
 		self.arm = arm
 		wyprost = poz.r==arm.l1+arm.l2
 		assert arm.l1+arm.l2>poz.r or wyprost, "Nie starcza ramion"
