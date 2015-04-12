@@ -40,9 +40,7 @@ class pos:
 		return di
 	def __dict__(self): return self.dict
 	def __str__(self): return str(self.dict)
-	def __getitem__(self, item):
-		if item in self.__dict__: return self.__dict__()[item]
-		else: raise IndexError
+	def __getitem__(self, item): return self.dict[item]
 	@property
 	def r(self):
 		if self.rval is not None: return self.rval
