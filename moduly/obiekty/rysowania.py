@@ -10,8 +10,10 @@ class rysunek:
 class punkt(rysunek):
 	def __init__(self,gdzie): rysunek.__init__(self,gdzie);self.gdzie=gdzie
 	def draw(self,ramie):
-		self.gdzie.przemiesc()
-		ramie.opusc_pioro()
+		try:
+			armpoz(gdzie,ramie)
+			ramie.opusc_pioro()
+		except: print "punkt failed"
 
 class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):
@@ -135,5 +137,7 @@ class arcFromZero(krzywa):
 		def fdef(arm):
 			def tocos(x):
 				return {'w': armpoz({'r':r,'phi':maxPhi},arm),'e':x>0}
+			return tocos
+		krzywa.__init__(self,start,fdef)
 #TODO: arcfromelbow
 #TODO: allipsefrag
