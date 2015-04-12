@@ -3,7 +3,7 @@ from __future__ import division
 from moduly.arm.maszyna import maszyna
 from moduly.wartosci.kat import kat
 import nxt.locator
-from nxt.motor import Motor,PORT_A,PORT_B,PORT_C
+from nxt.motor import Motor,PORT_A,PORT_B,PORT_C,SynchronizedMotors
 from nxt.sensor import Touch,PORT_1,PORT_2
 from time import sleep
 
@@ -34,22 +34,44 @@ class real(maszyna):
 		self.motpenc = Motor(self.ster,PORT_C)
 		self.tzeralph = Touch(self.ster,PORT_1)
 		self.tzerbeta = Touch(self.ster,PORT_2)
+		self.motpenc.reset_position()
 		self.motpenc.run(power=10)
 		sleep(5)
 		self.motpenc.idle()
 		#odczytaj ile przejechał
 		#wez wartosc i uzywaj do późniejszych podnoszeń i opuszczeń
-		self.ilepencil = 90  #tu nie będzie jedynki tylko ta wartosc
+		self.ilepencil = self.motpenc.get_tacho()  #tu nie będzie jedynki tylko ta wartosc
 		return self
 	def __exit__(self, exc_type, exc_val, exc_tb): pass
 	def czyhome(self): return {'alphaodzera':self.tzeralph.get_sample(),'beta':self.tzerbeta.get_sample()}
 	def podnies_pioro(self): 
-		#self.linprog('#costam motor C podnies',1)
+		self.motpenc.turn(-100,self.ilepencil)
 		print "Podniesiono"
 	def opusc_pioro(self): 
-		#self.linprog('#costam motor C opusc',1)
+		self.motpenc.turn(50,self.ilepencil)
 		print "Opuszczono"
-	def movealpha(self,ruch): pass #self.linprog('#costam motor A rusz o tyle',1)
-	def movebeta(self,ruch): pass #self.linprog('#costam motor B rusz o tyle',1)
-	def syncedmove(self,a,b): pass #self.linprog('#costam synced move motor A z synced motor B',1)
+	def movealpha(self,ruch):
+		motalph = self.motalph
+		from numpy import sign
+		motalph.turn(sign(ruch*self.alphaenginemultiplier),abs(ruch*self.alphaenginemultiplier))
+	def movebeta(self,ruch):
+		motbeta = self.motbeta
+		from numpy import sign
+		motbeta.turn(sign(ruch*self.betaenginemultiplier),abs(ruch*self.betaenginemultiplier))
+	def syncedmove(self,a,b):
+		if a*self.alphaenginemultiplier<=b*self.betaenginemultiplier:
+			pie = b*self.betaenginemultiplier
+			dru = a*self.alphaenginemultiplier
+			mpie = self.motbeta
+			mdru = self.motalph
+		else:
+			pie = a*self.alphaenginemultiplier
+			dru = b*self.betaenginemultiplier
+			mpie = self.motalph
+			mdru = self.motbeta
+		ratio = dru/pie
+		motsync = SynchronizedMotors(mpie,mdru,ratio)
+		from numpy import sign
+		motsync.turn(sign(dru)*100,abs(pie))
+
 	def gdziejestesmaszyno(self): return self.whereami  #tutaj można to zrobić lepiej, ale to później
