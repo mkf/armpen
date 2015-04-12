@@ -31,7 +31,7 @@ class fake(maszyna):
 	def __exit__(self, exc_type, exc_val, exc_tb):
 		while True:
 			for event in pygame.event.get():
-				print event
+				if event.type!=pygame.MouseMotion: print event
 	def podnies_pioro(self): print "Podniesiono";self.pioro=False
 	def opusc_pioro(self):
 		print "Opuszczono";self.pioro=True
