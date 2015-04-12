@@ -48,7 +48,7 @@ class pos:
 	@property
 	def r(self):
 		if self.rval is not None: return self.rval
-		elif self.xval is not None and self.rval is not None:
+		elif self.xval is not None and self.yval is not None:
 			from math import sqrt
 			self.rval = sqrt((self.xval*self.xval)+(self.yval*self.yval))
 			return self.rval
