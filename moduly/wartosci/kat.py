@@ -13,14 +13,16 @@ class kat:
 	def deg(self):
 		if self.w==0: return 0.0
 		elif self.degval is None:
-			self.degval=self.degOLrad('deg')(self.w,self.a)
-			return self.degval
+			degval=self.degOLrad('deg')(self.w,self.a)
+			self.degval = degval
+			return degval
 	@property
 	def rad(self):
 		if self.w==0: return 0.0
 		elif self.radval is None:
-			self.radval=self.degOLrad("rad")(self.w,self.a)
-			return self.radval
+			radval = self.degOLrad("rad")(self.w,self.a)
+			self.radval=radval
+			return radval
 	def __mul__(self, other):
 		assert isinstance(other,int) or isinstance(other,float) or isinstance(other,long) or (isinstance(other,complex) and other.imag==0)
 		if self.w==0: return self
