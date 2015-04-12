@@ -2,7 +2,7 @@
 from moduly.wartosci.kat import kat
 class pos:
 	def __init__(self,coordicti):
-		debugg = False
+		debugg = False  # debug boolean
 		self.debugg = debugg
 		if debugg: print coordicti # debug
 		coordict = dict(coordicti)
