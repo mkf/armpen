@@ -42,6 +42,9 @@ class pos:
 	def __str__(self): return str(self.dict)
 	def __getitem__(self, item): return self.dict[item]
 	def __contains__(self, item): return item in self.dict
+	def keys(self): return self.dict.keys()
+	def __iter__(self): return iter(self.dict)
+	def __repr__(self): return repr(self.dict)
 	@property
 	def r(self):
 		if self.rval is not None: return self.rval
