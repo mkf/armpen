@@ -4,7 +4,7 @@ class kat:
 	def __init__(self,w,a):
 		from math import degrees,radians
 		self.defaultaforinterior="deg"  # config: default for internal operations if needed
-		self.degOLrad = lambda wart: lambda x,ax: x if ax==wart else (degrees(x) if wart=="deg" else radians(x) if wart=="rad" else None) if ax==("deg" if wart=="rad" else "rad" if wart=="deg" else None) else None
+		self.degOLrad = lambda wart: lambda x,ax: x if ax==wart else (degrees(x) if wart=="deg" else radians(x) if wart=="rad" else 'degolradfirsterror') if ax==("deg" if wart=="rad" else "rad" if wart=="deg" else 'degolrad-seconderror') else 'degOLrad-lasterror'
 		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
 		assert a in ("rad","deg")
 		assert isinstance(w,int) or isinstance(w,float) or isinstance(w,long) or isinstance(w,complex)
