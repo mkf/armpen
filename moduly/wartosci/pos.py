@@ -43,7 +43,7 @@ class pos:
 	def __getitem__(self, item):
 		try:
 			return self.dict[item]
-		except KeyError: pass
+		except KeyError: return None
 	@property
 	def r(self):
 		if self.rval is not None: return self.rval
