@@ -39,7 +39,7 @@ class kat:
 	@property
 	def naplaszczyznie(self):
 		print self.a    #debug
-		zdiva=divmod(self.w,float(360) if self.a=="deg" else kat(360,"deg").rad if self.a=="rad" else None)
+		zdiva=divmod(self.w if (self.a=="deg" or self.a=="rad") else self.deg, float(360) if self.a=="deg" else kat(360,"deg").rad if self.a=="rad" else float(360))
 		return {'katnaplaszczyznie': kat(zdiva[1],self.a),'pelnych':int(zdiva[0])}
 	@property
 	def cwiartka(self):
