@@ -21,7 +21,7 @@ class pos:
 		return di
 	def __str__(self): return str(dict(self))
 	def __getitem__(self, item):
-		if item in self.__dict__: return self.__dict__[item]
+		if item in self.__dict__: return self.__dict__()[item]
 		else: raise IndexError
 	@property
 	def r(self):
