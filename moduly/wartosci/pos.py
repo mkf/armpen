@@ -18,7 +18,8 @@ class pos:
 			if debugg: print self.phival, self.rval,self.typ
 		if debugg: print "__init__: phi,r,x,y ",self.phival,self.rval,self.xval,self.yval
 		assert (self.xval is not None and self.yval is not None) or (self.phival is not None and self.rval is not None)
-	def __dict__(self):
+	@property
+	def dict(self):
 		di = {}
 		if self.debugg:
 			print "__dict__"
@@ -37,7 +38,8 @@ class pos:
 			if self.debugg: print "di.update({'y':self.yval})"
 		assert ('phi' in di and 'r' in di) or ('x' in di and 'y' in di),di
 		return di
-	def __str__(self): return str(dict(self))
+	def __dict__(self): return self.dict
+	def __str__(self): return str(self.dict)
 	def __getitem__(self, item):
 		if item in self.__dict__: return self.__dict__()[item]
 		else: raise IndexError
