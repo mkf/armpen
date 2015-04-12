@@ -20,7 +20,21 @@ class krzywa(rysunek):
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie)
 		from moduly.arm.maszyna import nasilnik
 		print 'self.start',self.start,'ramie',ramie
-		doprzem = armpoz(self.start,ramie)
+		try:
+			doprzem = armpoz(self.start,ramie)
+		except:
+			zrobione = False
+			jest = 0
+			endjuz = False
+			while not zrobione and not endjuz:
+				try:
+					tojest = self.funkcja(jest*step)
+					endjuz = tojest['e']
+					assert not endjuz
+					doprzem = tojest['w']
+					zrobione = True
+				except AssertionError: pass
+
 		doprzem.przemiesc()
 		ramie.opusc_pioro()
 		ruch = nasilnik(self.funkcja,self.start,step,str(self))
