@@ -28,6 +28,7 @@ class krzywa(rysunek):
 				doprzem = armpoz(self.start,ramie)
 				doprzemend = False
 			else:
+				print juzstepprob
 				doprzemfun = funkcja(juzstepprob)
 				doprzemend = doprzemfun['e']
 				doprzem = doprzemfun['w']

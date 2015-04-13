@@ -9,7 +9,7 @@ class testsource:
 		print "bye",self.co
 		print "testsource.__exit__",exc_type,exc_val,exc_tb
 		import traceback
-		traceback.print_exception(exc_type,exc_val,exc_tb)
+		#traceback.print_exception(exc_type,exc_val,exc_tb)
 	def daj(self):
 		i = 1
 		while i<10:

@@ -31,7 +31,7 @@ class fake(maszyna):
 	def __exit__(self, exc_type, exc_val, exc_tb):
 		print "fake.__exit__",exc_type,exc_val,exc_tb
 		import traceback
-		traceback.print_exception(exc_type,exc_val,exc_tb)
+		#traceback.print_exception(exc_type,exc_val,exc_tb)
 		while True:
 			for event in pygame.event.get():
 				if event.type!=pygame.MOUSEMOTION: print event
