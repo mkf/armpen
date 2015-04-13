@@ -36,7 +36,7 @@ class krzywa(rysunek):
 					doprzem = tojest['w']
 					zrobione = True
 					jest+=1
-				except AssertionError: pass
+				except AssertionError: print AssertionError
 
 		doprzem.przemiesc()
 		ramie.opusc_pioro()
