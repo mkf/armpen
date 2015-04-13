@@ -83,3 +83,4 @@ class nasilnik:
 		self.funkcja=funkcja;self.startpoz=startpoz;self.step=step
 		assert isinstance(opis, str)
 		self.__str__ = "Komenda@step%s: %s" % (str(step),opis)
+		print self.__str__
