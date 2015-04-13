@@ -19,7 +19,7 @@ class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):
 		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca
 		from sys import setrecursionlimit
-		setrecursionlimit(250000)
+		setrecursionlimit(25000)
 	def draw(self,ramie,step,bylprob=False,juzstepprob=0):
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie,juzstepprob)
 		from moduly.arm.maszyna import nasilnik
