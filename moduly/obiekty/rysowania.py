@@ -38,6 +38,7 @@ class krzywa(rysunek):
 				doprzem.przemiesc()
 				ramie.opusc_pioro()
 				ruch = nasilnik(self.funkcja,doprzem,step,str(self))
+			else: print doprzemend,doprzemfun,doprzem
 		except AssertionError:
 			bylprob = True
 			if not doprzemend:
