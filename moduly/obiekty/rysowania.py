@@ -40,6 +40,8 @@ class krzywa(rysunek):
 			bylprob = True
 			juzstepprob+=probstep
 			self.draw(ramie,step,bylprob,juzstepprob)
+		except RuntimeError:
+			print "Mamy RuntimeError, na razie olewamy"
 
 class prosta(krzywa):     #      prosta(cubicbezier):
 	def __init__(self,start,end):   #cubicbezier.__init__(self,start,start,end,end)
