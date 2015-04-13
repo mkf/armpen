@@ -20,13 +20,14 @@ class krzywa(rysunek):
 		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca
 	def draw(self,ramie,step,bylprob=False,juzstepprob=0):
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie,juzstepprob)
+		doprzemend = False
 		from moduly.arm.maszyna import nasilnik
 		print 'self.start',self.start,'ramie',ramie
 		probstep = self.probstep if self.probstep is not None else (step*10)
 		try:
 			if not bylprob:
-				doprzem = armpoz(self.start,ramie)
 				doprzemend = False
+				doprzem = armpoz(self.start,ramie)
 			else:
 				print juzstepprob
 				doprzemfun = funkcja(juzstepprob)
@@ -38,8 +39,9 @@ class krzywa(rysunek):
 				ruch = nasilnik(self.funkcja,doprzem,step,str(self))
 		except AssertionError:
 			bylprob = True
-			juzstepprob+=probstep
-			self.draw(ramie,step,bylprob,juzstepprob)
+			if not doprzemend:
+				juzstepprob+=probstep
+				self.draw(ramie,step,bylprob,juzstepprob)
 		except RuntimeError:
 			print "Mamy RuntimeError, na razie olewamy"
 
