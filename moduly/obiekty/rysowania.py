@@ -18,10 +18,11 @@ class punkt(rysunek):
 class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):
 		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca
+		from sys import setrecursionlimit
+		setrecursionlimit(250000)
 	def draw(self,ramie,step,bylprob=False,juzstepprob=0):
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie,juzstepprob)
 		from moduly.arm.maszyna import nasilnik
-		if not bylprob: recurslockjuz=False
 		print 'self.start',self.start,'ramie',ramie
 		probstep = self.probstep if self.probstep is not None else step
 		try:
@@ -29,10 +30,6 @@ class krzywa(rysunek):
 				doprzem = armpoz(self.start,ramie)
 				doprzemend = False
 			else:
-				if not recurslockjuz:
-					recurslockjuz = True
-					from sys import setrecursionlimit
-					setrecursionlimit(250000)
 				print juzstepprob
 				doprzemfun = funkcja(juzstepprob)
 				doprzemend = doprzemfun['e']
