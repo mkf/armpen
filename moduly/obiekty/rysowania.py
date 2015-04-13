@@ -22,7 +22,7 @@ class krzywa(rysunek):
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie,juzstepprob)
 		from moduly.arm.maszyna import nasilnik
 		print 'self.start',self.start,'ramie',ramie
-		probstep = self.probstep if self.probstep is not None else step*10
+		probstep = self.probstep if self.probstep is not None else (step*10)
 		try:
 			if not bylprob:
 				doprzem = armpoz(self.start,ramie)
