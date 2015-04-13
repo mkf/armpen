@@ -31,6 +31,7 @@ class krzywa(rysunek):
 			else:
 				print juzstepprob
 				doprzemfun = funkcja(juzstepprob)
+				print doprzemfun
 				doprzemend = doprzemfun['e']
 				doprzem = doprzemfun['w']
 			if not doprzemend:
