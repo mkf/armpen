@@ -83,7 +83,15 @@ class arctrig(kat):
 			else:from math import acos as atrig
 		elif trigt=='sin': from math import asin as atrig
 		elif trigt=='tan': from math import atan as atrig
-		kat.__init__(self,atrig(val),'rad')
+		try: kat.__init__(self,atrig(val),'rad')
+		except ValueError:
+			print atrig, val , val*0.9999999999
+			if trigt=='sin' or trigt=='cos':
+				try:
+					kat.__init__(self,atrig(val*0.9999999999),'rad')
+				except ValueError:
+					raise
+			else: raise
 		if trigt=='cos': self.cosval = val ; self.sinval=sqrt(1-(val**2)) ; self.tanval=sqrt(1-(val**2))/val
 		elif trigt=='sin': self.sinval = val ; self.cosval=sqrt(1-(val**2)) ; self.tanval=val/sqrt(1-(val**2))
 		elif trigt=='tan': self.tanval = val ; self.sinval=val/sqrt(1+(val**2)) ; self.cosval=1/sqrt(1+(val**2))
