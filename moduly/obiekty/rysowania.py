@@ -18,30 +18,46 @@ class punkt(rysunek):
 class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):
 		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca
-	def draw(self,ramie,step,bylprob=False,juzstepprob=0,doprzemend=False):
+	def draw(self,ramie,step):
+		bylprob=False;juzstepprob=0;doprzemend=False
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie,juzstepprob)
 		from moduly.arm.maszyna import nasilnik
-		print 'self.start',self.start,'ramie',ramie
+		print 'self.start',self.start,'ramie',ramie   #debug
 		probstep = self.probstep if self.probstep is not None else (step*10)
 		try:
 			if not bylprob: doprzem = armpoz(self.start,ramie)
 			else:
-				print juzstepprob
+				print juzstepprob  #debug
 				doprzemfun = funkcja(juzstepprob)
-				print doprzemfun
+				print doprzemfun  #debug
 				doprzemend = doprzemfun['e']
 				doprzem = doprzemfun['w']
 			if not doprzemend:
 				doprzem.przemiesc()
 				ramie.opusc_pioro()
 				ruch = nasilnik(self.funkcja,doprzem,step,str(self))
+				ramie.dajnasilnik(ruch)
 			else: print doprzemend,doprzemfun,doprzem
 		except AssertionError:
 			bylprob = True
 			if not doprzemend:
 				juzstepprob+=probstep
-				print ramie,step,bylprob,juzstepprob,doprzemend
-				self.draw(ramie,step,bylprob,juzstepprob,doprzemend)
+				print ramie,step,bylprob,juzstepprob,doprzemend    #debug
+				#self.draw(ramie,step,bylprob,juzstepprob,doprzemend)
+				zrobione = False
+				while not doprzemend and not zrobione:
+					try:
+						doprzemfun = funkcja(juzstepprob)
+						doprzemend = doprzemfun['e']
+						doprzem = doprzemfun['w']
+						if not doprzemend:
+							doprzem.przemiesc()
+							ramie.opusc_pioro()
+							ruch = nasilnik(self.funkcja,doprzem,step,str(self))
+							ramie.dajnasilnik(ruch)
+						zrobione = True
+					except AssertionError: pass
+
 		#except RuntimeError:
 		#	print "Mamy RuntimeError, na razie olewamy"
 
