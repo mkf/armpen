@@ -19,7 +19,7 @@ class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):
 		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca
 	def draw(self,ramie,step):
-		absolutniestopdlastepprog = 20000
+		absolutniestopdlastepprog = 3000
 		bylprob=False;juzstepprob=0;doprzemend=False
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie,juzstepprob)
 		from moduly.arm.maszyna import nasilnik
