@@ -9,7 +9,7 @@ class rysunek:
 
 class punkt(rysunek):
 	def __init__(self,gdzie): rysunek.__init__(self,gdzie);self.gdzie=gdzie
-	def draw(self,ramie):
+	def draw(self,ramie,step=0):
 		try:
 			armpoz(self.gdzie,ramie).przemiesc()
 			ramie.opusc_pioro()
