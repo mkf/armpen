@@ -47,6 +47,7 @@ class fake(maszyna):
 			while i<100:
 				if self.pioro: yield self.ostat+{'alpha':i*stepdivid}
 				i+=1
+				print i,"to jest to i z fake"
 		for o in czesci():
 			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
 			print naszazmienna
