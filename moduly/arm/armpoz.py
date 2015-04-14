@@ -19,17 +19,25 @@ class armpoz(MovingMixIn,pos):
 		pos.__init__(self,dict(poz))
 		self.arm = arm
 		wyprost = self.r==arm.l1+arm.l2
-		assert arm.l1+arm.l2>self.r or wyprost, "Nie starcza ramion"
-		assert arm.l1-arm.l2<self.r, "Za blisko!"
+		if not (arm.l1+arm.l2>self.r or wyprost):
+			print "Nie starcza ramion"
+			assert arm.l1+arm.l2>self.r or wyprost, "Nie starcza ramion"
+		if not (arm.l1-arm.l2<self.r):
+			print "Za blisko!"
+			assert arm.l1-arm.l2<self.r, "Za blisko!"
 		#print "l1",arm.l1,'l2',arm.l2,'r',self.r  #debug
 		cosalphaodr = (arm.l1/(2*self.r))+(self.r/(2*arm.l1))-(arm.l2*arm.l2/(2*self.r*arm.l1))  # dla przykładowych wyszło ~1.04 — ale to chyba było za blisko po prostu
 		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.r*self.r/(2*arm.l1*arm.l2))
 		self.alphaodr = arctrig(cosalphaodr,'cos')
 		self.beta = arctrig(cosbeta,'cos')
-		assert arm.maxbeta >= self.beta >= arm.minbeta, "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
+		if not (arm.maxbeta >= self.beta >= arm.minbeta):
+			print "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
+			assert arm.maxbeta >= self.beta >= arm.minbeta, "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
 		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
 		self.alphaodzera=(self.phi+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
-		assert self.alphaodzera != 'err'
+		if self.alphaodzera=='err':
+			print "self.alphaodzera=='err'"
+			assert self.alphaodzera != 'err'
 	def __add__(self, other):
 		adddict = other
 		if 'r' in adddict.keys() or 'phi' in adddict.keys():
