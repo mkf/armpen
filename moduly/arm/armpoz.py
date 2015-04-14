@@ -67,6 +67,7 @@ class gdzieramiona(MovingMixIn):
 	def dajpoz(self):
 		try: return self.armpozy
 		except NameError: pass
+		except AttributeError: pass
 		arm=self.arm
 		beta=self.beta
 		alph=self.alphaodzera
