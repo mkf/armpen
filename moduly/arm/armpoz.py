@@ -22,9 +22,9 @@ class armpoz(MovingMixIn,pos):
 		if not (arm.l1+arm.l2>self.r or wyprost):
 			print "Nie starcza ramion"
 			assert arm.l1+arm.l2>self.r or wyprost, "Nie starcza ramion"
-		if not (arm.l1-arm.l2<self.r):
-			print "Za blisko!"
-			assert arm.l1-arm.l2<self.r, "Za blisko!"
+		#if not (arm.l1-arm.l2<self.r):
+		#	print "Za blisko!",arm.l1,arm.l2,self.r
+		#	assert arm.l1-arm.l2<self.r, "Za blisko!"
 		#print "l1",arm.l1,'l2',arm.l2,'r',self.r  #debug
 		cosalphaodr = (arm.l1/(2*self.r))+(self.r/(2*arm.l1))-(arm.l2*arm.l2/(2*self.r*arm.l1))  # dla przykładowych wyszło ~1.04 — ale to chyba było za blisko po prostu
 		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.r*self.r/(2*arm.l1*arm.l2))
