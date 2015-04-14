@@ -40,6 +40,7 @@ class krzywa(rysunek):
 			bylprob = True
 			if not doprzemend:
 				juzstepprob+=probstep
+				print ramie,step,bylprob,juzstepprob,doprzemend
 				self.draw(ramie,step,bylprob,juzstepprob,doprzemend)
 		#except RuntimeError:
 		#	print "Mamy RuntimeError, na razie olewamy"
