@@ -39,7 +39,7 @@ class armpoz(MovingMixIn,pos):
 			assert arm.maxbeta >= self.beta >= arm.minbeta, "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
 		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
 		self.alphaodzera=(self.phi+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
-		if self.alphaodzera=='err':
+		if isinstance(self.alphaodzera,str) and self.alphaodzera=='err':
 			print "self.alphaodzera=='err'"
 			assert self.alphaodzera != 'err'
 	def __add__(self, other):
