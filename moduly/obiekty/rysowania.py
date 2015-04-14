@@ -19,6 +19,7 @@ class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):
 		rysunek.__init__(self,start);self.funkcjadefiniujaca=funkcjadefiniujaca
 	def draw(self,ramie,step):
+		absolutniestopdlastepprog = 20000
 		bylprob=False;juzstepprob=0;doprzemend=False
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie,juzstepprob)
 		from moduly.arm.maszyna import nasilnik
@@ -45,7 +46,7 @@ class krzywa(rysunek):
 				print ramie,step,bylprob,juzstepprob,doprzemend    #debug
 				#self.draw(ramie,step,bylprob,juzstepprob,doprzemend)
 				zrobione = False
-				while not doprzemend and not zrobione:
+				while not doprzemend and not zrobione and juzstepprob<=absolutniestopdlastepprog:
 					print "tryin",ramie,step,bylprob,juzstepprob,doprzemend
 					try:
 						doprzemfun = funkcja(juzstepprob)
@@ -59,6 +60,8 @@ class krzywa(rysunek):
 						zrobione = True
 					except AssertionError:
 						if not doprzemend and not zrobione: juzstepprob+=probstep
+				if juzstepprob<=absolutniestopdlastepprog:
+					print "Nie zrobiono"
 
 		#except RuntimeError:
 		#	print "Mamy RuntimeError, na razie olewamy"
