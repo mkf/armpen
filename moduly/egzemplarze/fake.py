@@ -2,7 +2,7 @@
 from __future__ import division
 from moduly.arm.maszyna import maszyna
 from moduly.wartosci.kat import kat
-import pygame
+#import pygame
 from time import sleep
 
 class fake(maszyna):
@@ -23,22 +23,22 @@ class fake(maszyna):
 		maszyna.__init__(self,l1,l2,maxalphafromzero,minalphafromzero,maxbeta,minbeta,alphaprecision,betaprecision)
 		self.ostat = self.whereami
 	def __enter__(self):
-		pygame.init()
-		self.screen = pygame.display.set_mode((640,480))
-		self.image = pygame.image.load("testimage.gif")
+		#pygame.init()
+		#self.screen = pygame.display.set_mode((640,480))
+		#self.image = pygame.image.load("testimage.gif")
 
 		return self
 	def __exit__(self, exc_type, exc_val, exc_tb):
 		print "fake.__exit__",exc_type,exc_val,exc_tb
 		import traceback
 		#traceback.print_exception(exc_type,exc_val,exc_tb)
-		while True:
-			for event in pygame.event.get():
-				if event.type!=pygame.MOUSEMOTION: print event
+		#while True:
+		#	for event in pygame.event.get():
+		#		if event.type!=pygame.MOUSEMOTION: print event
 	def podnies_pioro(self): print "Podniesiono";self.pioro=False
 	def opusc_pioro(self):
 		print "Opuszczono";self.pioro=True
-		self.screen.blit(self.image,(int(self.ostat.dajpoz().ka['x']),int(self.ostat.dajpoz().ka['y'])))
+		#self.screen.blit(self.image,(int(self.ostat.dajpoz().ka['x']),int(self.ostat.dajpoz().ka['y'])))
 	def movealpha(self,ruch):
 		print ruch
 		stepdivid = ruch*(1/100)
@@ -51,8 +51,8 @@ class fake(maszyna):
 		for o in czesci():
 			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
 			print naszazmienna
-			self.screen.blit(self.image,naszazmienna)
-			pygame.display.flip()
+			#self.screen.blit(self.image,naszazmienna)
+			#pygame.display.flip()
 		self.ostat = self.whereami
 	def movebeta(self,ruch):
 		print ruch
@@ -65,8 +65,8 @@ class fake(maszyna):
 		for o in czesci():
 			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
 			print naszazmienna
-			self.screen.blit(self.image,naszazmienna)
-			pygame.display.flip()
+			#self.screen.blit(self.image,naszazmienna)
+			#pygame.display.flip()
 		self.ostat = self.whereami
 	def syncedmove(self,a,b):
 		print a,b
@@ -80,7 +80,7 @@ class fake(maszyna):
 		for o in czesci():
 			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
 			print naszazmienna
-			self.screen.blit(self.image,naszazmienna)
-			pygame.display.flip()
+			#self.screen.blit(self.image,naszazmienna)
+			#pygame.display.flip()
 		self.ostat = self.whereami
 	def gdziejestesmaszyno(self): return self.whereami.dajpoz
