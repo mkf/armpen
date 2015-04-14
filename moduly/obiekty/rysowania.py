@@ -57,7 +57,8 @@ class krzywa(rysunek):
 							ruch = nasilnik(self.funkcja,doprzem,step,str(self))
 							ramie.dajnasilnik(ruch)
 						zrobione = True
-					except AssertionError: pass
+					except AssertionError:
+						if not doprzemend and not zrobione: juzstepprob+=probstep
 
 		#except RuntimeError:
 		#	print "Mamy RuntimeError, na razie olewamy"
