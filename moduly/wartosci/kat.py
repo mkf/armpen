@@ -79,7 +79,7 @@ class arctrig(kat):
 		assert trigt in ['cos','sin','tan']
 		from math import sqrt
 		if trigt=='cos':
-			if val==1: atrig = lambda x: return 0 if x==1 else None
+			if val==1: atrig = lambda x: 0 if x==1 else None
 			else:from math import acos as atrig
 		elif trigt=='sin': from math import asin as atrig
 		elif trigt=='tan': from math import atan as atrig
