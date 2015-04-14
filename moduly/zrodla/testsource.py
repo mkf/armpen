@@ -26,5 +26,5 @@ class testsource:
 		print self.co
 			#print i
 		for i in range(1,50):
-			yield rysowania.punkt(pos({'x':1,'y':1}))
+			yield rysowania.punkt(pos({'x':i,'y':i}))
 			print i,"done: punkt"
