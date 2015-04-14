@@ -28,8 +28,12 @@ class armpoz(MovingMixIn,pos):
 		#print "l1",arm.l1,'l2',arm.l2,'r',self.r  #debug
 		cosalphaodr = (arm.l1/(2*self.r))+(self.r/(2*arm.l1))-(arm.l2*arm.l2/(2*self.r*arm.l1))  # dla przykładowych wyszło ~1.04 — ale to chyba było za blisko po prostu
 		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.r*self.r/(2*arm.l1*arm.l2))
-		self.alphaodr = arctrig(cosalphaodr,'cos')
-		self.beta = arctrig(cosbeta,'cos')
+		try:
+			self.alphaodr = arctrig(cosalphaodr,'cos')
+			self.beta = arctrig(cosbeta,'cos')
+		except ValueError:
+			print "cosalphaodr",cosalphaodr,"cosbeta",cosbeta
+			raise AssertionError("cosalphaodr",cosalphaodr,"cosbeta",cosbeta)
 		if not (arm.maxbeta >= self.beta >= arm.minbeta):
 			print "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
 			assert arm.maxbeta >= self.beta >= arm.minbeta, "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
