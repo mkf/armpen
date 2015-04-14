@@ -13,6 +13,7 @@ class punkt(rysunek):
 		try:
 			armpoz(self.gdzie,ramie).przemiesc()
 			ramie.opusc_pioro()
+			print "NARYSOWANO PUNKT!!!"
 		except AssertionError: print "punkt failed"
 
 class krzywa(rysunek):

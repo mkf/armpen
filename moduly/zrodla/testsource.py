@@ -28,3 +28,5 @@ class testsource:
 		for i in range(1,50):
 			yield rysowania.punkt(pos({'x':i,'y':i}))
 			print i,"done: punkt"
+			yield rysowania.punkt(pos({'x':i,'y':i+5}))
+			print i,"done:punkt2"
