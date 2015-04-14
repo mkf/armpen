@@ -50,11 +50,11 @@ class kat:
 	def cwiartka(self):
 		zdiva=divmod(self.w,float(90) if self.a=="deg" else kat(90,"deg").rad if self.a=="rad" else None)
 		return {'cwiartka':int(zdiva[0]),'ostry':kat(zdiva[1],self.a)}
-	def __eq__(self, other): return self.deg==other.deg or self.rad==other.rad
-	def __lt__(self, other): return self.deg < other.deg and self.rad<other.rad
+	def __eq__(self, other): return self.deg==other.deg #or self.rad==other.rad
+	def __lt__(self, other): return self.deg < other.deg #and self.rad<other.rad
 	def __le__(self, other): return self.__eq__(other) or self.__lt__(other)
 	def __ne__(self, other): return not self.__eq__(other)
-	def __gt__(self, other): return self.deg > other.deg and self.rad > other.rad
+	def __gt__(self, other): return self.deg > other.deg #and self.rad > other.rad
 	def __ge__(self, other): return self.__eq__(other) or self.__gt__(other)
 	@property
 	def sin(self):
