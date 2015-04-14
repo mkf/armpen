@@ -75,8 +75,8 @@ class gdzieramiona(MovingMixIn):
 		alodr=arctrig((arm.l1-(arm.l2*beta.cos))/radi,'cos')
 		# elbow direction temporarily given up
 		pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}
-		self.armpozy = armpoz(pozd,self.arm)
-		return self.armpozy
+		self.armpozy = armpozy = armpoz(pozd,self.arm)
+		return armpozy
 	def __add__(self,other):
 		saoz=dict(self)['alphaodzera']+dict(other)['alphaodzera']
 		sbet=dict(self)['beta']+dict(other)['beta']
