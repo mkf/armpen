@@ -46,6 +46,7 @@ class krzywa(rysunek):
 				#self.draw(ramie,step,bylprob,juzstepprob,doprzemend)
 				zrobione = False
 				while not doprzemend and not zrobione:
+					print "tryin",ramie,step,bylprob,juzstepprob,doprzemend
 					try:
 						doprzemfun = funkcja(juzstepprob)
 						doprzemend = doprzemfun['e']
