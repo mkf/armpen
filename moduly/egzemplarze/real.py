@@ -9,6 +9,7 @@ from nxt.sensor import Touch,PORT_1,PORT_2
 
 class real(maszyna):
 	def __init__(self):
+		self.bezpieczenstwo = 0.1
 		l1 = 26.58
 		l2 = l1 * (0.426/0.574)
 		# temporarily givin' up the elbow direction
@@ -55,13 +56,13 @@ class real(maszyna):
 		else: ruch = ruchc
 		motalph = self.motalph
 		from numpy import sign
-		motalph.turn(sign(ruch*self.alphaenginemultiplier),abs(ruch*self.alphaenginemultiplier))
+		motalph.turn(sign(ruch*self.alphaenginemultiplier),abs(ruch*self.alphaenginemultiplier)*self.bezpieczenstwo)
 	def movebeta(self,ruchc):
 		if isinstance(ruchc,kat): ruch = ruchc.deg
                 else: ruch = ruchc
 		motbeta = self.motbeta
 		from numpy import sign
-		motbeta.turn(sign(ruch*self.betaenginemultiplier),abs(ruch*self.betaenginemultiplier))
+		motbeta.turn(sign(ruch*self.betaenginemultiplier),abs(ruch*self.betaenginemultiplier)*self.bezpieczenstwo)
 	def syncedmove(self,ac,bc):
 		if isinstance(ac,kat): a = ac.deg
                 else: a = ac
@@ -80,6 +81,6 @@ class real(maszyna):
 		ratio = dru/pie
 		motsync = SynchronizedMotors(mpie,mdru,ratio)
 		from numpy import sign
-		motsync.turn(sign(dru)*100,abs(pie))
+		motsync.turn(sign(dru)*100,abs(pie)*self.bezpieczenstwo)
 
 	def gdziejestesmaszyno(self): return self.whereami  #tutaj można to zrobić lepiej, ale to później
