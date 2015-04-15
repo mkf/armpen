@@ -14,6 +14,7 @@ class kat:
 				elif radeg=="rad" and xa=="deg":
 					return radians(xw)
 				else: raise ValueError('prob z degOLrad')
+			return zamiana
 		self.degOLrad = degOLrad		
 		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
 		assert a in ("rad","deg")
