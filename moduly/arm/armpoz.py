@@ -34,9 +34,15 @@ class armpoz(MovingMixIn,pos):
 		except ValueError:
 			print "cosalphaodr",cosalphaodr,"cosbeta",cosbeta
 			raise AssertionError("cosalphaodr",cosalphaodr,"cosbeta",cosbeta,"nie da się z tego wyliczyć arccos")
-		if not (arm.maxbeta >= self.beta >= arm.minbeta):
-			print "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
-			assert arm.maxbeta >= self.beta >= arm.minbeta, "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
+		#if not (arm.maxbeta >= self.beta >= arm.minbeta):
+		#	print "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
+		#	assert arm.maxbeta >= self.beta >= arm.minbeta, "maxbeta"+str(arm.maxbeta)+"beta"+str(self.beta)+"minbeta"+str(arm.minbeta)
+		if arm.maxbeta<self.beta:
+			print "MAXBETA"+str(arm.maxbeta)+"BETA"+str(self.beta)
+			assert arm.maxbeta>=self.beta,"MAXBETA"+str(arm.maxbeta)+"BETA"+str(self.beta)
+		if arm.minbeta>self.beta:
+			print "MINBETA"+str(arm.minbeta)+"BETA"+str(self.beta)
+			assert arm.minbeta<=self.beta,"MINBETA"+str(arm.minbeta),+"BETA"+str(self.beta)
 		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
 		self.alphaodzera=(self.phi+self.alphaodr).naplaszczyznie['katnaplaszczyznie']
 		if isinstance(self.alphaodzera,str) and self.alphaodzera=='err':
