@@ -81,14 +81,19 @@ class armpoz(MovingMixIn,pos):
                 if self.yval is not None:
                         di.update({'y':self.yval})
                         if self.debugg: print "di.update({'y':self.yval})"
-		if self.alphaodzera is not None:
-			di.update({'alphaodzera':self.alphaodzera})
-			if self.debugg: print "di.update({'alphaodzera':self.alphaodzera})"
-		if self.beta is not None:
-			di.update({'beta':self.beta})
-			if self.debugg: print "di.update({'beta':self.beta})"
+		di.update({'alphaodzera':self.alphaodzera})
+		if self.debugg: print "di.update({'alphaodzera':self.alphaodzera})"
+		di.update({'beta':self.beta})
+		if self.debugg: print "di.update({'beta':self.beta})"
                 assert ('phi' in di and 'r' in di) or ('x' in di and 'y' in di),di
                 return di
+	def __dict__(self): return self.dict
+        def __str__(self): return str(self.dict)
+        def __getitem__(self, item): return self.dict[item]
+        def __contains__(self, item): return item in self.dict
+        def keys(self): return self.dict.keys()
+        def __iter__(self): return iter(self.dict)
+        def __repr__(self): return repr(self.dict)
 
 class gdzieramiona(MovingMixIn):
 	def __init__(self,alphaodzera,beta,arm):
@@ -112,6 +117,6 @@ class gdzieramiona(MovingMixIn):
 		self.armpozy = armpozy = armpoz(pozd,self.arm)
 		return armpozy
 	def __add__(self,other):
-		saoz=dict(self)['alphaodzera']+dict(other)['alphaodzera']
-		sbet=dict(self)['beta']+dict(other)['beta']
+		saoz=self.alphaodzera+dict(other)['alphaodzera']
+		sbet=self.beta+dict(other)['beta']
 		return gdzieramiona(saoz,sbet,self.arm)

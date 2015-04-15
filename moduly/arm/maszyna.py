@@ -32,7 +32,7 @@ class maszyna:
 		assert 'drawarea' in naszefunkcje
 
 	def armzakrescheck(self,pozy):
-		return self.minalphafromzero<=pozy['alphafromzero']<=self.maxalphafromzero and self.minbeta<=pozy['beta']<=self.maxbeta
+		return self.minalphafromzero<=pozy['alphaodzera']<=self.maxalphafromzero and self.minbeta<=pozy['beta']<=self.maxbeta
 
 	# noinspection PyMethodMayBeStatic
 	def dajnasilnik(self,co):
