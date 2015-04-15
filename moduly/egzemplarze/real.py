@@ -50,15 +50,23 @@ class real(maszyna):
 	def opusc_pioro(self): 
 		#self.motpenc.turn(50,self.ilepencil)
 		print "Opuszczono — kłamstwo"
-	def movealpha(self,ruch):
+	def movealpha(self,ruchc):
+		if isinstance(ruchc,kat): ruch = ruchc.deg
+		else: ruch = ruchc
 		motalph = self.motalph
 		from numpy import sign
 		motalph.turn(sign(ruch*self.alphaenginemultiplier),abs(ruch*self.alphaenginemultiplier))
-	def movebeta(self,ruch):
+	def movebeta(self,ruchc):
+		if isinstance(ruchc,kat): ruch = ruchc.deg
+                else: ruch = ruchc
 		motbeta = self.motbeta
 		from numpy import sign
 		motbeta.turn(sign(ruch*self.betaenginemultiplier),abs(ruch*self.betaenginemultiplier))
-	def syncedmove(self,a,b):
+	def syncedmove(self,ac,bc):
+		if isinstance(ac,kat): a = ac.deg
+                else: a = ac
+		if isinstance(bc,kat): b = bc.deg
+                else: b = bc
 		if a*self.alphaenginemultiplier<=b*self.betaenginemultiplier:
 			pie = b*self.betaenginemultiplier
 			dru = a*self.alphaenginemultiplier
