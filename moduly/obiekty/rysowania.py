@@ -14,7 +14,10 @@ class punkt(rysunek):
 			armpoz(self.gdzie,ramie).przemiesc()
 			ramie.opusc_pioro()
 			print "NARYSOWANO PUNKT!!!"
-		except AssertionError: print "punkt failed"
+		except AssertionError: 
+			print "punkt failed"
+			import pdb
+			pdb.post_mortem()
 
 class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):

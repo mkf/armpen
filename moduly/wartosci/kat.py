@@ -48,10 +48,10 @@ class kat:
 		return kat(other.w+self.w,self.a) if other.a==self.a else kat(cowkoncu(other,self.defaultaforinterior)+cowkoncu(self,self.defaultaforinterior),self.defaultaforinterior)
 	def __neg__(self): return kat(-self.w,self.a)
 	def __pos__(self): return self  # redundant, I know.
-	def __sub__(self, other): assert isinstance(other,kat); return self.__add__(other.__neg__)
+	def __sub__(self, other): assert isinstance(other,kat); return self.__add__(other.__neg__())
 	def signum(self): return 0 if self.w==0 else 1 if self.w>0 else -1 if self.w<0 else None
 	def onesign(self): return 1 if self.w>=0 else -1 if self.w<0 else None
-	def __abs__(self): return self.__neg__ if self.w<0 else self
+	def __abs__(self): return self.__neg__() if self.w<0 else self
 	def __truediv__(self, other):
 		assert isinstance(other,kat)
 		cowkoncu = lambda w,a: w.deg if a=="deg" else w.rad if a=="rad" else None
