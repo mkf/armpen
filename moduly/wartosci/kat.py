@@ -7,13 +7,15 @@ class kat:
 		#self.degOLrad = lambda wart: lambda x,ax: x if ax==wart else (degrees(x) if wart=="deg" else radians(x) if wart=="rad" else 'degolradfirsterror') if ax==("deg" if wart=="rad" else "rad" if wart=="deg" else 'degolrad-seconderror') else 'degOLrad-lasterror'
 		def degOLrad(radeg):
 			def zamiana(xw,xa):
-				if ax==radeg or (radeg=="deg" and ax=="deg") or (radeg=="rad" and ax=="rad"):
+				if xa==radeg or (radeg=="deg" and xa=="deg") or (radeg=="rad" and xa=="rad"):
 					return xw
 				elif radeg=="deg" and xa=="rad":
 					return degrees(xw)
 				elif radeg=="rad" and xa=="deg":
 					return radians(xw)
-				else: raise ValueError('prob z degOLrad')
+				else: 
+					print "prob z degOLrad"
+					raise ValueError('prob z degOLrad')
 			return zamiana
 		self.degOLrad = degOLrad		
 		self.w=w;self.a=a;self.degval=None;self.radval=None;self.sinval=None;self.cosval=None;self.tanval=None
@@ -27,6 +29,7 @@ class kat:
 			degval=self.degOLrad('deg')(self.w,self.a)
 			self.degval = degval
 			return degval
+		else: return degval
 	@property
 	def rad(self):
 		if self.w==0: return 0.0
@@ -34,6 +37,7 @@ class kat:
 			radval = self.degOLrad("rad")(self.w,self.a)
 			self.radval=radval
 			return radval
+		else: return radval
 	def __mul__(self, other):
 		assert isinstance(other,int) or isinstance(other,float) or isinstance(other,long) or (isinstance(other,complex) and other.imag==0)
 		if self.w==0: return self
