@@ -29,7 +29,7 @@ class kat:
 			degval=self.degOLrad('deg')(self.w,self.a)
 			self.degval = degval
 			return degval
-		else: return degval
+		else: return self.degval
 	@property
 	def rad(self):
 		if self.w==0: return 0.0
@@ -37,7 +37,7 @@ class kat:
 			radval = self.degOLrad("rad")(self.w,self.a)
 			self.radval=radval
 			return radval
-		else: return radval
+		else: return self.radval
 	def __mul__(self, other):
 		assert isinstance(other,int) or isinstance(other,float) or isinstance(other,long) or (isinstance(other,complex) and other.imag==0)
 		if self.w==0: return self
