@@ -20,7 +20,7 @@ class real(maszyna):
 		alphaprecision = kat(0.01,"deg")
 		betaprecision = kat(0.01,"deg")
 		self.alphaenginemultiplier = 168
-		self.betaenginemultiplier = 168   # jeszcze nie wiadomo
+		self.betaenginemultiplier = 56   # jeszcze nie wiadomo
 		self.drawarea = lambda pozy: True
 
 		maszyna.__init__(self,l1,l2,maxalphafromzero,minalphafromzero,maxbeta,minbeta,alphaprecision,betaprecision)
