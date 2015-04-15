@@ -30,7 +30,7 @@ class armpoz(MovingMixIn,pos):
 		cosbeta = (arm.l1/(2*arm.l2))+(arm.l2/(2*arm.l1))-(self.r*self.r/(2*arm.l1*arm.l2))
 		try:
 			self.alphaodr = arctrig(cosalphaodr,'cos')
-			self.beta = arctrig(cosbeta,'cos')
+			self.beta = arctrig(-cosbeta,'cos')
 		except ValueError:
 			print "cosalphaodr",cosalphaodr,"cosbeta",cosbeta
 			raise AssertionError("cosalphaodr",cosalphaodr,"cosbeta",cosbeta,"nie da się z tego wyliczyć arccos")
@@ -79,8 +79,8 @@ class gdzieramiona(MovingMixIn):
 		beta=self.beta
 		alph=self.alphaodzera
 		from math import sqrt  #,acos
-		radi = sqrt(arm.l1*arm.l1+(arm.l2*arm.l2)-(2*arm.l1*arm.l2*beta.cos))
-		alodr=arctrig((arm.l1-(arm.l2*beta.cos))/radi,'cos')
+		radi = sqrt(arm.l1*arm.l1+(arm.l2*arm.l2)-(2*arm.l1*arm.l2*(-(beta.cos))))
+		alodr=arctrig((arm.l1-(arm.l2*(-(beta.cos))))/radi,'cos')
 		# elbow direction temporarily given up
 		pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}
 		self.armpozy = armpozy = armpoz(pozd,self.arm)

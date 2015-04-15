@@ -16,8 +16,10 @@ class punkt(rysunek):
 			print "NARYSOWANO PUNKT!!!"
 		except AssertionError: 
 			print "punkt failed"
-			import pdb
-			pdb.post_mortem()
+			#import pdb
+			#pdb.post_mortem()
+			import traceback
+			print traceback.format_exc()
 
 class krzywa(rysunek):
 	def __init__(self,start,funkcjadefiniujaca):
