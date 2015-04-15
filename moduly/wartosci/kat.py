@@ -86,6 +86,7 @@ class arctrig(kat):
 		try:
 			kat.__init__(self,atrig(val),'rad')
 			naszval = val
+			print "Ale tu dobrze liczy!: ",atrig,val
 		except ValueError:
 			print atrig, val , val*0.9999999999
 			if trigt=='sin' or trigt=='cos':
