@@ -36,7 +36,7 @@ class maszyna:
 
 	# noinspection PyMethodMayBeStatic
 	def dajnasilnik(self,co):
-		print co
+		#print co
 		end = False
 		gdzie = 0.0
 		done = 0.0

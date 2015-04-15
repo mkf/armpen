@@ -62,7 +62,33 @@ class armpoz(MovingMixIn,pos):
 		elif 'alpha' in adddict.keys() or 'beta' in adddict.keys():
 			newaoz = self.alphaodzera+adddict['alpha'] if 'alpha' in adddict else self.alphaodzera
 			newbet = self.beta+adddict['beta'] if 'alpha' in adddict else self.beta
-			return gdzieramiona(newaoz,newbet,self.arm).dajpoz
+			return gdzieramiona(newaoz,newbet,self.arm).dajpo
+	@property
+        def dict(self):
+                di = {}
+                if self.debugg:
+                        print "__dict__"
+                        print self.phival,self.rval,self.xval,self.yval
+                if self.phival is not None:
+                        di.update({'phi':self.phival})
+                        if self.debugg: print "di.update({'phi':self.phival})"
+                if self.rval is not None:
+                        di.update({'r':self.rval})
+                        if self.debugg: print "di.update({'r':self.rval})"
+                if self.xval is not None:
+                        di.update({'x':self.xval})
+                        if self.debugg: print "di.update({'x':self.xval})"
+                if self.yval is not None:
+                        di.update({'y':self.yval})
+                        if self.debugg: print "di.update({'y':self.yval})"
+		if self.alphaodzera is not None:
+			di.update({'alphaodzera':self.alphaodzera})
+			if self.debugg: print "di.update({'alphaodzera':self.alphaodzera})"
+		if self.beta is not None:
+			di.update({'beta':self.beta})
+			if self.debugg: print "di.update({'beta':self.beta})"
+                assert ('phi' in di and 'r' in di) or ('x' in di and 'y' in di),di
+                return di
 
 class gdzieramiona(MovingMixIn):
 	def __init__(self,alphaodzera,beta,arm):
