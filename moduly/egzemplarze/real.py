@@ -43,7 +43,7 @@ class real(maszyna):
 		#self.ilepencil = self.motpenc.get_tacho()  #tu nie będzie jedynki tylko ta wartosc
 		return self
 	def __exit__(self, exc_type, exc_val, exc_tb): pass
-	def czyhome(self): return {'alphaodzera':self.tzeralph.get_sample(),'beta':self.tzerbeta.get_sample()}
+	#def czyhome(self): return {'alphaodzera':self.tzeralph.get_sample(),'beta':self.tzerbeta.get_sample()}
 	def podnies_pioro(self): 
 		#self.motpenc.turn(-100,self.ilepencil)
 		print "Podniesiono — kłamstwo"
