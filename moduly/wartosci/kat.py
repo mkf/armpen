@@ -59,7 +59,15 @@ class kat:
 	@property
 	def naplaszczyznie(self):
 		print "jestem w naplaszczyznie!  ",self.a,self.w    #debug
-		zdiva=divmod(self.w if (self.a=="deg" or self.a=="rad") else self.deg, float(360) if self.a=="deg" else kat(360,"deg").rad if self.a=="rad" else float(360))
+		#zdiva=divmod(self.w if (self.a=="deg" or self.a=="rad") else self.deg, float(360) if self.a=="deg" else kat(360,"deg").rad if self.a=="rad" else float(360))
+		if self.a=="deg":
+			da = self.deg
+			db = float(360)
+		elif self.a=="rad":
+			da = self.rad
+			db = kat(360,"deg").rad
+		else: raise ValueError("ni to rad, ni to deg, to co to??")
+		zdiva = divmod(da,db)
 		return {'katnaplaszczyznie': kat(zdiva[1],self.a),'pelnych':int(zdiva[0])}
 	@property
 	def cwiartka(self):
