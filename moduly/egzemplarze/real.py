@@ -42,7 +42,10 @@ class real(maszyna):
 		#wez wartosc i uzywaj do późniejszych podnoszeń i opuszczeń
 		#self.ilepencil = self.motpenc.get_tacho()  #tu nie będzie jedynki tylko ta wartosc
 		return self
-	def __exit__(self, exc_type, exc_val, exc_tb): pass
+	def __exit__(self, exc_type, exc_val, exc_tb):
+		self.motalph.idle()
+		self.motbeta.idle()
+		self.ster.play_tone_and_wait(1000,1)
 	#def czyhome(self): return {'alphaodzera':self.tzeralph.get_sample(),'beta':self.tzerbeta.get_sample()}
 	def podnies_pioro(self): 
 		#self.motpenc.turn(-100,self.ilepencil)
