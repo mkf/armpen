@@ -54,18 +54,22 @@ class real(maszyna):
 		#self.motpenc.turn(50,self.ilepencil)
 		print "Opuszczono — kłamstwo"
 	def movealpha(self,ruchc):
-		ruch = ruchc.deg if isinstance(ruchc,kat) else ruchc
+		ruch = (ruchc.deg if isinstance(ruchc,kat) else ruchc)   #tu minus czy plus?
+		if ruch==0: return None
+		elif ruch<0: przod=False
+		elif ruch>0: przod=True
 		motalph = self.motalph
-		from numpy import sign
-		motalph.turn(sign(ruch*self.alphaenginemultiplier),abs(ruch*self.alphaenginemultiplier))
+		motalph.turn(100 if przod else -100,abs(ruch*self.alphaenginemultiplier))
 	def movebeta(self,ruchc):
-		ruch = ruchc.deg if isinstance(ruchc,kat) else ruchc
+		ruch = -(ruchc.deg if isinstance(ruchc,kat) else ruchc)
+		if ruch==0: return None
+		elif ruch<0: przod=False
+		elif ruch>0: przod=True
 		motbeta = self.motbeta
-		from numpy import sign
-		motbeta.turn(sign(ruch*self.betaenginemultiplier),abs(ruch*self.betaenginemultiplier))
+		motbeta.turn(100 if przod else -100,abs(ruch*self.betaenginemultiplier))
 	def syncedmove(self,ac,bc):
-		a = ac.deg if isinstance(ac,kat) else ac
-		b = bc.deg if isinstance(bc,kat) else bc
+		a = (ac.deg if isinstance(ac,kat) else ac)   #tu minus czy plus?
+		b = -(bc.deg if isinstance(bc,kat) else bc)
 		#1: leader w sync porusza się lepiej, beta zachowuje się jak przyczepka na lekko sprężystym sznurku,
 		#   regularnie podbija, dogania gwałtownie
 		#2: ale przy ratio bliskim 50 beta zachowuje się brzydko
