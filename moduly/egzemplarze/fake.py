@@ -41,46 +41,49 @@ class fake(maszyna):
 		#self.screen.blit(self.image,(int(self.ostat.dajpoz().ka['x']),int(self.ostat.dajpoz().ka['y'])))
 	def movealpha(self,ruch):
 		print ruch
-		stepdivid = ruch*(1/100)
-		def czesci():
-			i = 0
-			while i<100:
-				if self.pioro: yield self.ostat+{'alpha':stepdivid*i}
-				i+=1
-				print i,"to jest to i z fake"
-		for o in czesci():
-			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
-			print naszazmienna
+		#stepdivid = ruch*(1/100)
+		#def czesci():
+		#	i = 0
+		#	while i<100:
+		#		if self.pioro: yield self.ostat+{'alpha':stepdivid*i}
+		#		i+=1
+		#		print i,"to jest to i z fake"
+		#for o in czesci():
+		#	naszazmienna = (int(o.ka['x']),int(o.ka['y']))
+		#	print naszazmienna
 			#self.screen.blit(self.image,naszazmienna)
 			#pygame.display.flip()
 		self.ostat = self.whereami
+		print self.ostat
 	def movebeta(self,ruch):
 		print ruch
-		stepdivid = ruch*(1/100)
-		def czesci():
-			i = 0
-			while i<100:
-				if self.pioro: yield self.ostat+{'beta':stepdivid*i}
-				i+=1
-		for o in czesci():
-			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
-			print naszazmienna
+		#stepdivid = ruch*(1/100)
+		#def czesci():
+		#	i = 0
+		#	while i<100:
+		#		if self.pioro: yield self.ostat+{'beta':stepdivid*i}
+		#		i+=1
+		#for o in czesci():
+		#	naszazmienna = (int(o.ka['x']),int(o.ka['y']))
+		#	print naszazmienna
 			#self.screen.blit(self.image,naszazmienna)
 			#pygame.display.flip()
 		self.ostat = self.whereami
+		print self.ostat
 	def syncedmove(self,a,b):
 		print a,b
-		sda = a*(1/100)
-		sdb = b*(1/100)
-		def czesci():
-			i = 0
-			while i<100:
-				if self.pioro: yield self.ostat+{'alpha':sda*i,'beta':sdb*i}
-				i+=1
-		for o in czesci():
-			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
-			print naszazmienna
+		#sda = a*(1/100)
+		#sdb = b*(1/100)
+		#def czesci():
+		#	i = 0
+		#	while i<100:
+		#		if self.pioro: yield self.ostat+{'alpha':sda*i,'beta':sdb*i}
+		#		i+=1
+		#for o in czesci():
+		#	naszazmienna = (int(o.ka['x']),int(o.ka['y']))
+		#	print naszazmienna
 			#self.screen.blit(self.image,naszazmienna)
 			#pygame.display.flip()
 		self.ostat = self.whereami
+		print self.ostat
 	def gdziejestesmaszyno(self): return self.whereami.dajpoz
