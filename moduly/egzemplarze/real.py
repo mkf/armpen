@@ -59,15 +59,15 @@ class real(maszyna):
 		motalph.turn(sign(ruch*self.alphaenginemultiplier),abs(ruch*self.alphaenginemultiplier)*self.bezpieczenstwo)
 	def movebeta(self,ruchc):
 		if isinstance(ruchc,kat): ruch = ruchc.deg
-                else: ruch = ruchc
+		else: ruch = ruchc
 		motbeta = self.motbeta
 		from numpy import sign
 		motbeta.turn(sign(ruch*self.betaenginemultiplier),abs(ruch*self.betaenginemultiplier)*self.bezpieczenstwo)
 	def syncedmove(self,ac,bc):
 		if isinstance(ac,kat): a = ac.deg
-                else: a = ac
+		else: a = ac
 		if isinstance(bc,kat): b = bc.deg
-                else: b = bc
+		else: b = bc
 		if a*self.alphaenginemultiplier<=b*self.betaenginemultiplier:
 			pie = b*self.betaenginemultiplier
 			dru = a*self.alphaenginemultiplier

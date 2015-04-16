@@ -45,7 +45,7 @@ class armpoz(MovingMixIn,pos):
 			assert arm.minbeta<=self.beta,"MINBETA"+str(arm.minbeta)+"BETA"+str(self.beta)
 		#self.alphaodzera = self.phival+self.alphaodr if (self.alphaodr.w==0 or self.phival+self.alphaodr<arm.maxalphafromzero) else self.phival-self.alphaodr if self.phival-self.alphaodr>arm.minalphafromzero else 'err'
 		self.alphaodzera=+((self.phi+self.alphaodr).naplaszczyznie['katnaplaszczyznie'])
-		print "dotąd jest, self.alphaodzera=",self.alphaodzera       #debug
+		print "dotąd jest, self.alphaodzera=",self.alphaodzera	   #debug
 		if isinstance(self.alphaodzera,str) and self.alphaodzera=='err':
 			print "self.alphaodzera=='err'"
 			assert self.alphaodzera != 'err'
@@ -64,36 +64,36 @@ class armpoz(MovingMixIn,pos):
 			newbet = self.beta+adddict['beta'] if 'alpha' in adddict else self.beta
 			return gdzieramiona(newaoz,newbet,self.arm).dajpo
 	@property
-        def dict(self):
-                di = {}
-                if self.debugg:
-                        print "__dict__"
-                        print self.phival,self.rval,self.xval,self.yval
-                if self.phival is not None:
-                        di.update({'phi':self.phival})
-                        if self.debugg: print "di.update({'phi':self.phival})"
-                if self.rval is not None:
-                        di.update({'r':self.rval})
-                        if self.debugg: print "di.update({'r':self.rval})"
-                if self.xval is not None:
-                        di.update({'x':self.xval})
-                        if self.debugg: print "di.update({'x':self.xval})"
-                if self.yval is not None:
-                        di.update({'y':self.yval})
-                        if self.debugg: print "di.update({'y':self.yval})"
+	def dict(self):
+		di = {}
+		if self.debugg:
+			print "__dict__"
+			print self.phival,self.rval,self.xval,self.yval
+		if self.phival is not None:
+			di.update({'phi':self.phival})
+			if self.debugg: print "di.update({'phi':self.phival})"
+		if self.rval is not None:
+			di.update({'r':self.rval})
+			if self.debugg: print "di.update({'r':self.rval})"
+		if self.xval is not None:
+			di.update({'x':self.xval})
+			if self.debugg: print "di.update({'x':self.xval})"
+		if self.yval is not None:
+			di.update({'y':self.yval})
+			if self.debugg: print "di.update({'y':self.yval})"
 		di.update({'alphaodzera':self.alphaodzera})
 		if self.debugg: print "di.update({'alphaodzera':self.alphaodzera})"
 		di.update({'beta':self.beta})
 		if self.debugg: print "di.update({'beta':self.beta})"
-                assert ('phi' in di and 'r' in di) or ('x' in di and 'y' in di),di
-                return di
+		assert ('phi' in di and 'r' in di) or ('x' in di and 'y' in di),di
+		return di
 	def __dict__(self): return self.dict
-        def __str__(self): return str(self.dict)
-        def __getitem__(self, item): return self.dict[item]
-        def __contains__(self, item): return item in self.dict
-        def keys(self): return self.dict.keys()
-        def __iter__(self): return iter(self.dict)
-        def __repr__(self): return repr(self.dict)
+	def __str__(self): return str(self.dict)
+	def __getitem__(self, item): return self.dict[item]
+	def __contains__(self, item): return item in self.dict
+	def keys(self): return self.dict.keys()
+	def __iter__(self): return iter(self.dict)
+	def __repr__(self): return repr(self.dict)
 
 class gdzieramiona(MovingMixIn):
 	def __init__(self,alphaodzera,beta,arm):
