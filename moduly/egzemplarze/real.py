@@ -10,8 +10,8 @@ import Queue,threading
 
 class real(maszyna):
 	def __init__(self):
-		l1 = 26.58
-		l2 = l1 * (0.426/0.574)
+		l1 = 16  #26.58
+		l2 = 16  #l1 * (0.426/0.574)
 		# temporarily givin' up the elbow direction
 		# maybe even forever
 		maxalphafromzero = kat(180,"deg")
@@ -45,6 +45,7 @@ class real(maszyna):
 		#self.ilepencil = self.motpenc.get_tacho()  #tu nie będzie jedynki tylko ta wartosc
 		return self
 	def __exit__(self, exc_type, exc_val, exc_tb):
+		self.homepos.przemiesc()
 		self.motalph.idle()
 		self.motbeta.idle()
 		self.ster.play_tone_and_wait(440,1)
