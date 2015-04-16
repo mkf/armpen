@@ -55,7 +55,7 @@ class fake(maszyna):
 			#pygame.display.flip()
 		self.ostat = self.whereami
 		print self.ostat
-		sleep(3)
+		#sleep(3)
 	def movebeta(self,ruch):
 		print ruch
 		#stepdivid = ruch*(1/100)
@@ -71,7 +71,7 @@ class fake(maszyna):
 			#pygame.display.flip()
 		self.ostat = self.whereami
 		print self.ostat
-		sleep(3)
+		#sleep(3)
 	def syncedmove(self,a,b):
 		print a,b
 		#sda = a*(1/100)
@@ -88,5 +88,5 @@ class fake(maszyna):
 			#pygame.display.flip()
 		self.ostat = self.whereami
 		print self.ostat
-		sleep(3)
+		#sleep(3)
 	def gdziejestesmaszyno(self): return self.whereami.dajpoz
