@@ -6,6 +6,7 @@ import nxt.locator
 from nxt.motor import Motor,PORT_A,PORT_B,PORT_C,SynchronizedMotors
 from nxt.sensor import Touch,PORT_1,PORT_2
 #from time import sleep
+import Queue,threading
 
 class real(maszyna):
 	def __init__(self):
@@ -22,15 +23,16 @@ class real(maszyna):
 		self.alphaenginemultiplier = 168
 		self.betaenginemultiplier = 56
 		self.drawarea = lambda pozy: True
-
+		
 		maszyna.__init__(self,l1,l2,maxalphafromzero,minalphafromzero,maxbeta,minbeta,alphaprecision,betaprecision)
 		#self.progfile = open('rysprog.py','w')
 		#self.linprog('def main():',0)
 	#def linprog(self,tresc,sintend): self.progfile.write(('    '*sintend)+tresc+"\n")
 	def __enter__(self):
-		self.ster = nxt.locator.find_one_brick()
-		self.motalph = Motor(self.ster,PORT_A)
-		self.motbeta = Motor(self.ster,PORT_B)
+		self.stera = nxt.locator.find_one_brick("00:16:53:08:77:37") #Alexa
+		self.sterb = nxt.locator.find_one_brick("00:16:53:07:F8:5B") #Kuby
+		self.motalph = Motor(self.stera,PORT_A)
+		self.motbeta = Motor(self.sterb,PORT_A)
 		#self.motpenc = Motor(self.ster,PORT_C)
 		#self.tzeralph = Touch(self.ster,PORT_1)
 		#self.tzerbeta = Touch(self.ster,PORT_2)
@@ -43,8 +45,8 @@ class real(maszyna):
 		#self.ilepencil = self.motpenc.get_tacho()  #tu nie będzie jedynki tylko ta wartosc
 		return self
 	def __exit__(self, exc_type, exc_val, exc_tb):
-		self.motalph.idle()
-		self.motbeta.idle()
+		#self.motalph.idle()
+		#self.motbeta.idle()
 		self.ster.play_tone_and_wait(440,1)
 	#def czyhome(self): return {'alphaodzera':self.tzeralph.get_sample(),'beta':self.tzerbeta.get_sample()}
 	def podnies_pioro(self): 
@@ -59,48 +61,40 @@ class real(maszyna):
 		elif ruch<0: przod=False
 		elif ruch>0: przod=True
 		motalph = self.motalph
-		motalph.turn(100 if przod else -100,abs(ruch*self.alphaenginemultiplier))
+		naszeta = abs(ruch*self.alphaenginemultiplier)
+		try:
+			motalph.turn(100 if przod else -100,naszeta)
+		except:
+			print "struct.error"
+			import pdb
+			pdb.post_mortem()
 	def movebeta(self,ruchc):
 		ruch = -(ruchc.deg if isinstance(ruchc,kat) else ruchc)
 		if ruch==0: return None
 		elif ruch<0: przod=False
 		elif ruch>0: przod=True
 		motbeta = self.motbeta
-		motbeta.turn(100 if przod else -100,abs(ruch*self.betaenginemultiplier))
+		naszeta = abs(ruch*self.betaenginemultiplier)
+		try:
+			motbeta.turn(100 if przod else -100,naszeta)
+		except:
+			print "struct.error"
+			import pdb
+			pdb.post_mortem()
 	def syncedmove(self,ac,bc):
+		def dajna(q,mov,ruch):
+			q.put(mov(ruch))
 		a = (ac.deg if isinstance(ac,kat) else ac)   #tu minus czy plus?
 		b = -(bc.deg if isinstance(bc,kat) else bc)
-		#1: leader w sync porusza się lepiej, beta zachowuje się jak przyczepka na lekko sprężystym sznurku,
-		#   regularnie podbija, dogania gwałtownie
-		#2: ale przy ratio bliskim 50 beta zachowuje się brzydko
-		#
-		#na razie wolimy ratio dalsze ze względu na 2
-		if a==0: self.movebeta(b) ; cont = False
-		elif b==0: self.movealpha(a) ; cont = False
-		elif a<0 and b<0: przod = False;przeciwne = False ; cont = True
-		elif a<0 and b>0: przod = None; przeciwne = True ; cont = True ; doprzodu = 'b'
-		elif a>0 and b<0: przod = None; przeciwne = True ; cont = True ; doprzodu = 'a'
-		elif a>0 and b>0: przod = True; przeciwne = False ; cont = True
-		else: raise ValueError("bez sensu w syncedmove")
-		if cont:
-			if not przeciwne:
-				adb = (a/b)*(self.alphaenginemultiplier/self.betaenginemultiplier)
-				bda = (b/a)*(self.betaenginemultiplier/self.alphaenginemultiplier)
-				if bda>=adb: ratva = bda ; lead = 'b'
-				else: ratva = adb ; lead = 'a'
-				ratvf = 50-(50*ratva)
-			elif przeciwne:
-				adb = abs((a/b)*(self.alphaenginemultiplier/self.betaenginemultiplier))
-				bda = abs((b/a)*(self.betaenginemultiplier/self.alphaenginemultiplier))
-				if bda>=adb: ratva = bda ; lead = 'b'
-				else: ratva = adb ; lead = 'a'
-				if doprzodu==lead: przod = True
-				else: przod = False
-				ratvf = 50+(50*ratva)
-			if lead=='a': leader = self.motalph ; follower = self.motbeta ; distlead = abs(a*self.alphaenginemultiplier)
-			elif lead=='b': leader = self.motbeta ; follower = self.motalph ; distlead = abs(b*self.betaenginemultiplier)
-			motsync = SynchronizedMotors(leader,follower,ratvf)
-			if przod: motsync.turn(100,distlead)
-			elif not przod: motsync.turn(-100,distlead)
-
+		q = Queue.Queue()
+		if b!=0:
+			t = threading.Thread(target=dajna, args=(q,self.movebeta,b))
+			t.daemon = True
+			t.start()
+		if a!=0:
+			t = threading.Thread(target=dajna, args=(q,self.movealpha,a))
+			t.daemon = True
+			t.start()
+		s=q.get()
+		print s
 	def gdziejestesmaszyno(self): return self.whereami  #tutaj można to zrobić lepiej, ale to później
