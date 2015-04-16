@@ -45,7 +45,7 @@ class real(maszyna):
 	def __exit__(self, exc_type, exc_val, exc_tb):
 		self.motalph.idle()
 		self.motbeta.idle()
-		self.ster.play_tone_and_wait(1000,1)
+		self.ster.play_tone_and_wait(440,1)
 	#def czyhome(self): return {'alphaodzera':self.tzeralph.get_sample(),'beta':self.tzerbeta.get_sample()}
 	def podnies_pioro(self): 
 		#self.motpenc.turn(-100,self.ilepencil)
