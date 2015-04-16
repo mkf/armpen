@@ -30,7 +30,7 @@ class krzywa(rysunek):
 		self.funkcja=funkcja=self.funkcjadefiniujaca(ramie,juzstepprob)
 		from moduly.arm.maszyna import nasilnik
 		print 'self.start',self.start,'ramie',ramie   #debug
-		probstep = self.probstep if self.probstep is not None else (step*10)
+		probstep = self.probstep if self.probstep is not None else step
 		try:
 			if not bylprob: doprzem = armpoz(self.start,ramie)
 			else:
@@ -54,7 +54,8 @@ class krzywa(rysunek):
 				#self.draw(ramie,step,bylprob,juzstepprob,doprzemend)
 				zrobione = False
 				while not doprzemend and not zrobione and juzstepprob<=absolutniestopdlastepprog:
-					#print "tryin",ramie,step,bylprob,juzstepprob,doprzemend
+					doprzemend = self.czyend(juzstepprob)
+					print "tryin",ramie,step,bylprob,juzstepprob,doprzemend,self
 					try:
 						doprzemfun = funkcja(juzstepprob)
 						doprzemend = doprzemfun['e']
@@ -81,6 +82,7 @@ class prosta(krzywa):     #      prosta(cubicbezier):
 		krzywa.__init__(self,start,funkdef)
 		self.probstep = None
 		self.end=end
+		self.czyend = lambda x: x>=1
 
 class quadrbezier(krzywa):    # fragment paraboli
 	def __init__(self,start,c,end):
@@ -95,6 +97,7 @@ class quadrbezier(krzywa):    # fragment paraboli
 			'e':t+probst>=1
 		}
 		krzywa.__init__(self,start,funkdef)
+		self.czyend = lambda x: x>=1
 
 class cubicbezier(krzywa):
 	def __init__(self,start,c1,c2,end):
@@ -106,6 +109,7 @@ class cubicbezier(krzywa):
 		},arm),'e':t+probst>=1}
 		krzywa.__init__(self,start,funkcjadefiniujaca)
 		self.c1=c1;self.c2=c2;self.end=end
+		self.czyend = lambda x: x>=1
 
 class plotxy(krzywa):
 	def __init__(self,fFromX,zero,oneXzeroY,oneYzeroX): # one will be the maximum — you have to divide the values appropiately
@@ -126,6 +130,7 @@ class plotxy(krzywa):
 				},arm),'e':x>=1}
 			return tocos
 		krzywa.__init__(self,zero,fdef)
+		self.czyend = lambda x: x>=1
 
 class plotrphi(krzywa):
 	def __init__(self,fFromPhi,zero,minR,oneR_onZeroPhi,minPhi,maxPhi):  # one is the maximum for radius
@@ -149,6 +154,7 @@ class plotrphi(krzywa):
 				return {'w': armpoz(pjp,arm),'e':phi>=maxPhi}
 			return tocos
 		krzywa.__init__(self,zero,fdef)
+		self.czyend = lambda x: x>=maxPhi.deg
 
 class plotrphiFromZero(krzywa):
 	def __init__(self,fFromPhi,minR,oneR_onZeroPhi,minPhi,maxPhi):
@@ -170,6 +176,7 @@ class plotrphiFromZero(krzywa):
 				return {'w': armpoz(pjp,arm),'e':phi>=maxPhi}
 			return tocos
 		krzywa.__init__(self,zero,fdef)
+		self.czyend = lambda x: x>=maxPhi.deg
 
 class arcFromZero(krzywa):
 	def __init__(self,r,minPhi,maxPhi):
@@ -183,5 +190,6 @@ class arcFromZero(krzywa):
 				return {'w': armpoz({'r':r,'phi':minPhi+((maxPhi-minPhi)*x)},arm),'e':x>=1}
 			return tocos
 		krzywa.__init__(self,start,fdef)
+		self.czyend = lambda x: x>=1
 #TODO: arcfromelbow
 #TODO: allipsefrag
