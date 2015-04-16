@@ -55,7 +55,7 @@ class real(maszyna):
 	def opusc_pioro(self): 
 		#self.motpenc.turn(50,self.ilepencil)
 		print "Opuszczono — kłamstwo"
-	def movealpha(self,ruchc):
+	def movealpha(self,ruchc,speed=127):
 		ruch = (ruchc.deg if isinstance(ruchc,kat) else ruchc)   #tu minus czy plus?
 		if ruch==0: return None
 		elif ruch<0: przod=False
@@ -63,12 +63,12 @@ class real(maszyna):
 		motalph = self.motalph
 		naszeta = abs(ruch*self.alphaenginemultiplier)
 		try:
-			motalph.turn(100 if przod else -100,naszeta)
+			motalph.turn(speed if przod else -speed,naszeta)
 		except:
 			print "struct.error"
 			import pdb
 			pdb.post_mortem()
-	def movebeta(self,ruchc):
+	def movebeta(self,ruchc,speed=127):
 		ruch = -(ruchc.deg if isinstance(ruchc,kat) else ruchc)
 		if ruch==0: return None
 		elif ruch<0: przod=False
@@ -76,23 +76,26 @@ class real(maszyna):
 		motbeta = self.motbeta
 		naszeta = abs(ruch*self.betaenginemultiplier)
 		try:
-			motbeta.turn(100 if przod else -100,naszeta)
+			motbeta.turn(speed if przod else -speed,naszeta)
 		except:
 			print "struct.error"
 			import pdb
 			pdb.post_mortem()
 	def syncedmove(self,ac,bc):
-		def dajna(q,mov,ruch):
-			q.put(mov(ruch))
+		def dajna(q,mov,ruch,speed):
+			q.put(mov(ruch,speed))
 		a = (ac.deg if isinstance(ac,kat) else ac)   #tu minus czy plus?
 		b = -(bc.deg if isinstance(bc,kat) else bc)
 		q = Queue.Queue()
+		if b!=0 and a!=0:
+			if abs(b)>=abs(a): speedb=127;speeda=127*(abs(a)/abs(b))
+			elif abs(a)>abs(b): speeda=127;speedb=127*(abs(b)/abs(a))
 		if b!=0:
-			t = threading.Thread(target=dajna, args=(q,self.movebeta,b))
+			t = threading.Thread(target=dajna, args=(q,self.movebeta,b,speedb))
 			t.daemon = True
 			t.start()
 		if a!=0:
-			t = threading.Thread(target=dajna, args=(q,self.movealpha,a))
+			t = threading.Thread(target=dajna, args=(q,self.movealpha,a,speeda))
 			t.daemon = True
 			t.start()
 		s=q.get()
