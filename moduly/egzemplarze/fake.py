@@ -45,7 +45,7 @@ class fake(maszyna):
 		def czesci():
 			i = 0
 			while i<100:
-				if self.pioro: yield self.ostat+{'alpha':i*stepdivid}
+				if self.pioro: yield self.ostat+{'alpha':stepdivid*i}
 				i+=1
 				print i,"to jest to i z fake"
 		for o in czesci():
@@ -60,7 +60,7 @@ class fake(maszyna):
 		def czesci():
 			i = 0
 			while i<100:
-				if self.pioro: yield self.ostat+{'beta':i*stepdivid}
+				if self.pioro: yield self.ostat+{'beta':stepdivid*i}
 				i+=1
 		for o in czesci():
 			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
@@ -75,7 +75,7 @@ class fake(maszyna):
 		def czesci():
 			i = 0
 			while i<100:
-				if self.pioro: yield self.ostat+{'alpha':i*sda,'beta':i*sdb}
+				if self.pioro: yield self.ostat+{'alpha':sda*i,'beta':sdb*i}
 				i+=1
 		for o in czesci():
 			naszazmienna = (int(o.ka['x']),int(o.ka['y']))
