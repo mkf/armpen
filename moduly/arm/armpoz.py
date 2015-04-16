@@ -9,7 +9,7 @@ class MovingMixIn:
 		from moduly.arm.maszyna import nasilnik
 		naszaf = lambda x: {'w':self,'e':x>0}
 		last = self.arm.gdziejestesmaszyno()
-		dajemy = nasilnik(naszaf,last,1,"Przemieszczenie na %s" % str(dict(self)))
+		dajemy = nasilnik(naszaf,last,1,"Przemieszczenie na %s" % str(self))     #str(dict(self)))
 		arm = self.arm
 		arm.podnies_pioro()
 		arm.dajnasilnik(dajemy)
