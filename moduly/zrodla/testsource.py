@@ -30,5 +30,5 @@ class testsource:
 			print i,"done: punkt1"
 			yield rysowania.punkt(pos({'x':i,'y':i+5}))
 			print i,"done: punkt2"
-			yield rysowania.cubicbezier(pos({'x':i,'y':i}),pos({'x':i+3,'y':i+3}),pos({'x':i+6,'y':i+3}),pos({'x':i+7,'y':i}))
-			print i,"done: bezier"
+			#yield rysowania.cubicbezier(pos({'x':i,'y':i}),pos({'x':i+3,'y':i+3}),pos({'x':i+6,'y':i+3}),pos({'x':i+7,'y':i}))
+			#print i,"done: bezier"
