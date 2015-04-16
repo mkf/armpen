@@ -44,6 +44,7 @@ class krzywa(rysunek):
 				ramie.opusc_pioro()
 				ruch = nasilnik(self.funkcja,doprzem,step,str(self))
 				ramie.dajnasilnik(ruch)
+				print "ZROBILIŚMY KRZYWĄ"
 			else: print doprzemend,doprzemfun,doprzem
 		except AssertionError:
 			bylprob = True
@@ -63,6 +64,7 @@ class krzywa(rysunek):
 							ramie.opusc_pioro()
 							ruch = nasilnik(self.funkcja,doprzem,step,str(self))
 							ramie.dajnasilnik(ruch)
+							print "ZROBILIŚMY KRZYWĄ"
 						zrobione = True
 					except AssertionError:
 						if not doprzemend and not zrobione: juzstepprob+=probstep
