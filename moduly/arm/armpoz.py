@@ -100,7 +100,14 @@ class gdzieramiona(MovingMixIn):
 		self.alphaodzera=alphaodzera
 		self.beta=beta
 		self.arm=arm
-		self.__dict__={'alphaodzera':alphaodzera,'beta':beta,'arm':arm}
+		self.dict={'alphaodzera':alphaodzera,'beta':beta,'arm':arm}
+		def __dict__(self): return self.dict
+		def __str__(self): return str(self.dict)
+		def __getitem__(self, item): return self.dict[item]
+		def __contains__(self, item): return item in self.dict
+		def keys(self): return self.dict.keys()
+		def __iter__(self): return iter(self.dict)
+		def __repr__(self): return repr(self.dict)
 	@property
 	def dajpoz(self):
 		try: return self.armpozy
