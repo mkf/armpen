@@ -9,7 +9,6 @@ from nxt.sensor import Touch,PORT_1,PORT_2
 
 class real(maszyna):
 	def __init__(self):
-		self.bezpieczenstwo = 0.1
 		l1 = 26.58
 		l2 = l1 * (0.426/0.574)
 		# temporarily givin' up the elbow direction
@@ -21,7 +20,7 @@ class real(maszyna):
 		alphaprecision = kat(0.01,"deg")
 		betaprecision = kat(0.01,"deg")
 		self.alphaenginemultiplier = 168
-		self.betaenginemultiplier = 56   # jeszcze nie wiadomo
+		self.betaenginemultiplier = 56
 		self.drawarea = lambda pozy: True
 
 		maszyna.__init__(self,l1,l2,maxalphafromzero,minalphafromzero,maxbeta,minbeta,alphaprecision,betaprecision)
@@ -52,35 +51,49 @@ class real(maszyna):
 		#self.motpenc.turn(50,self.ilepencil)
 		print "Opuszczono — kłamstwo"
 	def movealpha(self,ruchc):
-		if isinstance(ruchc,kat): ruch = ruchc.deg
-		else: ruch = ruchc
+		ruch = ruchc.deg if isinstance(ruchc,kat) else ruchc
 		motalph = self.motalph
 		from numpy import sign
-		motalph.turn(sign(ruch*self.alphaenginemultiplier),abs(ruch*self.alphaenginemultiplier)*self.bezpieczenstwo)
+		motalph.turn(sign(ruch*self.alphaenginemultiplier),abs(ruch*self.alphaenginemultiplier))
 	def movebeta(self,ruchc):
-		if isinstance(ruchc,kat): ruch = ruchc.deg
-		else: ruch = ruchc
+		ruch = ruchc.deg if isinstance(ruchc,kat) else ruchc
 		motbeta = self.motbeta
 		from numpy import sign
-		motbeta.turn(sign(ruch*self.betaenginemultiplier),abs(ruch*self.betaenginemultiplier)*self.bezpieczenstwo)
+		motbeta.turn(sign(ruch*self.betaenginemultiplier),abs(ruch*self.betaenginemultiplier))
 	def syncedmove(self,ac,bc):
-		if isinstance(ac,kat): a = ac.deg
-		else: a = ac
-		if isinstance(bc,kat): b = bc.deg
-		else: b = bc
-		if a*self.alphaenginemultiplier<=b*self.betaenginemultiplier:
-			pie = b*self.betaenginemultiplier
-			dru = a*self.alphaenginemultiplier
-			mpie = self.motbeta
-			mdru = self.motalph
-		else:
-			pie = a*self.alphaenginemultiplier
-			dru = b*self.betaenginemultiplier
-			mpie = self.motalph
-			mdru = self.motbeta
-		ratio = dru/pie
-		motsync = SynchronizedMotors(mpie,mdru,ratio)
-		from numpy import sign
-		motsync.turn(sign(dru)*100,abs(pie)*self.bezpieczenstwo)
+		a = ac.deg if isinstance(ac,kat) else ac
+		b = bc.deg if isinstance(bc,kat) else bc
+		#1: leader w sync porusza się lepiej, beta zachowuje się jak przyczepka na lekko sprężystym sznurku,
+		#   regularnie podbija, dogania gwałtownie
+		#2: ale przy ratio bliskim 50 beta zachowuje się brzydko
+		#
+		#na razie wolimy ratio dalsze ze względu na 2
+		if a==0: self.movebeta(b) ; cont = False
+		elif b==0: self.movealpha(a) ; cont = False
+		elif a<0 and b<0: przod = False;przeciwne = False ; cont = True
+		elif a<0 and b>0: przod = None; przeciwne = True ; cont = True ; doprzodu = 'b'
+		elif a>0 and b<0: przod = None; przeciwne = True ; cont = True ; doprzodu = 'a'
+		elif a>0 and b>0: przod = True; przeciwne = False ; cont = True
+		else: raise ValueError("bez sensu w syncedmove")
+		if cont:
+			if not przeciwne:
+				adb = (a/b)*(self.alphaenginemultiplier/self.betaenginemultiplier)
+				bda = (b/a)*(self.betaenginemultiplier/self.alphaenginemultiplier)
+				if bda>=adb: ratva = bda ; lead = 'b'
+				else: ratva = adb ; lead = 'a'
+				ratvf = 50-(50*ratva)
+			elif przeciwne:
+				adb = abs((a/b)*(self.alphaenginemultiplier/self.betaenginemultiplier))
+				bda = abs((b/a)*(self.betaenginemultiplier/self.alphaenginemultiplier))
+				if bda>=adb: ratva = bda ; lead = 'b'
+				else: ratva = adb ; lead = 'a'
+				if doprzodu==lead: przod = True
+				else: przod = False
+				ratvf = 50+(50*ratva)
+			if lead=='a': leader = self.motalph ; follower = self.motbeta ; distlead = abs(a*self.alphaenginemultiplier)
+			elif lead=='b': leader = self.motbeta ; follower = self.motalph ; distlead = abs(b*self.betaenginemultiplier)
+			motsync = SynchronizedMotors(leader,follower,ratvf)
+			if przod: motsync.turn(100,distlead)
+			elif not przod: motsync.turn(-100,distlead)
 
 	def gdziejestesmaszyno(self): return self.whereami  #tutaj można to zrobić lepiej, ale to później
