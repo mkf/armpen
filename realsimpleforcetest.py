@@ -36,5 +36,5 @@ with real() as arm:
 				try: beta = float(tbet)
 				except ValueError: pass
 		if sync and corys=='s': arm.chamskonasilnik(alpha=kat(ang,"deg"),beta=kat(beta,"deg"))
-		elif corys=='a': arm.chamskonasilnik(alpha=ang)
-		elif corys=='b': arm.chamskonasilnik(beta=ang)
+		elif corys=='a': arm.chamskonasilnik(alpha=kat(ang,"deg"))
+		elif corys=='b': arm.chamskonasilnik(beta=kat(ang,"deg"))
