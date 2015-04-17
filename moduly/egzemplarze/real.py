@@ -91,8 +91,8 @@ class real(maszyna):
 		b = bt*self.betaenginemultiplier
 		q = Queue.Queue()
 		if b!=0 and a!=0:
-			if abs(b)>=abs(a): speedb=127;speeda=127*(abs(a)/abs(b))
-			elif abs(a)>abs(b): speeda=127;speedb=127*(abs(b)/abs(a))
+			if abs(b)>=abs(a): speedb=100;speeda=100*(abs(a)/abs(b))
+			elif abs(a)>abs(b): speeda=100;speedb=100*(abs(b)/abs(a))
 		if b!=0:
 			t = threading.Thread(target=dajna, args=(q,self.movebeta,bt,speedb))
 			t.daemon = True
