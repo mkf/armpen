@@ -123,15 +123,15 @@ class gdzieramiona(MovingMixIn):
 		radi = sqrt(arm.l1*arm.l1+(arm.l2*arm.l2)-(2*arm.l1*arm.l2*beta.cos))
 		alodr=arctrig((arm.l1-(arm.l2*(beta.cos)))/radi,'cos')
 		# elbow direction temporarily given up
-		pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}
+		#pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}
 		# elbow direction is given up anyway
 		x = arm.l1*alph.cos+(arm.l2*(alph+beta).cos)
 		y = arm.l1*alph.sin+(arm.l2*(alph+beta).sin)
-		print pos({'x':x,'y':y}).ka,"nieużywane"
-		print pos(pozd).ka,"ma być użyte zaraz"
-		#pozd = {'x':x,'y':y}
+		print pos({'x':x,'y':y}).ka,"kartezjanskie owe"
+		print pos({'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}).ka,"kątowe"
+		pozd = {'x':x,'y':y}
 		self.armpozy = armpozy = armpoz(pozd,self.arm)
-		print self.armpozy.ka,"armpozy"
+		print self.armpozy.ka,"armpozy owe"
 		return armpozy
 	def __add__(self,other):
 		saoz=self.alphaodzera+dict(other)['alphaodzera']
