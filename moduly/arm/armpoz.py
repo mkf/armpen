@@ -121,10 +121,9 @@ class gdzieramiona(MovingMixIn):
 		#alodr=arctrig((arm.l1-(arm.l2*(-(beta.cos))))/radi,'cos')
 		# elbow direction temporarily given up
 		#pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}
-		from math import cos,sin
 		# elbow direction is given up anyway
-		x = arm.l1*cos(alph)+(arm.l2*cos(alph+beta))
-		y = arm.l1*sin(alph)+(arm.l2*sin(alph+beta))
+		x = arm.l1*alph.cos+(arm.l2*(alph+beta).cos)
+		y = arm.l1*alph.sin+(arm.l2*(alph+beta).sin)
 		pozd = {'x':x,'y':y}
 		self.armpozy = armpozy = armpoz(pozd,self.arm)
 		return armpozy
