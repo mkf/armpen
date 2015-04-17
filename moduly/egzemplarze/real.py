@@ -67,8 +67,8 @@ class real(maszyna):
 			motalph.turn(speed if przod else -speed,naszeta)
 		except:
 			print "struct.error"
-			import pdb
-			pdb.post_mortem()
+			#import pdb
+			#pdb.post_mortem()
 	def movebeta(self,ruchc,speed=127):
 		ruch = -(ruchc.deg if isinstance(ruchc,kat) else ruchc)
 		if ruch==0: return None
@@ -80,8 +80,8 @@ class real(maszyna):
 			motbeta.turn(speed if przod else -speed,naszeta)
 		except:
 			print "struct.error"
-			import pdb
-			pdb.post_mortem()
+			#import pdb
+			#pdb.post_mortem()
 	def syncedmove(self,ac,bc):
 		def dajna(q,mov,ruch,speed):
 			q.put(mov(ruch,speed))
