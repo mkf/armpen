@@ -46,7 +46,7 @@ class real(maszyna):
 		return self
 	def __exit__(self, exc_type, exc_val, exc_tb):
 		self.emergency()
-		self.homepos.przemiesc()
+		if not self.notanymoreabsolut: self.homepos.przemiesc()
 		self.emergency()
 		#self.ster.play_tone_and_wait(440,1)
 	#def czyhome(self): return {'alphaodzera':self.tzeralph.get_sample(),'beta':self.tzerbeta.get_sample()}
