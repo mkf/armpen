@@ -102,8 +102,9 @@ class arctrig(kat):
 		assert trigt in ['cos','sin','tan']
 		from math import sqrt
 		if trigt=='cos':
-			if val==1: atrig = lambda x: 0 if x==1 else None
-			else:from math import acos as atrig
+			#if val==1: atrig = lambda x: 0 if x==1 else None
+			#else:
+			from math import acos as atrig
 		elif trigt=='sin': from math import asin as atrig
 		elif trigt=='tan': from math import atan as atrig
 		try:
@@ -119,6 +120,6 @@ class arctrig(kat):
 				except ValueError:
 					raise
 			else: raise
-		if trigt=='cos': self.cosval = naszval ; self.sinval=sqrt(1-(naszval**2)) ; self.tanval=sqrt(1-(naszval**2))/naszval
-		elif trigt=='sin': self.sinval = naszval ; self.cosval=sqrt(1-(naszval**2)) ; self.tanval=naszval/sqrt(1-(naszval**2))
-		elif trigt=='tan': self.tanval = val ; self.sinval=val/sqrt(1+(val**2)) ; self.cosval=1/sqrt(1+(val**2))
+		if trigt=='cos': self.cosval = naszval # ; self.sinval=sqrt(1-(naszval**2)) ; self.tanval=sqrt(1-(naszval**2))/naszval
+		elif trigt=='sin': self.sinval = naszval # ; self.cosval=sqrt(1-(naszval**2)) ; self.tanval=naszval/sqrt(1-(naszval**2))
+		elif trigt=='tan': self.tanval = val # ; self.sinval=val/sqrt(1+(val**2)) ; self.cosval=1/sqrt(1+(val**2))
