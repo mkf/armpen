@@ -85,18 +85,20 @@ class real(maszyna):
 	def syncedmove(self,ac,bc):
 		def dajna(q,mov,ruch,speed):
 			q.put(mov(ruch,speed))
-		a = (ac.deg if isinstance(ac,kat) else ac)   #tu minus czy plus?
-		b = -(bc.deg if isinstance(bc,kat) else bc)
+		at = (ac.deg if isinstance(ac,kat) else ac)   #tu minus czy plus?
+		bt = -(bc.deg if isinstance(bc,kat) else bc)
+		a = at*self.alphaenginemultiplier
+		b = bt*self.betaenginemultiplier
 		q = Queue.Queue()
 		if b!=0 and a!=0:
 			if abs(b)>=abs(a): speedb=127;speeda=127*(abs(a)/abs(b))
 			elif abs(a)>abs(b): speeda=127;speedb=127*(abs(b)/abs(a))
 		if b!=0:
-			t = threading.Thread(target=dajna, args=(q,self.movebeta,b,speedb))
+			t = threading.Thread(target=dajna, args=(q,self.movebeta,bt,speedb))
 			t.daemon = True
 			t.start()
 		if a!=0:
-			t = threading.Thread(target=dajna, args=(q,self.movealpha,a,speeda))
+			t = threading.Thread(target=dajna, args=(q,self.movealpha,at,speeda))
 			t.daemon = True
 			t.start()
 		s=q.get()
