@@ -78,16 +78,16 @@ class maszyna:
 
 				end = toc['e']
 				print "end: %s" % str(end)
-		def gdziejestesmaszyno(self):
-			assert not self.notanymoreabsolut
-			return self.whereami
+	def gdziejestesmaszyno(self):
+		assert not self.notanymoreabsolut
+		return self.whereami
 
-		def chamskonasilnik(self,alpha=None,beta=None):
-			self.notanymoreabsolut = True
-			if isinstance(alpha,kat) and isinstance(beta,kat): self.syncedmove(alpha,beta)
-			elif isinstance(alpha,kat): self.movealpha(alpha)
-			elif isinstance(beta,kat): self.movebeta(beta)
-			else: "Co jest, nawet chamsko się nie da?"
+	def chamskonasilnik(self,alpha=None,beta=None):
+		self.notanymoreabsolut = True
+		if isinstance(alpha,kat) and isinstance(beta,kat): self.syncedmove(alpha,beta)
+		elif isinstance(alpha,kat): self.movealpha(alpha)
+		elif isinstance(beta,kat): self.movebeta(beta)
+		else: "Co jest, nawet chamsko się nie da?"
 
 class nasilnik:
 	def __init__(self,funkcja,startpoz,step,opis):
