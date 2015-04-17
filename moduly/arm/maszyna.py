@@ -12,6 +12,7 @@ class maszyna:
 			betaprecision,
 	):
 		self.homepos = gdzieramiona(kat(0,"deg"),kat(0,"deg"),self)
+		self.notanymoreabsolut = False
 		self.whereami = self.homepos
 		self.l1=l1;self.l2=l2
 		self.maxalphafromzero=maxalphafromzero;self.minalphafromzero=minalphafromzero
@@ -32,10 +33,12 @@ class maszyna:
 		assert 'drawarea' in naszefunkcje
 
 	def armzakrescheck(self,pozy):
+		assert not self.notanymoreabsolut
 		return self.minalphafromzero<=pozy['alphaodzera']<=self.maxalphafromzero and self.minbeta<=pozy['beta']<=self.maxbeta
 
 	# noinspection PyMethodMayBeStatic
 	def dajnasilnik(self,co):
+		assert not self.notanymoreabsolut
 		#print co
 		end = False
 		gdzie = 0.0
@@ -76,7 +79,15 @@ class maszyna:
 				end = toc['e']
 				print "end: %s" % str(end)
 		def gdziejestesmaszyno(self):
+			assert not self.notanymoreabsolut
 			return self.whereami
+
+		def chamskonasilnik(self,alpha=None,beta=None):
+			self.notanymoreabsolut = True
+			if isinstance(alpha,kat) and isinstance(beta,kat): self.syncedmove(alpha,beta)
+			elif isinstance(alpha,kat): self.movealpha(alpha)
+			elif isinstance(beta,kat): self.movebeta(beta)
+			else: "Co jest, nawet chamsko się nie da?"
 
 class nasilnik:
 	def __init__(self,funkcja,startpoz,step,opis):
