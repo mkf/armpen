@@ -126,6 +126,7 @@ class gdzieramiona(MovingMixIn):
 		x = arm.l1*alph.cos+(arm.l2*(alph+beta).cos)
 		y = arm.l1*alph.sin+(arm.l2*(alph+beta).sin)
 		print pos({'x':x,'y':y}).ka,"nieużywane"
+		print pos(pozd).ka,"ma być użyte zaraz"
 		#pozd = {'x':x,'y':y}
 		self.armpozy = armpozy = armpoz(pozd,self.arm)
 		print self.armpozy.ka,"armpozy"
