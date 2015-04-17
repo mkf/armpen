@@ -26,8 +26,10 @@ class armpoz(MovingMixIn,pos):
 			print "Za blisko![by lengths]",arm.l1,arm.l2,self.r
 		assert arm.l1-arm.l2<self.r, "Za blisko![by lengths]"
 		#print "l1",arm.l1,'l2',arm.l2,'r',self.r  #debug
-		cosalphaodr = (arm.l1/(2*self.r))+(self.r/(2*arm.l1))-(arm.l2*arm.l2/(2*self.r*arm.l1))  # dla przykładowych wyszło ~1.04 — ale to chyba było za blisko po prostu
-		cosbeta = (self.r*self.r/(2*arm.l1*arm.l2))-(arm.l1/(2*arm.l2))-(arm.l2/(2*arm.l1))
+		#cosalphaodr = (arm.l1/(2*self.r))+(self.r/(2*arm.l1))-(arm.l2*arm.l2/(2*self.r*arm.l1))  # dla przykładowych wyszło ~1.04 — ale to chyba było za blisko po prostu
+		#cosbeta = (self.r*self.r/(2*arm.l1*arm.l2))-(arm.l1/(2*arm.l2))-(arm.l2/(2*arm.l1))
+		cosbeta = ((self.x*self.x)+(self.y*self.y)-(arm.l1*arm.l1)-(arm.l2*arm.l2))/(2*arm.l1*arm.l2)
+		cosalphaodr = ((self.x*self.x)+(self.y*self.y)+(arm.l1*arm.l1)-(arm.l2*arm.l2))/(2*arm.l1*self.r)
 		try:
 			self.alphaodr = arctrig(cosalphaodr,'cos')
 			self.beta = arctrig(cosbeta,'cos')
