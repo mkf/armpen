@@ -15,7 +15,7 @@ with real() as arm:
 	# zrezygnowaliśmy z rysowania prostych, bo to już na jutro
 	#zakładamy że ramię wyprostowane
 	done = False
-	sync = False
+	sync = True
 	corys = None
 	ang = None
 	beta = None
