@@ -35,6 +35,12 @@ with real() as arm:
 				tbet = raw_input('podaj kąt bety ')
 				try: beta = float(tbet)
 				except ValueError: pass
-		if sync and corys=='s': arm.chamskonasilnik(alpha=kat(ang,"deg"),beta=kat(beta,"deg"))
-		elif corys=='a': arm.chamskonasilnik(alpha=kat(ang,"deg"))
-		elif corys=='b': arm.chamskonasilnik(beta=kat(ang,"deg"))
+		if sync and corys=='s':
+			arm.chamskonasilnik(alpha=kat(ang,"deg"),beta=kat(beta,"deg"))
+			ang = None ; corys = None ; beta = None
+		elif corys=='a':
+			arm.chamskonasilnik(alpha=kat(ang,"deg"))
+			ang = None ; corys = None
+		elif corys=='b':
+			arm.chamskonasilnik(beta=kat(ang,"deg"))
+			ang = None ; corys = None
