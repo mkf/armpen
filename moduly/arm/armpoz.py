@@ -117,15 +117,15 @@ class gdzieramiona(MovingMixIn):
 		arm=self.arm
 		beta=self.beta
 		alph=self.alphaodzera
-		#from math import sqrt  #,acos
-		#radi = sqrt(arm.l1*arm.l1+(arm.l2*arm.l2)-(2*arm.l1*arm.l2*(-(beta.cos))))
-		#alodr=arctrig((arm.l1-(arm.l2*(-(beta.cos))))/radi,'cos')
+		from math import sqrt  #,acos
+		radi = sqrt(arm.l1*arm.l1+(arm.l2*arm.l2)-(2*arm.l1*arm.l2*(-(beta.cos))))
+		alodr=arctrig((arm.l1-(arm.l2*(-(beta.cos))))/radi,'cos')
 		# elbow direction temporarily given up
-		#pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}
+		pozd = {'r':radi,'phi':(alph-alodr).naplaszczyznie['katnaplaszczyznie']}
 		# elbow direction is given up anyway
-		x = arm.l1*alph.cos+(arm.l2*(alph+beta).cos)
-		y = arm.l1*alph.sin+(arm.l2*(alph+beta).sin)
-		pozd = {'x':x,'y':y}
+		#x = arm.l1*alph.cos+(arm.l2*(alph+beta).cos)
+		#y = arm.l1*alph.sin+(arm.l2*(alph+beta).sin)
+		#pozd = {'x':x,'y':y}
 		self.armpozy = armpozy = armpoz(pozd,self.arm)
 		return armpozy
 	def __add__(self,other):
