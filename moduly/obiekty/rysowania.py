@@ -73,7 +73,8 @@ class krzywa(rysunek):
 					if not doprzemend and not zrobione:
 						juzstepprob+=probstep
 						doprzemend = self.czyend(juzstepprob)
-			print "Nie zrobiono — limit absstopstepprog" if juzstepprob<=absstopstepprog else "koniec (przynajmniej nie osiągnięto limitu absstopstepprog)"
+			print "Nie zrobiono — limit absstopstepprog" if juzstepprob>=absstopstepprog else "koniec (przynajmniej nie osiągnięto limitu absstopstepprog)"
+		print "KONIEC krzywa.draw"
 		#except RuntimeError:
 		#	print "Mamy RuntimeError, na razie olewamy"
 
