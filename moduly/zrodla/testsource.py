@@ -28,8 +28,8 @@ class testsource:
 		for i in range(1,50):
 			yield rysowania.punkt(pos({'x':i,'y':i}))
 			print i,"done: punkt1"
-			yield rysowania.punkt(pos({'x':i,'y':i+5}))
-			print i,"done: punkt2"
+			#yield rysowania.punkt(pos({'x':i,'y':i+5}))
+			#print i,"done: punkt2"
 			#yield rysowania.prosta(pos({'x':i+10,'y':i}),pos({'x':i,'y':i+5}))
 			#print i,"done: prosta"
 			#yield rysowania.cubicbezier(pos({'x':i,'y':i}),pos({'x':i+3,'y':i+3}),pos({'x':i+6,'y':i+3}),pos({'x':i+7,'y':i}))
