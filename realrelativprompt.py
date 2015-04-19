@@ -44,3 +44,4 @@ with real() as arm:
 		elif corys=='b':
 			arm.chamskonasilnik(beta=kat(ang,"deg"))
 			ang = None ; corys = None
+

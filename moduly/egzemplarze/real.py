@@ -86,7 +86,7 @@ class real(maszyna):
 		def dajna(q,mov,ruch,speed):
 			q.put(mov(ruch,speed))
 		at = (ac.deg if isinstance(ac,kat) else ac)   #tu minus czy plus?
-		bt = -(bc.deg if isinstance(bc,kat) else bc)
+		bt = (bc.deg if isinstance(bc,kat) else bc)
 		a = at*self.alphaenginemultiplier
 		b = bt*self.betaenginemultiplier
 		q = Queue.Queue()
