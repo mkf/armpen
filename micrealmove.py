@@ -2,7 +2,7 @@
 __author__ = 'ArchieT'
 from moduly.egzemplarze.real import real
 from moduly.wartosci.kat import kat
-from nxt.sensors import PORT_1,PORT_2,Touch,Sound
+from nxt.sensor import PORT_1,PORT_2,Touch,Sound
 blah = raw_input('Podłącz czujniki do 1,2 przy kostce alfa i wciśnij enter')
 am = float(raw_input('daj współczynnik alpha '))
 bm = float(raw_input('daj współczynnik beta '))
@@ -13,8 +13,8 @@ with real() as arm:
 	while True:
 		dzw = sound.get_sample()
 		if am!=0 and bm!=0 and dzw!=0:
-			if touch.get_sample(): arm.chamskonasilnik(alpha=am*dzw,beta=bm*dzw)
+			if touch.get_sample(): arm.chamskonasilnik(alpha=kat(am*dzw,"deg"),beta=kat(bm*dzw,"deg"))
 		elif bm!=0 and dzw!=0:
-			if touch.get_sample(): arm.chamskonasilnik(beta=bm*dzw)
+			if touch.get_sample(): arm.chamskonasilnik(beta=kat(bm*dzw,"deg"))
 		elif am!=0 and dzw!=0:
-			if touch.get_sample(): arm.chamskonasilnik(alpha=am*dzw)
+			if touch.get_sample(): arm.chamskonasilnik(alpha=kat(am*dzw,"deg"))
